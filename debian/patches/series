@@ -1,0 +1,8 @@
+drop-stripped-sources.patch
+use-system-utf8cpp.patch
+use-system-stb_image.patch
+use-system-libdraco.patch
+use-system-minizip.patch
+pyassimp.patch
+pyassimp_faces.patch
+doxygen.patch

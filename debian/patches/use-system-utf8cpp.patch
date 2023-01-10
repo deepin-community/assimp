@@ -1,0 +1,63 @@
+From: =?utf-8?q?=22IOhannes_m_zm=C3=B6lnig_=28Debian/GNU=29=22?=
+ <umlaeute@debian.org>
+Date: Fri, 27 Mar 2020 09:15:56 +0100
+Subject: Make sure to include utf8.h from Debian
+
+Origin: Debian
+Forwarded: no
+Last-Update: 2019-10-17
+
+using libutfcpp-dev, rather than the included version
+Last-Update: 2019-10-17
+---
+ code/Common/BaseImporter.cpp                  | 2 +-
+ code/Importer/STEPParser/STEPFileEncoding.cpp | 2 +-
+ code/MMD/MMDPmxParser.cpp                     | 2 +-
+ code/SIB/SIBImporter.cpp                      | 2 +-
+ code/X3D/FIReader.cpp                         | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
+
+--- assimp.orig/code/AssetLib/STEPParser/STEPFileEncoding.cpp
++++ assimp/code/AssetLib/STEPParser/STEPFileEncoding.cpp
+@@ -48,7 +48,7 @@
+ #ifdef ASSIMP_USE_HUNTER
+ #  include <utf8.h>
+ #else
+-#  include <contrib/utf8cpp/source/utf8.h>
++#  include <utf8.h>
+ #endif
+ 
+ #include <memory>
+--- assimp.orig/code/AssetLib/MMD/MMDPmxParser.cpp
++++ assimp/code/AssetLib/MMD/MMDPmxParser.cpp
+@@ -45,7 +45,7 @@
+ #ifdef ASSIMP_USE_HUNTER
+ #  include <utf8.h>
+ #else
+-#  include "../contrib/utf8cpp/source/utf8.h"
++#  include <utf8.h>
+ #endif
+ #include <assimp/Exceptional.h>
+ 
+--- assimp.orig/code/AssetLib/SIB/SIBImporter.cpp
++++ assimp/code/AssetLib/SIB/SIBImporter.cpp
+@@ -62,7 +62,7 @@
+ #include <utf8.h>
+ #else
+ //#  include "../contrib/ConvertUTF/ConvertUTF.h"
+-#include "../contrib/utf8cpp/source/utf8.h"
++#include <utf8.h>
+ #endif
+ #include <assimp/importerdesc.h>
+ #include <assimp/scene.h>
+--- assimp.orig/code/Common/BaseImporter.cpp
++++ assimp/code/Common/BaseImporter.cpp
+@@ -331,7 +331,7 @@
+ #ifdef ASSIMP_USE_HUNTER
+ #include <utf8.h>
+ #else
+-#include "../contrib/utf8cpp/source/utf8.h"
++#include <utf8.h>
+ #endif
+ 
+ // ------------------------------------------------------------------------------------------------

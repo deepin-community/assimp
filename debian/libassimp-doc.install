@@ -1,0 +1,3 @@
+debian/extra/samples/GNUmakefile usr/share/doc/libassimp-doc/samples/SimpleOpenGL/
+samples/SimpleOpenGL/ usr/share/doc/libassimp-doc/samples/
+usr/share/doc/Assimp/AssimpDoc_Html/* usr/share/doc/libassimp-doc/apiref/

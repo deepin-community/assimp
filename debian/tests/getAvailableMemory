@@ -1,0 +1,45 @@
+#!/bin/sh
+
+error() {
+    echo "$@" 1>&2
+}
+
+get_procmeminfo() {
+    for f in "${@}"; do
+        [ -f "${f}" ] || continue
+        cat "${f}"  | egrep "^MemAvailable:" | while read _ chunks size; do
+            case "${size}" in
+                kB)
+                    echo $((chunks * 1024))
+                    ;;
+                *)
+                    error "ignoring unknown size specifier '${size}"
+                    ;;
+            esac
+        done
+    done
+}
+
+get_sysfs_cgroups() {
+    for f in "${@}"; do
+        [ -f "${f}" ] || continue
+        cat "${f}"
+    done
+}
+
+get_memlimits() {
+    get_procmeminfo /proc/meminfo
+    get_sysfs_cgroups /sys/fs/cgroup/memory/memory.limit_in_bytes /sys/fs/cgroup/memory.max
+}
+
+filter_memlimits() {
+    local MB=$((1024*1024))
+    egrep "^[0-9]*$" | grep . | while read num; do
+        if [ ${num} -ge ${MB} ]; then
+            echo $num
+            error "limit ${num} bytes"
+        fi
+    done
+}
+
+get_memlimits | filter_memlimits | sort -n | head -1

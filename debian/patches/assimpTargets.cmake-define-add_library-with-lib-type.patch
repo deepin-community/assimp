@@ -1,0 +1,51 @@
+From: Robikz <zalewapl@gmail.com>
+Date: Sun, 6 Oct 2019 18:46:51 +0200
+Subject: assimpTargets.cmake: define add_library() with lib type directly
+
+Instead of using if(ON)/if(OFF) to determine which of the "hardcoded"
+add_library(... SHARED ...)  or (... STATIC ...) should be used,
+specify a new BUILD_LIB_TYPE variable that is set directly to either
+SHARED or STATIC and substituted in the `add_library()` statement
+when assimpTargets.cmake.in is configured.
+
+This removes a CMP0012 collision with prior `cmake_policy(VERSION 2.6)`
+statement and makes the CMP0012 warning not appear in users' projects.
+This problem is mentioned in issue #2685.
+---
+ CMakeLists.txt         | 5 +++++
+ assimpTargets.cmake.in | 6 +-----
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index dcafb64..5a716da 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -391,6 +391,11 @@ IF(HUNTER_ENABLED)
+   )
+ ELSE(HUNTER_ENABLED)
+   # cmake configuration files
++  if(${BUILD_SHARED_LIBS})
++    set(BUILD_LIB_TYPE SHARED)
++  else()
++    set(BUILD_LIB_TYPE STATIC)
++  endif()
+   CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/assimp-config.cmake.in"         "${CMAKE_CURRENT_BINARY_DIR}/assimp-config.cmake" @ONLY IMMEDIATE)
+   CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/assimpTargets.cmake.in"         "${CMAKE_CURRENT_BINARY_DIR}/assimpTargets.cmake" @ONLY IMMEDIATE)
+   IF (is_multi_config)
+diff --git a/assimpTargets.cmake.in b/assimpTargets.cmake.in
+index ab1a8d2..ea63ba2 100644
+--- a/assimpTargets.cmake.in
++++ b/assimpTargets.cmake.in
+@@ -51,11 +51,7 @@ if(_IMPORT_PREFIX STREQUAL "/")
+ endif()
+ 
+ # Create imported target assimp::assimp
+-if(@BUILD_SHARED_LIBS@)
+-  add_library(assimp::assimp SHARED IMPORTED)
+-else()
+-  add_library(assimp::assimp STATIC IMPORTED)
+-endif()
++add_library(assimp::assimp @BUILD_LIB_TYPE@ IMPORTED)
+ 
+ set_target_properties(assimp::assimp PROPERTIES
+   COMPATIBLE_INTERFACE_STRING "assimp_MAJOR_VERSION"

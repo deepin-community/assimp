@@ -1,0 +1,29 @@
+Description: use libdraco-dev provided by the system
+Author: IOhannes m zmölnig
+Origin: Debian
+Forwarded: no
+Last-Update: 2021-11-23
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- assimp.orig/code/CMakeLists.txt
++++ assimp/code/CMakeLists.txt
+@@ -1207,6 +1207,9 @@
+   endif()
+ ENDIF()
+ 
++find_package(draco CONFIG REQUIRED)
++target_link_libraries(assimp ${DRACO_LIBRARIES})
++
+ if(ASSIMP_ANDROID_JNIIOSYSTEM)
+   set(ASSIMP_ANDROID_JNIIOSYSTEM_PATH port/AndroidJNI)
+   add_subdirectory(../${ASSIMP_ANDROID_JNIIOSYSTEM_PATH}/ ../${ASSIMP_ANDROID_JNIIOSYSTEM_PATH}/)
+--- assimp.orig/cmake-modules/assimp-plain-config.cmake.in
++++ assimp/cmake-modules/assimp-plain-config.cmake.in
+@@ -1,5 +1,7 @@
+ @PACKAGE_INIT@
+ 
++find_package(draco   CONFIG REQUIRED)
++
+ include("${CMAKE_CURRENT_LIST_DIR}/@TARGETS_EXPORT_NAME@.cmake")
+ 
+ set(ASSIMP_ROOT_DIR ${PACKAGE_PREFIX_DIR})
