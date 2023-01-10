@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+cd ${0%/*}/../..
+
+basedir=$(mktemp -d -p .)
+basedir=$(realpath "${basedir}")
+builddir=${basedir}/_build
+srcdir="${builddir}/../samplegl"
+
+#cp -rav tools/assimp_cmd "${basedir}"
+mkdir -p "${builddir}" "${srcdir}"
+#mkdir -p "${builddir}" "${srcdir}"/Common "${srcdir}"/PostProcessing
+
+# copy the CMakeLists and sources to ensure a minimal setup
+cp samples/SimpleOpenGL/Sample_SimpleOpenGL.c "${srcdir}"
+cp debian/tests/CMakeLists_sample.txt "${srcdir}"/CMakeLists.txt
+
+# build!
+cd "${builddir}"
+cmake "${srcdir}" -DCMAKE_VERBOSE_MAKEFILE=ON
+make
+
+## quick test whether we succeeded
+cd -
+## (skipped as this actually requires X11/OpenGL and does not quit)
+# "${builddir}/"assimp_simpleogl test/models/OBJ/WusonOBJ.obj
+"${builddir}/"assimp_simpleogl --usage
+
+# cleanup
+rm -rvf "${basedir}"

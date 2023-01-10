@@ -1,0 +1,80 @@
+#!/usr/bin/make -f
+# -*- mode: makefile; coding: utf-8 -*-
+# Copyright © 2017-2021 IOhannes m zmölnig <umlaeute@debian.org>
+#
+# Description: Main Debian packaging script for assimp
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 3, or (at
+# your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#export DH_VERBOSE = 1
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# see ENVIRONMENT in dpkg-buildflags(1)
+# package maintainers to append CFLAGS
+export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+# enable draco (but don't build it)
+export DEB_CPPFLAGS_MAINT_APPEND  = -DASSIMP_ENABLE_DRACO=1
+# package maintainers to append LDFLAGS
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+export PYBUILD_NAME=pyassimp
+
+%:
+	dh $@ --buildsystem=cmake
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-DASSIMP_BUILD_ARCHITECTURE=$(DEB_HOST_ARCH) \
+		-DASSIMP_BUILD_DOCS=ON \
+		-DASSIMP_BUILD_SAMPLES=OFF \
+		-DASSIMP_BUILD_TESTS=OFF \
+		-DASSIMP_BUILD_ZLIB=OFF \
+		-DASSIMP_LIB_INSTALL_DIR=lib/$(DEB_HOST_MULTIARCH) \
+		-DCMAKE_SHARED_LINKER_FLAGS="-Wl,--version-script=$(CURDIR)/debian/libassimp.ver $(LDFLAGS)" \
+		-DCMAKE_EXE_LINKER_FLAGS="$(LDFLAGS)" \
+		-DCMAKE_BUILD_RPATH_USE_ORIGIN=ON \
+	        -DCMAKE_DEBUG_POSTFIX=''
+
+execute_after_dh_auto_build-arch:
+	cd doc && doxygen Doxyfile_Cmd
+override_dh_auto_build-indep:
+	dh_auto_build --indep --buildsystem=pybuild -- \
+		-d port/PyAssimp/
+	make -C obj-$(DEB_HOST_GNU_TYPE)/doc
+
+override_dh_auto_test:
+	# tests have been disabled, until we figure out how to make them not stall
+	@echo "skipping tests"
+
+override_dh_auto_install-indep:
+	dh_auto_install --indep --buildsystem=pybuild -- \
+		-d port/PyAssimp/
+	make -C obj-$(DEB_HOST_GNU_TYPE)/doc install DESTDIR=$(CURDIR)/debian/tmp
+
+execute_after_dh_auto_clean-arch:
+	rm -rf doc/tmp/
+execute_after_dh_auto_clean-indep:
+	-dh_auto_clean --indep --buildsystem=pybuild -- \
+		-d port/PyAssimp/
+
+licensecheck:
+	licensecheck --deb-machine -r * \
+	| perl -00ne 'print unless /^(Files:)? *((Documentation|CommandLine)\.chm|tools\/assimp_view\/(base\.PNG|HUD\.png)|tools\/shared\/(default_icon\.xcf|assimp_tools_icon\.(png|ico))|tools\/assimp_view\/(.*\.bmp|.*\.png|text1\.bin|test\.xcf)|tools\/assimp_qt_viewer\/doc\/.*\.odt|port\/PyAssimp\/3d_viewer_screenshot\.png|port\/Assimp\.NET\/CSharpViewerScreenShot\.PNG|doc\/AssimpCmdDoc_Html\/(dragonsplash\.png|AssimpCmdDoc\.chm)|doc\/AssimpDoc_Html\/(dragonsplash\.png|AnimationOverview\.png)|doc\/architecture\/.*\.png|samples\/SimpleAssimpViewX\/MyDocument\.xcdatamodel\/(elements|layout)|packaging\/windows-innosetup\/LICENSE\.rtf|doc\/tmp\/.*|test\/models\/3DS\/testFormatDetection|test\/models\/X\/OV_GetNextToken|debian\/(changelog|copyright(|_hints|_newhints)))/' \
+	> debian/copyright_newhints
+	cmp debian/copyright_hints debian/copyright_newhints \
+	&& rm debian/copyright_newhints

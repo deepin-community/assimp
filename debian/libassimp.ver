@@ -1,0 +1,33 @@
+{
+	global:
+		ai*;
+		extern "C++" {
+                 Assimp::Base*;
+                 Assimp::BatchLoader*;
+                 Assimp::Bitmap*;
+                 Assimp::CommentRemover*;
+                 Assimp::DefaultIO*;
+                 Assimp::Dump*;
+                 Assimp::ExportProperties*;
+                 Assimp::Exporter*;
+                 Assimp::IO*;
+                 Assimp::Importer*;
+                 Assimp::Intern*;
+                 Assimp::LogStream*;
+                 Assimp::*Logger*;
+                 Assimp::ProgressHandler*;
+                 Assimp::SceneCombiner*;
+                 Assimp::SkeletonMeshBuilder*;
+                 Assimp::*SpatialSort*;
+                 Assimp::StandardShapes*;
+                 Assimp::Subdivider*;
+                 Assimp::ai*;
+                 ai*;
+		};
+                /* g++ version mangling prefixes for 'typeinfo' */
+		_ZTI*; _ZTF*; _ZTS*;
+                /* g++ version mangling prefixes for 'vtable' */
+		 _ZTT*; _ZTV*;
+	local:
+		*;
+};

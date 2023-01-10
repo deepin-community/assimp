@@ -1,0 +1,6 @@
+176811132	/usr/share/assimp/models/AC/sample_subdiv.ac
+12241569761	/usr/share/assimp/models/Q3D/WusonOrange.q3o
+12241569967	/usr/share/assimp/models/Q3D/WusonOrange.q3s
+12890912340	/usr/share/assimp/models/X/fromtruespace_bin32.x
+#16175127715	/usr/share/assimp/models/invalid/OutOfMemory.off
+0	/usr/share/assimp/models/invalid/OutOfMemory.off

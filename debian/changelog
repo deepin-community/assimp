@@ -1,0 +1,538 @@
+assimp (5.1.6~ds0-1) unstable; urgency=medium
+
+  * New upstream version 5.1.6~ds0
+  * Fix compilation with system-provided minizip
+  * Drop obsolete (and unused) patch
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 19 Jan 2022 10:28:36 +0100
+
+assimp (5.1.5~ds0-1) unstable; urgency=medium
+
+  * New upstream version 5.1.5~ds0
+    + Refresh patches
+  * Update d/copyright
+    + Tighten Files-Excluded
+    + Update dates
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sun, 09 Jan 2022 23:52:33 +0100
+
+assimp (5.1.4~ds0-1) unstable; urgency=medium
+
+  * New upstream version 5.1.4~ds0
+    * Drop patches applied upstream.
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 22 Dec 2021 12:33:33 +0100
+
+assimp (5.1.3~ds0-1) unstable; urgency=medium
+
+  * New upstream version 5.1.3~ds0
+    * Drop patch applied upstream.
+  * Add patch to fix crash with LWO models
+  * Add patch to fix crash when model has no usable materials
+  * Make rpath reproducible
+  * Update autopkgtest for CMake build
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 07 Dec 2021 13:19:17 +0100
+
+assimp (5.1.1~ds0-2) unstable; urgency=medium
+
+  * Allow failures of 'dh_auto_clean-indep'
+    (Closes: #1000197)
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Fri, 26 Nov 2021 22:21:47 +0100
+
+assimp (5.1.1~ds0-1) unstable; urgency=medium
+
+  * New upstream version 5.1.1~ds0
+    (Closes: #1000197, #973361)
+    + Refresh d/copyright
+      - Update copyrights
+      - New exclude location for stb
+      - Regenerate d/copyright_hints
+    + Refresh patches, dropping those applied upstream
+  * Patch to disable crashy X3DImporter
+  * Patch to enable HTML documentation
+  * Build with libdraco support
+  * Have libassimp-dev depend on lib{draco,minizip}-dev
+  * Update configure flags
+    * Drop duplicate CMAKE_INSTALL_PREFIX flag
+  * Update version-script
+  * Drop no-longer-needed execute_after_dh_auto_install-arch
+  * debian/tests
+    + add flag to disable traceback
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 25 Nov 2021 15:32:47 +0100
+
+assimp (5.0.1~ds0-4) unstable; urgency=medium
+
+  * Drop CDBS leftovers
+  * Split dh invocations into arch & indep parts
+  * Mark patches as forwarded
+  * Fix arch/indep rules
+  * Simplified doxygen invocation
+  * Test whether the cmake snippet works
+  * Fix python build dependency.
+    Thanks to Helmut Grohne <helmut@subdivi.de> (Closes: #995980)
+    + Alternatives in Build-Depends are ignored.
+    + Enable the python3 dh addon once only.
+    + Move python Build-Depends to B-D-I.
+    + Drop the :any nonsense.
+  * Prefer "execute_after_dh_..." over "override_dh_..."
+  * Apply 'wrapand-sort -ast'
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 18 Nov 2021 22:13:52 +0100
+
+assimp (5.0.1~ds0-3) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Bug-Database, Bug-Submit.
+  * Drop deprecated restriction . See
+    https://salsa.debian.org/ci-team/autopkgtest/tree/master/doc/README.package-tests.rst
+
+  [ IOhannes m zmölnig (Debian/GNU) ]
+  * autopkgtests: don't run tests if they exceed the memory limits
+    (Closes: #995658)
+  * Mark python Build-Dependencies as arch:any
+  * Drop versioned B-D on g++ (satisfied in oldoldstable)
+  * Add patch to fix spelling errors
+  * Properly exclude unwanted files from library documentation
+  * Modernized d/watch
+  * Mark libIrrXML as not-installed
+  * Bump dh-compat to 13
+  * Bump standards version to 4.6.0
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 06 Oct 2021 09:02:14 +0200
+
+assimp (5.0.1~ds0-2) unstable; urgency=medium
+
+  * debian/patches
+    * Refresh patches with 'gbp pq'
+    * Cherry-pick upstream fix for CMake warning (Closes: #955029)
+    * Cherry-pick upstream fix for bogus include-dir in pkg-config
+    * Cherry-pick upstream fix to allow compilation with std<<c++11
+  * Use https:// in homepage stanza
+  * Add salsa-ci configuration
+  * Bump standards-version to 4.5.0
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Fri, 27 Mar 2020 10:27:32 +0100
+
+assimp (5.0.1~ds0-1) unstable; urgency=medium
+
+  * New upstream version 5.0.1~ds0
+    * Refresh patches
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 16 Jan 2020 14:41:57 +0100
+
+assimp (5.0.0~ds2-4.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+    (with maintainer's permission)
+  * Disable some tests on s390x (Closes: #944742)
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Tue, 07 Jan 2020 19:49:46 +0100
+
+assimp (5.0.0~ds2-4) unstable; urgency=medium
+
+  * More PyAssimp autopkgtest-fixes (Closes: #944742)
+    * Make pyassimp-testscript more useful
+    * Call pyassimp-testscript with arguments
+    * Allow pyassimp-testscript to output to stderr
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 10 Dec 2019 22:19:14 +0100
+
+assimp (5.0.0~ds2-3) unstable; urgency=medium
+
+  * PyAssimp fixes
+    * Add patch to handle faces with variable number of vertices in PyAssimp
+      (Closes: #944742)
+    * Update patch to fix struct-definition after discovering another problem
+  * PyAssimp autopkgtest
+    * Add many more file-extensions to the pyassimp autopkgtest
+    * Add nicer error messages
+    * Gracefully handle exceptions that are not AssimpErrors
+  * Declare "assimp-testmodels" package as "multi-arch: foreign"
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 09 Dec 2019 21:03:46 +0100
+
+assimp (5.0.0~ds2-2) unstable; urgency=medium
+
+  * Patch to fix struct-definition in python bindings (Closes: #944742)
+  * Amend test-suite
+    * Use our own data for running tests
+    * Skip out-of-memory test-file as it exhausts the test host's memory
+  * Fix dversionmangling in d/watch
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sat, 07 Dec 2019 23:03:21 +0100
+
+assimp (5.0.0~ds2-1) unstable; urgency=medium
+
+  * Upload to unstable.
+  * Add note on repackaging in the d/changelog for 5.0.0~ds2-1~exp1
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 12 Nov 2019 10:00:21 +0100
+
+assimp (5.0.0~ds2-1~exp1) experimental; urgency=medium
+
+  * Repackaged to exclude more bundled 3rd party libraries
+    * utf8cpp, stb_image
+    * (generated) resource.h files
+  * Refresh pyassimp patch to make it actually work
+  * Add patch for CMake snippets to find libassimp.so.N
+  * Use more system-provided libraries
+    * B-D on libutfcpp-dev, libstb-dev instead
+    * Patch sources to use the system-provided headers
+  * Fix install-path for test models
+  * Add an autopkgtest for the "assimp" utility
+  * For now, don't run pysassimp autopkgtests on assimp-testmodels
+  * Update d/copyright
+    * Exclude {utf8cpp,stb_image} from contrib/
+    * Remove copyright info for excluded utf8cpp
+    * Exclude (generated) resource.h files
+  * Fix spelling of "assimp" in d/changelog
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Fri, 18 Oct 2019 11:06:22 +0200
+
+assimp (5.0.0~ds1-1~exp1) experimental; urgency=medium
+
+  * New upstream version 5.0.0~ds1
+  * Drop filtering in d/gbp.conf in favour of d/copyright
+  * Add assimp-testmodels package for 3D models used for testing
+  * Add own testfiles to autopktest
+  * Update d/copyright
+    * Exclude more binaries from licensecheck target
+    * Regenerate d/copyright_hints
+  * Bump standards version to 4.4.1
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 08 Oct 2019 13:02:43 +0200
+
+assimp (5.0.0~ds0-1~exp1) experimental; urgency=medium
+
+  * New upstream version 5.0.0~ds0
+  * Refresh patches and drop those applied upstream
+  * Added more symbols to libassimp.ver
+    * Drop soname-version from version-script
+  * Bump soname from v4 to v5
+  * Keep BSD-licensed data
+  * Update d/watch
+  * Refresh d/copyright
+    * Regenerate d/copyright_hints
+    * Drop B-D on 'licensecheck'
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Fri, 27 Sep 2019 16:22:00 +0200
+
+assimp (4.1.0~dfsg-7) unstable; urgency=medium
+
+  * autopkgtest fixes
+    * Drop autpkgtest for Python2
+    * Replace smoketest by a real one that loads actual models
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 17 Sep 2019 16:41:53 +0200
+
+assimp (4.1.0~dfsg-6) unstable; urgency=medium
+
+  * Drop "python-pyassimp" as part of the Python2 removal in bullseye
+  * Backport patch to fix generated CMake-config (Closes: #896835)
+  * Drop obsolete d/source/local-options file
+  * Use debhelper-compat rather than d/compat
+  * Bump dh-compat to 12
+  * Bump standards version to 4.4.0
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 10 Sep 2019 11:43:05 +0200
+
+assimp (4.1.0~dfsg-5) unstable; urgency=medium
+
+  * Backport fix for data-misalignment (Closes: #911484)
+  * Refresh patches with "gbp pq"
+  * Use https:// for copyright URI
+  * Declare that the package does not require "root" for building
+  * Bump standards version to 4.2.1
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 23 Oct 2018 21:55:26 +0200
+
+assimp (4.1.0~dfsg-4) unstable; urgency=medium
+
+  * Made python3-pyassimp depend on required python-modules (Closes: #896199)
+  * Added DebCI smoketests for python*-assimp
+  * Switched Vcs-* stanzas to salsa.d.o
+  * Bumped standards version to 4.1.4
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sun, 22 Apr 2018 14:45:39 +0200
+
+assimp (4.1.0~dfsg-3) unstable; urgency=medium
+
+  * More hurd FTBFS fixes.
+    Thanks to Aaron M. Ucko <ucko@debian.org> (Closes: #883486)
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 21 Dec 2017 21:50:24 +0100
+
+assimp (4.1.0~dfsg-2) unstable; urgency=medium
+
+  * Fixed indentation in pyassimp patch
+    * makes the python packages installable!
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 19 Dec 2017 18:12:12 +0100
+
+assimp (4.1.0~dfsg-1) unstable; urgency=medium
+
+  * New upstream version 4.1.0~dfsg
+
+  * Refreshed patches
+  * Fixed FTBFS on the Hurd (non-Apple mach) (Closes: #883486)
+  * Refreshed d/copyright(_hints)?
+  * Bumped standards version to 4.1.2
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 14 Dec 2017 17:37:29 +0100
+
+assimp (4.0.1~dfsg-1) unstable; urgency=medium
+
+  * Upload to unstable
+
+  * Changed priority to "optional"
+  * Removed no-longer-needed lintian-override for d/copyright_hints
+  * Bumped standards version to 4.1.1
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Fri, 01 Dec 2017 21:43:31 +0100
+
+assimp (4.0.1~dfsg-1~exp2) experimental; urgency=medium
+
+  * Use DEB_HOST_GNU_TYPE for building docs.
+    Thanks to Andreas Beckmann <anbe@debian.org> (Closes: #877134)
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 02 Oct 2017 00:05:30 +0200
+
+assimp (4.0.1~dfsg-1~exp1) experimental; urgency=medium
+
+  * New upstream version 4.0.1~dfsg
+
+  * Refreshed patches
+    * Dropped patches applied upstream
+    * Simplified doxygen patch
+    * Fixed spelling errors
+
+  * soname bump: libassimp3v5 -> libassimp4
+  * Packaged python3-pyassimp package
+  * Cleaned up build-dependencies
+  * Updated d/copyright{_hints}
+  * Simplified samples-Makefile installation
+  * Modernized Vcs-Browser stanza
+  * Dropped obsolete lintian-overrides
+  * Switched build-system from cdbs to dh
+    * Dropped get-orig-source support (use uscan instead)
+    * Separate "licensecheck" target
+    * Bumped dh compat to 10
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sat, 02 Sep 2017 20:32:11 +0200
+
+assimp (3.3.1~dfsg-5) unstable; urgency=medium
+
+  * Added Multi-Arch fields
+  * Updated ConvertUTF license to the DFSG-free new unicode license.
+    Thanks to Rene Engelhard <rene@debian.org> (Closes: #864729)
+    * Added lintian-override for ConvertUTF
+  * Bumped standards version to 4.0.0
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 12 Jul 2017 20:01:45 +0200
+
+assimp (3.3.1~dfsg-4) unstable; urgency=medium
+
+  * Fixed pyassimp import for good.
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 24 Aug 2016 23:06:28 +0200
+
+assimp (3.3.1~dfsg-3) unstable; urgency=medium
+
+  * Fixed pyassimp import (LP: #1589949)
+  * Updated d/copyright
+    * Removed unused infozip license
+    * Updated Source URL
+    * Refreshed copyright years
+  * Dropped lintian-override that is no longer needed.
+  * Filter out .git* files on (next) import-orig
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 24 Aug 2016 22:39:40 +0200
+
+assimp (3.3.1~dfsg-2) unstable; urgency=medium
+
+  * Fixed FTBFS on big-endian architectures
+    Thanks to Daniel Knezevic <Daniel.Knezevic@imgtec.com> (Closes: #834717)
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 23 Aug 2016 22:39:10 +0200
+
+assimp (3.3.1~dfsg-1) unstable; urgency=medium
+
+  * New upstream version 3.3.1~dfsg
+
+  * Refreshed patches
+    * Dropped patches applied upstream.
+  * Documented how to properly clone the package repository via gbp.
+  * Updated Vcs-Git stanza to use https://
+  * Updated upstream homepage-field
+  * Updated copyright information
+  * Bumped standards version to 3.9.8
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 08 Aug 2016 17:11:00 +0200
+
+assimp (3.2~dfsg-3) unstable; urgency=medium
+
+  * Fixed CMake-config for linking against libassimp.
+    Thanks to Leopold Palomo-Avellaneda (Closes: #807690)
+  * Preparing an upload to backports
+    * Re-use libassimp3v5.* for libassimp3
+    * Fix target interdependencies for backports
+    * Script to fix debian/control
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 15 Dec 2015 16:36:37 +0100
+
+assimp (3.2~dfsg-2) unstable; urgency=medium
+
+  * Install CMake config files (Closes: #806317)
+  * Removed copyright-notice for non-existant files
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 26 Nov 2015 21:06:53 +0100
+
+assimp (3.2~dfsg-1) unstable; urgency=medium
+
+  * Imported Upstream version 3.2~dfsg
+
+  * Refreshed patches
+  * Updated debian/libassimp3v5.ver
+    - Unconditionally export all typeinfo/vtable symbols (Closes: #804250)
+    - Export new Assimp::ExportProperties
+  * Dropped libassimp3v5.symbols file
+  * Build-amendments
+    - Disabled assimp's boost-workaround
+    - Exclude stripped-away files from build
+    - Disabled tests for now (need too stripped away data files)
+  * Added Build-Depends
+    - libminizip-dev
+    - pkg-config
+  * Added debian/git-tuneclone.sh script
+  * Removed Debian-specific .gitignore
+  * Simplified repackaging of upstream
+    - Exclude .lib files in debian/copyright
+    - Setup filters for gbp-import-orig
+  * Regenerated debian/(control|copyright_hints)
+  * debian/copyright
+    - Exclude binary files from licensecheck
+    - Updated debian/copyright
+  * Update Vcs-Browser stanza
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sun, 15 Nov 2015 23:50:33 +0100
+
+assimp (3.1.1~dfsg-5) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sun, 23 Aug 2015 20:36:32 +0200
+
+assimp (3.1.1~dfsg-4) experimental; urgency=medium
+
+  * Fixed imports in python module
+  * Fixed FTBFS on big-endian architectures
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 10 Aug 2015 19:55:42 +0200
+
+assimp (3.1.1~dfsg-3) experimental; urgency=medium
+
+  * Conflict with libassimp3
+  * lintian-override for mismatched packagename/soname
+  * Add more files to be excluded in the source-package
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 10 Aug 2015 16:01:30 +0200
+
+assimp (3.1.1~dfsg-2) experimental; urgency=medium
+
+  * Undo the SONAME bump (Closes: #790980)
+  * Relax Build-Dependency on g++
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 10 Aug 2015 10:09:47 +0200
+
+assimp (3.1.1~dfsg-1) experimental; urgency=medium
+
+  * Imported Upstream version 3.1.1~dfsg
+    + Refreshed patches
+    + Python example has been removed upstream
+    + Added new symbols
+  * Renamed to libassimp3v5 for GCC 5 transition
+    - Closes: #790980
+    - Closes: #793217
+    - Closes: #794835
+  * Build-Depend on g++-5
+  * Multi-archi'fication
+  * Remove build-leftovers from doxygen
+  * Updated debian/watch to github
+  * Helper-script for importing sources
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sun, 09 Aug 2015 22:59:13 +0200
+
+assimp (3.0~dfsg-4) unstable; urgency=medium
+
+  * Export "ai*" in C++-scope (Closes: #775890)
+    + Updated libassimp3.symbols file
+  * Removed non-existing files from debian/copyright
+  * Bumped standards to 3.9.6
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 27 Apr 2015 22:27:30 +0200
+
+assimp (3.0~dfsg-3) unstable; urgency=medium
+
+  [ IOhannes m zmölnig (Debian/GNU) ]
+  * Marked symbols as optional (Closes: #746826)
+  * Updated my Maintainer's name
+  * Regenerated debian/{control,copyright_hints}
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 15 May 2014 10:30:13 +0200
+
+assimp (3.0~dfsg-2) unstable; urgency=low
+
+  * assimp-utils: Fixed 'assimp cmpdump' argcheck (Closes: #715653)
+  * libassimp3: lintian-override for false positive in spellcheck
+  * B-D (only) on the default libboost-dev
+  * Canonicalized Vcs-* stanzas
+  * Fixed my name (after gpg-key transition)
+  * Excluded more binary files from licensecheck
+  * Updated debian/copyright_hints
+  * Regenerated debian/control
+  * Bumped standards to 3.9.5
+
+ -- IOhannes m zmölnig <zmoelnig@iem.at>  Mon, 18 Nov 2013 15:40:52 +0100
+
+assimp (3.0~dfsg-1) unstable; urgency=low
+
+  * New upstream
+
+  [ IOhannes m zmoelnig (gpg-key at iem) ]
+  * Imported Upstream version 3.0~dfsg
+  * Removed patches applied by upstream
+  * Refreshed patches so they apply cleanly to new upstream
+  * Build-depend on current version of libboost-dev (Closes: #678778)
+  * Renamed libassimp2 to libassimp3 due to soname change
+  * Removed duplicate entries (and symbols not exported by g++-4.7.1)
+    from .symbols file
+  * Removed D-bindings libassimp3-d-dev (deprecated upstream) (Closes: #677716)
+  * Don't try to build samples
+  * Enabled hardened builds
+  * Build doxygen documentation in separate directory
+  * Bumped standards version to 3.9.3
+  * Bumped compat version to 9
+  * Excluded binaries from copyright-check
+  * Regenerated debian/(control|copyright_hints)
+  * Updated debian/copyright
+  * Updated debian/README.source for upstream-3.0
+
+ -- IOhannes m zmoelnig (gpg-key at iem) <zmoelnig@iem.at>  Tue, 26 Jun 2012 10:51:54 +0200
+
+assimp (2.0.863+dfsg-2) unstable; urgency=low
+
+  [ IOhannes m zmölnig ]
+  * backported upstream fix for missing-architectures (fixes FTBFS on non-x86)
+  * provide a (working) example in libassimp-doc
+  * fix insecure use of printf() (Closes: #643354)
+
+ -- IOhannes m zmoelnig (gpg-key at iem) <zmoelnig@iem.at>  Mon, 26 Sep 2011 15:38:29 +0200
+
+assimp (2.0.863+dfsg-1) unstable; urgency=low
+
+  * Initial release. (Closes: #615055)
+
+ -- IOhannes m zmoelnig (gpg-key at iem) <zmoelnig@iem.at>  Tue, 23 Aug 2011 16:51:26 +0200

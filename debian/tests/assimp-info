@@ -1,0 +1,77 @@
+#!/bin/sh
+
+runtest() {
+   echo "===================================================="
+   echo "> Trying to open '$1' with assimp"
+   assimp info "$1" 2>&1
+   ret=$?
+   case "${ret}" in
+           0)
+                   ;;
+           5) # assimp failed to open the file, but handled it gracefully
+                   ;;
+           *)
+                   echo "> assimp info '$1' returned $ret"
+                   retval=1
+                   ;;
+   esac
+   echo ""
+}
+
+maxmemory=0
+memoryfile=""
+while getopts "m:M:" o; do
+    case "${o}" in
+        m)
+            maxmemory=$((OPTARG+0))
+        ;;
+        M)
+            memoryfile=${OPTARG}
+        ;;
+    esac
+done
+shift $((OPTIND-1))
+
+setMaxMemory() {
+    maxmemory=$(${0%/*}/getAvailableMemory)
+}
+
+[ -r "${memoryfile}" ] || memoryfile=""
+if [ -n "${memoryfile}" ]; then
+    if [ ${maxmemory} -le 0 ]; then
+        setMaxMemory 2>&1
+    fi
+else
+    maxmemory=0
+fi
+
+getNeededMemory() {
+    local f="$1"
+    local size
+    local name
+    cat "${memoryfile}" \
+        | egrep -v "^#" \
+        | egrep "/${f}$" \
+        | while read size name; do
+        echo $size
+    done
+}
+
+retval=0
+for f in "$@"; do
+    if [ $maxmemory -gt 0 ]; then
+        m=$(getNeededMemory "${f##*/}")
+        if [ -n "${m}" ]; then
+            if [ "x${m}" = x0 ]; then
+                echo "skipping ${f} due to unbound memory"
+                continue
+            fi
+            if [ $m -ge $maxmemory ]; then
+                echo "skipping ${f} due to memory constraints ($m > $maxmemory)"
+                continue
+            fi
+        fi
+    fi
+    runtest "$f" | sed -e '/^ *$/d'
+done
+exit $retval

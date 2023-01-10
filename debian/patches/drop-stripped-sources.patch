@@ -1,0 +1,27 @@
+From: =?utf-8?q?=22IOhannes_m_zm=C3=B6lnig_=28Debian/GNU=29=22?=
+ <umlaeute@debian.org>
+Date: Tue, 23 Oct 2018 21:49:33 +0200
+Subject: exclude stripped sources from build
+
+since we stripped out the entire tests/ directory, we must not include it in
+the build
+Forwarded: not-needed (Debian specific)
+---
+ tools/assimp_cmd/CMakeLists.txt | 2 --
+ 1 file changed, 2 deletions(-)
+
+--- assimp.orig/tools/assimp_cmd/CMakeLists.txt
++++ assimp/tools/assimp_cmd/CMakeLists.txt
+@@ -48,12 +48,10 @@
+ LINK_DIRECTORIES( ${Assimp_BINARY_DIR} ${Assimp_BINARY_DIR}/lib )
+ 
+ ADD_EXECUTABLE( assimp_cmd
+-  assimp_cmd.rc
+   CompareDump.cpp
+   ImageExtractor.cpp
+   Main.cpp
+   Main.h
+-  resource.h
+   WriteDump.cpp
+   Info.cpp
+   Export.cpp
