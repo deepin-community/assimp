@@ -2,7 +2,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 All rights reserved.
@@ -416,10 +416,10 @@ template <>
 struct Structure::_defaultInitializer<ErrorPolicy_Fail> {
 
     template <typename T>
-    void operator()(T & /*out*/, const char * = "") {
+    void operator()(T & /*out*/, const char *message = "") {
         // obviously, it is crucial that _DefaultInitializer is used
         // only from within a catch clause.
-        throw DeadlyImportError("Constructing BlenderDNA Structure encountered an error");
+        throw DeadlyImportError("Constructing BlenderDNA Structure encountered an error: ", message);
     }
 };
 

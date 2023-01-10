@@ -2,7 +2,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 All rights reserved.
@@ -96,7 +96,7 @@ public:
     /** construct a binary token */
     Token(const char* sbegin, const char* send, TokenType type, size_t offset);
 
-    ~Token();
+    ~Token() = default;
 
 public:
     std::string StringContents() const {

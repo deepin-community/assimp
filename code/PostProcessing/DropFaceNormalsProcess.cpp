@@ -3,7 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 
@@ -56,17 +56,11 @@ using namespace Assimp;
 
 // ------------------------------------------------------------------------------------------------
 // Constructor to be privately used by Importer
-DropFaceNormalsProcess::DropFaceNormalsProcess()
-{
-    // nothing to do here
-}
+DropFaceNormalsProcess::DropFaceNormalsProcess() = default;
 
 // ------------------------------------------------------------------------------------------------
 // Destructor, private as well
-DropFaceNormalsProcess::~DropFaceNormalsProcess()
-{
-    // nothing to do here
-}
+DropFaceNormalsProcess::~DropFaceNormalsProcess() = default;
 
 // ------------------------------------------------------------------------------------------------
 // Returns whether the processing step is present in the given flag field.

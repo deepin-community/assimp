@@ -2,7 +2,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 All rights reserved.
@@ -233,7 +233,7 @@ public:
         Surface ambient, diffuse, specular, emissive, reflective, transparent, normal;
         Property shininess, transparency, index_refraction;
 
-        Material() {}
+        Material() = default;
     };
 
     std::map<unsigned int, std::string> textures;

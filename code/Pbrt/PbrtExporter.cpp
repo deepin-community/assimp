@@ -2,7 +2,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 All rights reserved.
 
@@ -83,7 +83,7 @@ Other:
 #include <sstream>
 #include <string>
 
-#include "stb/stb_image.h"
+#include "Common/StbCommon.h"
 
 using namespace Assimp;
 
@@ -162,9 +162,7 @@ PbrtExporter::PbrtExporter(
 }
 
 // Destructor
-PbrtExporter::~PbrtExporter() {
-    // Empty
-}
+PbrtExporter::~PbrtExporter() = default;
 
 void PbrtExporter::WriteMetaData() {
     mOutput << "#############################\n";
@@ -590,7 +588,7 @@ void PbrtExporter::WriteMaterial(int m) {
     for (int i = 1; i <= aiTextureType_UNKNOWN; i++) {
         int count = material->GetTextureCount(aiTextureType(i));
         if (count > 0)
-            mOutput << TextureTypeToString(aiTextureType(i)) << ": " <<  count << " ";
+            mOutput << aiTextureTypeToString(aiTextureType(i)) << ": " <<  count << " ";
     }
     mOutput << "\n";
 

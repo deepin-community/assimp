@@ -3,7 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 All rights reserved.
 
@@ -88,29 +88,13 @@ IRRImporter::IRRImporter() :
 
 // ------------------------------------------------------------------------------------------------
 // Destructor, private as well
-IRRImporter::~IRRImporter() {
-	// empty
-}
+IRRImporter::~IRRImporter() = default;
 
 // ------------------------------------------------------------------------------------------------
 // Returns whether the class can handle the format of the given file.
-bool IRRImporter::CanRead(const std::string &pFile, IOSystem *pIOHandler, bool checkSig) const {
-	const std::string extension = GetExtension(pFile);
-	if (extension == "irr") {
-		return true;
-	} else if (extension == "xml" || checkSig) {
-		/*  If CanRead() is called in order to check whether we
-         *  support a specific file extension in general pIOHandler
-         *  might be nullptr and it's our duty to return true here.
-         */
-		if (nullptr == pIOHandler) {
-			return true;
-		}
-		static const char * const tokens[] = { "irr_scene" };
-		return SearchFileHeaderForToken(pIOHandler, pFile, tokens, 1);
-	}
-
-	return false;
+bool IRRImporter::CanRead(const std::string &pFile, IOSystem *pIOHandler, bool /*checkSig*/) const {
+	static const char *tokens[] = { "irr_scene" };
+	return SearchFileHeaderForToken(pIOHandler, pFile, tokens, AI_COUNT_OF(tokens));
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -642,7 +626,7 @@ void IRRImporter::GenerateGraph(Node *root, aiNode *rootOut, aiScene *scene,
 				ASSIMP_LOG_ERROR("IRR: Unable to load external file: ", root->meshPath);
 				break;
 			}
-			attach.push_back(AttachmentInfo(localScene, rootOut));
+			attach.emplace_back(localScene, rootOut);
 
 			// Now combine the material we've loaded for this mesh
 			// with the real materials we got from the file. As we
@@ -888,7 +872,7 @@ void IRRImporter::InternReadFile(const std::string &pFile, aiScene *pScene, IOSy
 
 	// Batch loader used to load external models
 	BatchLoader batch(pIOHandler);
-	//  batch.SetBasePath(pFile);
+	//batch.SetBasePath(pFile);
 
 	cameras.reserve(5);
 	lights.reserve(5);
@@ -993,7 +977,7 @@ void IRRImporter::InternReadFile(const std::string &pFile, aiScene *pScene, IOSy
 					// Materials can occur for nearly any type of node
 					if (inMaterials && curNode->type != Node::DUMMY) {
 						//  This is a material description - parse it!
-						curNode->materials.push_back(std::pair<aiMaterial *, unsigned int>());
+						curNode->materials.emplace_back();
 						std::pair<aiMaterial *, unsigned int> &p = curNode->materials.back();
 
 						p.first = ParseMaterial(p.second);
@@ -1002,7 +986,7 @@ void IRRImporter::InternReadFile(const std::string &pFile, aiScene *pScene, IOSy
 					} else if (inAnimator) {
 						//  This is an animation path - add a new animator
 						//  to the list.
-						curNode->animators.push_back(Animator());
+						curNode->animators.emplace_back();
 						curAnim = &curNode->animators.back();
 
 						++guessedAnimCnt;
@@ -1029,7 +1013,7 @@ void IRRImporter::InternReadFile(const std::string &pFile, aiScene *pScene, IOSy
 										// here N is the ONE-based index of the point
 										if (prop.name.length() >= 6 && prop.name.substr(0, 5) == "Point") {
 											// Add a new key to the list
-											curAnim->splineKeys.push_back(aiVectorKey());
+											curAnim->splineKeys.emplace_back();
 											aiVectorKey &key = curAnim->splineKeys.back();
 
 											// and parse its properties

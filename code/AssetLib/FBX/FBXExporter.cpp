@@ -2,7 +2,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 All rights reserved.
 
@@ -255,7 +255,7 @@ void FBXExporter::WriteBinaryHeader()
 
 void FBXExporter::WriteBinaryFooter()
 {
-    outfile->Write(NULL_RECORD.c_str(), NULL_RECORD.size(), 1);
+    outfile->Write(NULL_RECORD, NumNullRecords, 1);
 
     outfile->Write(GENERIC_FOOTID.c_str(), GENERIC_FOOTID.size(), 1);
 

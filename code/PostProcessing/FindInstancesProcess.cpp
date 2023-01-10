@@ -3,7 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 
@@ -60,8 +60,7 @@ FindInstancesProcess::FindInstancesProcess()
 
 // ------------------------------------------------------------------------------------------------
 // Destructor, private as well
-FindInstancesProcess::~FindInstancesProcess()
-{}
+FindInstancesProcess::~FindInstancesProcess() = default;
 
 // ------------------------------------------------------------------------------------------------
 // Returns whether the processing step is present in the given flag field.

@@ -3,7 +3,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 Copyright (c) 2019 bzt
 
 All rights reserved.
@@ -57,9 +57,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // Assimp specific M3D configuration. Comment out these defines to remove functionality
 //#define ASSIMP_USE_M3D_READFILECB
 
-// Share stb_image's PNG loader with other importers/exporters instead of bringing our own copy.
-#define STBI_ONLY_PNG
-#include <stb/stb_image.h>
+#include "Common/StbCommon.h"
 
 #include "m3d.h"
 

@@ -1,3 +1,80 @@
+assimp (5.2.5~ds0-1) unstable; urgency=medium
+
+  * New upstream version 5.2.5~ds0
+    + Refresh patches
+    + Drop patch applied upstream
+    + Disable index_overflow.patch for now
+  * Explicitly enable building of assimp tools
+  * Modernize d/watch
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Fri, 16 Sep 2022 15:39:37 +0200
+
+assimp (5.2.4~ds0-3) unstable; urgency=medium
+
+  * Compat format for lintian-override
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Fri, 12 Aug 2022 00:22:38 +0200
+
+assimp (5.2.4~ds0-2) unstable; urgency=medium
+
+  [ Timo Röhling ]
+  * Fix various index overflow errors (Closes: #1012898)
+
+  [ IOhannes m zmölnig (Debian/GNU) ]
+  * Update lintian-override
+  * Bump standards version to 4.6.1
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 11 Aug 2022 23:21:41 +0200
+
+assimp (5.2.4~ds0-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Disable -Werror for the build.
+    Thanks to Pino Toscano for the patch (Closes: #1012898)
+
+ -- Timo Röhling <roehling@debian.org>  Mon, 08 Aug 2022 23:24:46 +0200
+
+assimp (5.2.4~ds0-1) unstable; urgency=medium
+
+  * New upstream version 5.2.4~ds0
+    + Refresh patches
+    + Drop patches applied upstream
+  * Bump dates in d/copyright
+    * Regenerate d/copyright_hints
+  * Use dpkg-mergechangelogs for resolving merge conflicts with d/changelog
+    (for easier backporting)
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sat, 14 May 2022 23:07:16 +0200
+
+assimp (5.2.2~ds0-1) unstable; urgency=medium
+
+  * New upstream version 5.2.2~ds0
+    + Refresh patches
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 21 Feb 2022 16:49:57 +0100
+
+assimp (5.2.1~ds0-1) unstable; urgency=medium
+
+  * New upstream version 5.2.1~ds0
+    + Drop patches applied upstream
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 09 Feb 2022 14:44:50 +0100
+
+assimp (5.2.0~ds0-2) unstable; urgency=medium
+
+  * Add patch to prevent FTBFS on big-endian architectures
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 31 Jan 2022 15:30:58 +0100
+
+assimp (5.2.0~ds0-1) unstable; urgency=medium
+
+  * New upstream version 5.2.0~ds0
+    + Refresh patches
+  * Update dates in d/copyright
+    + Regenerate d/copyright_hints
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 31 Jan 2022 11:52:15 +0100
+
 assimp (5.1.6~ds0-1) unstable; urgency=medium
 
   * New upstream version 5.1.6~ds0

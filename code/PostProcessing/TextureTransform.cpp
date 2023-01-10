@@ -2,7 +2,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 All rights reserved.
@@ -64,10 +64,7 @@ TextureTransformStep::TextureTransformStep() :
 
 // ------------------------------------------------------------------------------------------------
 // Destructor, private as well
-TextureTransformStep::~TextureTransformStep()
-{
-    // nothing to do here
-}
+TextureTransformStep::~TextureTransformStep() = default;
 
 // ------------------------------------------------------------------------------------------------
 // Returns whether the processing step is present in the given flag field.
@@ -437,7 +434,7 @@ void TextureTransformStep::Execute( aiScene* pScene)
         for (unsigned int n = 0; n < AI_MAX_NUMBER_OF_TEXTURECOORDS;++n) {
             if (ref[n])
                 continue;
-            trafo.push_back(STransformVecInfo());
+            trafo.emplace_back();
             trafo.back().uvIndex = n;
         }
 

@@ -1,0 +1,67 @@
+From: =?utf-8?q?Timo_R=C3=B6hling?= <roehling@debian.org>
+Date: Sat, 6 Aug 2022 19:00:12 +0200
+Subject: Fix various index overflow errors
+
+These errors have been discovered through the improved diagnostics
+of GCC-12.
+---
+ code/AssetLib/SMD/SMDLoader.cpp              | 4 ++--
+ code/AssetLib/X3D/X3DImporter_Geometry2D.cpp | 4 ++--
+ code/AssetLib/glTF2/glTF2Exporter.cpp        | 4 +++-
+ 3 files changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/code/AssetLib/SMD/SMDLoader.cpp b/code/AssetLib/SMD/SMDLoader.cpp
+index 46fd968..0d0f5b2 100644
+--- a/code/AssetLib/SMD/SMDLoader.cpp
++++ b/code/AssetLib/SMD/SMDLoader.cpp
+@@ -252,10 +252,10 @@ void SMDImporter::CreateOutputMeshes() {
+             iFace =  asTriangles.begin();
+             iFace != asTriangles.end();++iFace,++iNum) {
+         if (UINT_MAX == (*iFace).iTexture) {
+-            aaiFaces[(*iFace).iTexture].push_back( 0 );
++            aaiFaces[0].push_back(iNum);
+         } else if ((*iFace).iTexture >= aszTextures.size()) {
+             ASSIMP_LOG_INFO("[SMD/VTA] Material index overflow in face");
+-            aaiFaces[(*iFace).iTexture].push_back((unsigned int)aszTextures.size()-1);
++            aaiFaces[(unsigned int)aszTextures.size()-1].push_back(iNum);
+         } else {
+             aaiFaces[(*iFace).iTexture].push_back(iNum);
+         }
+diff --git a/code/AssetLib/X3D/X3DImporter_Geometry2D.cpp b/code/AssetLib/X3D/X3DImporter_Geometry2D.cpp
+index 8d0f5ba..b936ae8 100644
+--- a/code/AssetLib/X3D/X3DImporter_Geometry2D.cpp
++++ b/code/AssetLib/X3D/X3DImporter_Geometry2D.cpp
+@@ -274,8 +274,8 @@ void X3DImporter::readDisk2D(XmlNode &node) {
+             }
+ 
+             // add last quad
+-            vlist.push_back(*tlist_i.end()); // 1st point
+-            vlist.push_back(*tlist_o.end()); // 2nd point
++            vlist.push_back(*tlist_i.rbegin()); // 1st point
++            vlist.push_back(*tlist_o.rbegin()); // 2nd point
+             vlist.push_back(*tlist_o.begin()); // 3rd point
+             vlist.push_back(*tlist_o.begin()); // 4th point
+ 
+diff --git a/code/AssetLib/glTF2/glTF2Exporter.cpp b/code/AssetLib/glTF2/glTF2Exporter.cpp
+index ffd8d22..36292e3 100644
+--- a/code/AssetLib/glTF2/glTF2Exporter.cpp
++++ b/code/AssetLib/glTF2/glTF2Exporter.cpp
+@@ -57,7 +57,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ #include <assimp/IOSystem.hpp>
+ 
+ // Header files, standard library.
++#include <algorithm>
+ #include <cinttypes>
++#include <iterator>
+ #include <limits>
+ #include <memory>
+ 
+@@ -683,7 +685,7 @@ bool glTF2Exporter::GetMatSheen(const aiMaterial &mat, glTF2::MaterialSheen &she
+     }
+ 
+     // Default Sheen color factor {0,0,0} disables Sheen, so do not export
+-    if (sheen.sheenColorFactor == defaultSheenFactor) {
++    if (std::equal(std::begin(sheen.sheenColorFactor), std::end(sheen.sheenColorFactor), std::begin(defaultSheenFactor))) {
+         return false;
+     }
+ 
