@@ -2,7 +2,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 All rights reserved.
 
@@ -186,6 +186,9 @@ D3MFOpcPackage::D3MFOpcPackage(IOSystem *pIOHandler, const std::string &rFile) :
 D3MFOpcPackage::~D3MFOpcPackage() {
     mZipArchive->Close(mRootStream);
     delete mZipArchive;
+    for (auto tex : mEmbeddedTextures) {
+        delete tex;
+    }
 }
 
 IOStream *D3MFOpcPackage::RootStream() const {

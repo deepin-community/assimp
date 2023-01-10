@@ -2,7 +2,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 All rights reserved.
 
@@ -206,8 +206,7 @@ private:
      */
     struct SkyboxVertex
     {
-        SkyboxVertex()
-        {}
+        SkyboxVertex() = default;
 
         //! Construction from single vertex components
         SkyboxVertex(ai_real px, ai_real py, ai_real pz,

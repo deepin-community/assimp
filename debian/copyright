@@ -35,7 +35,7 @@ Copyright: 2004-2008, Paul Hsieh.
 License: BSD-3-clause
 
 Files: code/Common/CreateAnimMesh.cpp
-Copyright: 2006-2021, ASSIMP Development Team
+Copyright: 2006-2022, ASSIMP Development Team
   2016, The Qt Company Ltd.
 License: BSD-3-clause
 
@@ -52,7 +52,7 @@ Copyright: 2002, Randy Reddig & seaw0lf
 License: BSD-3-clause
 
 Files: code/AssetLib/M3D/*
-Copyright: 2006-2021, ASSIMP Development Team
+Copyright: 2006-2022, ASSIMP Development Team
   2019, bzt (bztsrc@gitlab)
 License: BSD-3-clause
 
@@ -107,7 +107,7 @@ Copyright:  2004, Amir Said (said@ieee.org) & William A. Pearlman (pearlw@ecse.r
 License: BSD-2-clause
 
 Files: contrib/pugixml/*
-Copyright: 2006-2020, Arseny Kapoulkine (arseny.kapoulkine@gmail.com)
+Copyright: 2006-2022, Arseny Kapoulkine (arseny.kapoulkine@gmail.com)
 License: Expat
 
 Files: contrib/rapidjson/*

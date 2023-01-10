@@ -2,7 +2,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 All rights reserved.
@@ -62,10 +62,7 @@ LimitBoneWeightsProcess::LimitBoneWeightsProcess()
 
 // ------------------------------------------------------------------------------------------------
 // Destructor, private as well
-LimitBoneWeightsProcess::~LimitBoneWeightsProcess()
-{
-    // nothing to do here
-}
+LimitBoneWeightsProcess::~LimitBoneWeightsProcess() = default;
 
 // ------------------------------------------------------------------------------------------------
 // Returns whether the processing step is present in the given flag field.

@@ -3,7 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 All rights reserved.
 
@@ -81,19 +81,17 @@ static const aiImporterDesc desc = {
 
 //#define DEBUG_B3D
 
-template <typename T>
+template<typename T>
 void DeleteAllBarePointers(std::vector<T> &x) {
     for (auto p : x) {
         delete p;
     }
 }
 
-B3DImporter::~B3DImporter() {
-}
+B3DImporter::~B3DImporter() = default;
 
 // ------------------------------------------------------------------------------------------------
 bool B3DImporter::CanRead(const std::string &pFile, IOSystem * /*pIOHandler*/, bool /*checkSig*/) const {
-
     size_t pos = pFile.find_last_of('.');
     if (pos == string::npos) {
         return false;
@@ -479,13 +477,13 @@ void B3DImporter::ReadKEYS(aiNodeAnim *nodeAnim) {
     while (ChunkSize()) {
         int frame = ReadInt();
         if (flags & 1) {
-            trans.push_back(aiVectorKey(frame, ReadVec3()));
+            trans.emplace_back(frame, ReadVec3());
         }
         if (flags & 2) {
-            scale.push_back(aiVectorKey(frame, ReadVec3()));
+            scale.emplace_back(frame, ReadVec3());
         }
         if (flags & 4) {
-            rot.push_back(aiQuatKey(frame, ReadQuat()));
+            rot.emplace_back(frame, ReadQuat());
         }
     }
 
@@ -673,7 +671,7 @@ void B3DImporter::ReadBB3D(aiScene *scene) {
                         int bone = v.bones[k];
                         float weight = v.weights[k];
 
-                        vweights[bone].push_back(aiVertexWeight(vertIdx + faceIndex, weight));
+                        vweights[bone].emplace_back(vertIdx + faceIndex, weight);
                     }
                 }
                 ++face;

@@ -123,6 +123,8 @@ Files: code/AssetLib/3DS/3DSConverter.cpp
  code/AssetLib/IFC/IFCProfile.cpp
  code/AssetLib/IFC/IFCUtil.cpp
  code/AssetLib/IFC/IFCUtil.h
+ code/AssetLib/IQM/IQMImporter.cpp
+ code/AssetLib/IQM/IQMImporter.h
  code/AssetLib/Irr/IRRLoader.cpp
  code/AssetLib/Irr/IRRLoader.h
  code/AssetLib/Irr/IRRMeshLoader.cpp
@@ -283,10 +285,13 @@ Files: code/AssetLib/3DS/3DSConverter.cpp
  code/Common/AssertHandler.cpp
  code/Common/AssertHandler.h
  code/Common/Assimp.cpp
+ code/Common/Base64.cpp
  code/Common/BaseImporter.cpp
  code/Common/BaseProcess.cpp
  code/Common/BaseProcess.h
  code/Common/Bitmap.cpp
+ code/Common/Compression.cpp
+ code/Common/Compression.h
  code/Common/DefaultIOStream.cpp
  code/Common/DefaultIOSystem.cpp
  code/Common/DefaultLogger.cpp
@@ -295,6 +300,7 @@ Files: code/AssetLib/3DS/3DSConverter.cpp
  code/Common/Exporter.cpp
  code/Common/FileLogStream.h
  code/Common/FileSystemFilter.h
+ code/Common/IOSystem.cpp
  code/Common/Importer.cpp
  code/Common/Importer.h
  code/Common/ImporterRegistry.cpp
@@ -389,6 +395,7 @@ Files: code/AssetLib/3DS/3DSConverter.cpp
  code/PostProcessing/ValidateDataStructure.cpp
  code/PostProcessing/ValidateDataStructure.h
  fuzz/assimp_fuzzer.cc
+ include/assimp/Base64.hpp
  include/assimp/BaseImporter.h
  include/assimp/Bitmap.h
  include/assimp/BlobIOSystem.h
@@ -414,6 +421,7 @@ Files: code/AssetLib/3DS/3DSConverter.cpp
  include/assimp/MathFunctions.h
  include/assimp/MemoryIOWrapper.h
  include/assimp/NullLogger.hpp
+ include/assimp/ObjMaterial.h
  include/assimp/ParsingUtils.h
  include/assimp/Profiler.h
  include/assimp/ProgressHandler.hpp
@@ -519,6 +527,7 @@ Files: code/AssetLib/3DS/3DSConverter.cpp
  test/unit/AssimpAPITest_aiVector3D.cpp
  test/unit/Common/uiScene.cpp
  test/unit/Common/utAssertHandler.cpp
+ test/unit/Common/utBase64.cpp
  test/unit/Common/utLineSplitter.cpp
  test/unit/Common/utMesh.cpp
  test/unit/Common/utSpatialSort.cpp
@@ -675,6 +684,7 @@ Files: code/AssetLib/3DS/3DSConverter.cpp
 Copyright: 2006-2019, assimp team
   2006-2020, assimp team
   2006-2021, assimp team
+  2006-2022, assimp team
 License: BSD-3-clause
  FIXME
 
@@ -1019,6 +1029,7 @@ Files: Build.md
  Readme.md
  code/AssetLib/Blender/BlenderCustomData.cpp
  code/AssetLib/Blender/BlenderCustomData.h
+ code/AssetLib/IQM/iqm.h
  code/AssetLib/Irr/IRRShared.h
  code/AssetLib/X3D/X3DExporter.cpp
  code/AssetLib/X3D/X3DExporter.hpp
@@ -1027,6 +1038,7 @@ Files: Build.md
  code/AssetLib/X3D/X3DXmlHelper.cpp
  code/AssetLib/X3D/X3DXmlHelper.h
  code/Common/IFF.h
+ code/Common/Maybe.h
  code/Common/assbin_chunks.h
  contrib/android-cmake/ndk_links.md
  contrib/draco/.cmake-format.py
@@ -1095,7 +1107,6 @@ Files: Build.md
  contrib/openddlparser/README.md
  contrib/poly2tri/AUTHORS
  contrib/poly2tri/README
- contrib/pugixml/contrib/foreach.hpp
  contrib/zip/.travis.sh
  contrib/zip/src/zip.c
  contrib/zip/src/zip.h
@@ -1477,7 +1488,7 @@ Files: code/AssetLib/M3D/M3DExporter.cpp
  code/AssetLib/M3D/M3DMaterials.h
  code/AssetLib/M3D/M3DWrapper.cpp
  code/AssetLib/M3D/M3DWrapper.h
-Copyright: 2006-2021, assimp team
+Copyright: 2006-2022, assimp team
   2019, bzt
 License: BSD-3-clause
  FIXME
@@ -1501,7 +1512,7 @@ License: Apache-2.0
 Files: contrib/pugixml/src/pugiconfig.hpp
  contrib/pugixml/src/pugixml.cpp
  contrib/pugixml/src/pugixml.hpp
-Copyright: 2006-2020, Arseny Kapoulkine (arseny.kapoulkine@gmail.com)
+Copyright: 2006-2022, Arseny Kapoulkine (arseny.kapoulkine@gmail.com)
 License: Expat
  FIXME
 
@@ -1578,7 +1589,7 @@ License: BSD-3-clause
  FIXME
 
 Files: code/Common/CreateAnimMesh.cpp
-Copyright: 2006-2021, assimp team
+Copyright: 2006-2022, assimp team
   2016, The Qt Company Ltd.
 License: BSD-3-clause
  FIXME

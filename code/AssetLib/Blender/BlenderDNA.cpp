@@ -2,7 +2,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 All rights reserved.
@@ -325,10 +325,10 @@ void SectionParser ::Next() {
     stream.SetCurrentPos(current.start + current.size);
 
     const char tmp[] = {
-        (const char)stream.GetI1(),
-        (const char)stream.GetI1(),
-        (const char)stream.GetI1(),
-        (const char)stream.GetI1()
+        (char)stream.GetI1(),
+        (char)stream.GetI1(),
+        (char)stream.GetI1(),
+        (char)stream.GetI1()
     };
     current.id = std::string(tmp, tmp[3] ? 4 : tmp[2] ? 3 : tmp[1] ? 2 : 1);
 

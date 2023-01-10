@@ -25,7 +25,7 @@ Last-Update: 2019-10-17
  #pragma warning(default: 4100) // Enable warning 'unreferenced formal parameter'
 --- assimp.orig/code/CMakeLists.txt
 +++ assimp/code/CMakeLists.txt
-@@ -1069,11 +1069,11 @@
+@@ -1085,11 +1085,11 @@
    hunter_add_package(stb)
    find_package(stb CONFIG REQUIRED)
  ELSE()

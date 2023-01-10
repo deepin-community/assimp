@@ -3,7 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 
@@ -218,7 +218,7 @@ void LWOImporter::CopyFaceIndicesLWOB(FaceList::iterator& it,
 // ------------------------------------------------------------------------------------------------
 LWO::Texture* LWOImporter::SetupNewTextureLWOB(LWO::TextureList& list,unsigned int size)
 {
-    list.push_back(LWO::Texture());
+    list.emplace_back();
     LWO::Texture* tex = &list.back();
 
     std::string type;

@@ -3,7 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 All rights reserved.
 
@@ -62,9 +62,7 @@ FindInvalidDataProcess::FindInvalidDataProcess() :
 
 // ------------------------------------------------------------------------------------------------
 // Destructor, private as well
-FindInvalidDataProcess::~FindInvalidDataProcess() {
-    // nothing to do here
-}
+FindInvalidDataProcess::~FindInvalidDataProcess() = default;
 
 // ------------------------------------------------------------------------------------------------
 // Returns whether the processing step is present in the given flag field.

@@ -3,7 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 All rights reserved.
 
@@ -94,26 +94,13 @@ MD5Importer::MD5Importer() :
 
 // ------------------------------------------------------------------------------------------------
 // Destructor, private as well
-MD5Importer::~MD5Importer() {
-    // empty
-}
+MD5Importer::~MD5Importer() = default;
 
 // ------------------------------------------------------------------------------------------------
 // Returns whether the class can handle the format of the given file.
-bool MD5Importer::CanRead(const std::string &pFile, IOSystem *pIOHandler, bool checkSig) const {
-    const std::string extension = GetExtension(pFile);
-
-    if (extension == "md5anim" || extension == "md5mesh" || extension == "md5camera")
-        return true;
-    else if (!extension.length() || checkSig) {
-        if (!pIOHandler) {
-            return true;
-        }
-        static const char * const tokens[] = { "MD5Version" };
-        return SearchFileHeaderForToken(pIOHandler, pFile, tokens, 1);
-    }
-
-    return false;
+bool MD5Importer::CanRead(const std::string &pFile, IOSystem *pIOHandler, bool /*checkSig*/) const {
+    static const char *tokens[] = { "MD5Version" };
+    return SearchFileHeaderForToken(pIOHandler, pFile, tokens, AI_COUNT_OF(tokens));
 }
 
 // ------------------------------------------------------------------------------------------------

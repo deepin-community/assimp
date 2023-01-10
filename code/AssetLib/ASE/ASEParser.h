@@ -2,7 +2,7 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 All rights reserved.
@@ -116,7 +116,7 @@ struct Material : public D3DS::Material {
         return *this;
     }
 
-    ~Material() {}
+    ~Material() = default;
 
     //! Contains all sub materials of this material
     std::vector<Material> avSubMaterials;

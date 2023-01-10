@@ -3,7 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 All rights reserved.
 
@@ -331,7 +331,16 @@ void ColladaParser::ReadAssetInfo(XmlNode &node) {
         const std::string &currentName = currentNode.name();
         if (currentName == "unit") {
             mUnitSize = 1.f;
-            XmlParser::getRealAttribute(currentNode, "meter", mUnitSize);
+            std::string tUnitSizeString;
+            if (XmlParser::getStdStrAttribute(currentNode, "meter", tUnitSizeString)) {
+                try {
+                    fast_atoreal_move<ai_real>(tUnitSizeString.data(), mUnitSize);
+                } catch (const DeadlyImportError& die) {
+                    std::string warning("Collada: Failed to parse meter parameter to real number. Exception:\n");
+                    warning.append(die.what());
+                    ASSIMP_LOG_WARN(warning.data());
+                }
+            }
         } else if (currentName == "up_axis") {
             std::string v;
             if (!XmlParser::getValueAsString(currentNode, v)) {
@@ -1607,6 +1616,7 @@ void ColladaParser::ReadIndexData(XmlNode &node, Mesh &pMesh) {
                     XmlParser::getValueAsString(currentNode, v);
                     const char *content = v.c_str();
                     vcount.reserve(numPrimitives);
+                    SkipSpacesAndLineEnd(&content);
                     for (unsigned int a = 0; a < numPrimitives; a++) {
                         if (*content == 0) {
                             throw DeadlyImportError("Expected more values while reading <vcount> contents.");
@@ -1919,7 +1929,7 @@ void ColladaParser::ExtractDataObjectFromChannel(const InputChannel &pInput, siz
     switch (pInput.mType) {
     case IT_Position: // ignore all position streams except 0 - there can be only one position
         if (pInput.mIndex == 0) {
-            pMesh.mPositions.push_back(aiVector3D(obj[0], obj[1], obj[2]));
+            pMesh.mPositions.emplace_back(obj[0], obj[1], obj[2]);
         } else {
             ASSIMP_LOG_ERROR("Collada: just one vertex position stream supported");
         }
@@ -1931,7 +1941,7 @@ void ColladaParser::ExtractDataObjectFromChannel(const InputChannel &pInput, siz
 
         // ignore all normal streams except 0 - there can be only one normal
         if (pInput.mIndex == 0) {
-            pMesh.mNormals.push_back(aiVector3D(obj[0], obj[1], obj[2]));
+            pMesh.mNormals.emplace_back(obj[0], obj[1], obj[2]);
         } else {
             ASSIMP_LOG_ERROR("Collada: just one vertex normal stream supported");
         }
@@ -1943,7 +1953,7 @@ void ColladaParser::ExtractDataObjectFromChannel(const InputChannel &pInput, siz
 
         // ignore all tangent streams except 0 - there can be only one tangent
         if (pInput.mIndex == 0) {
-            pMesh.mTangents.push_back(aiVector3D(obj[0], obj[1], obj[2]));
+            pMesh.mTangents.emplace_back(obj[0], obj[1], obj[2]);
         } else {
             ASSIMP_LOG_ERROR("Collada: just one vertex tangent stream supported");
         }
@@ -1956,7 +1966,7 @@ void ColladaParser::ExtractDataObjectFromChannel(const InputChannel &pInput, siz
 
         // ignore all bitangent streams except 0 - there can be only one bitangent
         if (pInput.mIndex == 0) {
-            pMesh.mBitangents.push_back(aiVector3D(obj[0], obj[1], obj[2]));
+            pMesh.mBitangents.emplace_back(obj[0], obj[1], obj[2]);
         } else {
             ASSIMP_LOG_ERROR("Collada: just one vertex bitangent stream supported");
         }
@@ -1969,7 +1979,7 @@ void ColladaParser::ExtractDataObjectFromChannel(const InputChannel &pInput, siz
                 pMesh.mTexCoords[pInput.mIndex].insert(pMesh.mTexCoords[pInput.mIndex].end(),
                         pMesh.mPositions.size() - pMesh.mTexCoords[pInput.mIndex].size() - 1, aiVector3D(0, 0, 0));
 
-            pMesh.mTexCoords[pInput.mIndex].push_back(aiVector3D(obj[0], obj[1], obj[2]));
+            pMesh.mTexCoords[pInput.mIndex].emplace_back(obj[0], obj[1], obj[2]);
             if (0 != acc.mSubOffset[2] || 0 != acc.mSubOffset[3]) {
                 pMesh.mNumUVComponents[pInput.mIndex] = 3;
             }
@@ -2048,7 +2058,7 @@ void ColladaParser::ReadSceneNode(XmlNode &node, Node *pNode) {
                 XmlParser::getStdStrAttribute(currentNode, "id", child->mID);
             }
             if (XmlParser::hasAttribute(currentNode, "sid")) {
-                XmlParser::getStdStrAttribute(currentNode, "id", child->mSID);
+                XmlParser::getStdStrAttribute(currentNode, "sid", child->mSID);
             }
             if (XmlParser::hasAttribute(currentNode, "name")) {
                 XmlParser::getStdStrAttribute(currentNode, "name", child->mName);
@@ -2103,7 +2113,7 @@ void ColladaParser::ReadSceneNode(XmlNode &node, Node *pNode) {
                 if (s[0] != '#') {
                     ASSIMP_LOG_ERROR("Collada: Unresolved reference format of node");
                 } else {
-                    pNode->mNodeInstances.push_back(NodeInstance());
+                    pNode->mNodeInstances.emplace_back();
                     pNode->mNodeInstances.back().mNode = s.c_str() + 1;
                 }
             }
@@ -2119,7 +2129,7 @@ void ColladaParser::ReadSceneNode(XmlNode &node, Node *pNode) {
                     throw DeadlyImportError("Unknown reference format in <instance_light> element");
                 }
 
-                pNode->mLights.push_back(LightInstance());
+                pNode->mLights.emplace_back();
                 pNode->mLights.back().mLight = url.c_str() + 1;
             }
         } else if (currentName == "instance_camera") {
@@ -2130,7 +2140,7 @@ void ColladaParser::ReadSceneNode(XmlNode &node, Node *pNode) {
                 if (url[0] != '#') {
                     throw DeadlyImportError("Unknown reference format in <instance_camera> element");
                 }
-                pNode->mCameras.push_back(CameraInstance());
+                pNode->mCameras.emplace_back();
                 pNode->mCameras.back().mCamera = url.c_str() + 1;
             }
         }
@@ -2242,20 +2252,26 @@ void ColladaParser::ReadNodeGeometry(XmlNode &node, Node *pNode) {
         if (currentName == "bind_material") {
             XmlNode techNode = currentNode.child("technique_common");
             if (techNode) {
-                XmlNode instanceMatNode = techNode.child("instance_material");
-                // read ID of the geometry subgroup and the target material
-                std::string group;
-                XmlParser::getStdStrAttribute(instanceMatNode, "symbol", group);
-                XmlParser::getStdStrAttribute(instanceMatNode, "target", url);
-                const char *urlMat = url.c_str();
-                Collada::SemanticMappingTable s;
-                if (urlMat[0] == '#')
-                    urlMat++;
+                for (XmlNode instanceMatNode = techNode.child("instance_material"); instanceMatNode; instanceMatNode = instanceMatNode.next_sibling())
+                {
+                    const std::string &instance_name = instanceMatNode.name();
+                    if (instance_name == "instance_material")
+                    {
+                        // read ID of the geometry subgroup and the target material
+                        std::string group;
+                        XmlParser::getStdStrAttribute(instanceMatNode, "symbol", group);
+                        XmlParser::getStdStrAttribute(instanceMatNode, "target", url);
+                        const char *urlMat = url.c_str();
+                        Collada::SemanticMappingTable s;
+                        if (urlMat[0] == '#')
+                            urlMat++;
 
-                s.mMatName = urlMat;
-                // store the association
-                instance.mMaterials[group] = s;
-                ReadMaterialVertexInputBinding(instanceMatNode, s);
+                        s.mMatName = urlMat;
+                        // store the association
+                        instance.mMaterials[group] = s;
+                        ReadMaterialVertexInputBinding(instanceMatNode, s);
+                    }
+                }
             }
         }
     }

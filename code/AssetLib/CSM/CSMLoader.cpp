@@ -3,7 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 
@@ -85,24 +85,14 @@ CSMImporter::CSMImporter()
 
 // ------------------------------------------------------------------------------------------------
 // Destructor, private as well
-CSMImporter::~CSMImporter()
-{}
+CSMImporter::~CSMImporter() = default;
 
 // ------------------------------------------------------------------------------------------------
 // Returns whether the class can handle the format of the given file.
-bool CSMImporter::CanRead( const std::string& pFile, IOSystem* pIOHandler, bool checkSig) const
+bool CSMImporter::CanRead( const std::string& pFile, IOSystem* pIOHandler, bool /*checkSig*/) const
 {
-    // check file extension
-    const std::string extension = GetExtension(pFile);
-
-    if( extension == "csm")
-        return true;
-
-    if ((checkSig || !extension.length()) && pIOHandler) {
-        static const char * const tokens[] = {"$Filename"};
-        return SearchFileHeaderForToken(pIOHandler,pFile,tokens,1);
-    }
-    return false;
+    static const char* tokens[] = {"$Filename"};
+    return SearchFileHeaderForToken(pIOHandler,pFile,tokens,AI_COUNT_OF(tokens));
 }
 
 // ------------------------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 
@@ -88,22 +88,13 @@ BVHLoader::BVHLoader() :
 
 // ------------------------------------------------------------------------------------------------
 // Destructor, private as well
-BVHLoader::~BVHLoader() {}
+BVHLoader::~BVHLoader() = default;
 
 // ------------------------------------------------------------------------------------------------
 // Returns whether the class can handle the format of the given file.
-bool BVHLoader::CanRead(const std::string &pFile, IOSystem *pIOHandler, bool cs) const {
-    // check file extension
-    const std::string extension = GetExtension(pFile);
-
-    if (extension == "bvh")
-        return true;
-
-    if ((!extension.length() || cs) && pIOHandler) {
-        static const char * const tokens[] = { "HIERARCHY" };
-        return SearchFileHeaderForToken(pIOHandler, pFile, tokens, 1);
-    }
-    return false;
+bool BVHLoader::CanRead(const std::string &pFile, IOSystem *pIOHandler, bool /*checkSig*/) const {
+    static const char *tokens[] = { "HIERARCHY" };
+    return SearchFileHeaderForToken(pIOHandler, pFile, tokens, AI_COUNT_OF(tokens));
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -195,7 +186,7 @@ aiNode *BVHLoader::ReadNode() {
     std::vector<aiNode *> childNodes;
 
     // and create an bone entry for it
-    mNodes.push_back(Node(node));
+    mNodes.emplace_back(node);
     Node &internNode = mNodes.back();
 
     // now read the node's contents

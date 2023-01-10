@@ -7,7 +7,7 @@ Last-Update: 2021-11-23
 This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
 --- assimp.orig/code/CMakeLists.txt
 +++ assimp/code/CMakeLists.txt
-@@ -1207,6 +1207,9 @@
+@@ -1230,6 +1230,9 @@
    endif()
  ENDIF()
  

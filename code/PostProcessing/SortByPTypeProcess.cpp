@@ -3,7 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
+Copyright (c) 2006-2022, assimp team
 
 
 
@@ -61,9 +61,7 @@ SortByPTypeProcess::SortByPTypeProcess() :
 
 // ------------------------------------------------------------------------------------------------
 // Destructor, private as well
-SortByPTypeProcess::~SortByPTypeProcess() {
-    // nothing to do here
-}
+SortByPTypeProcess::~SortByPTypeProcess() = default;
 
 // ------------------------------------------------------------------------------------------------
 // Returns whether the processing step is present in the given flag field.
@@ -311,7 +309,7 @@ void SortByPTypeProcess::Execute(aiScene *pScene) {
                         VertexWeightTable &tbl = avw[idx];
                         for (VertexWeightTable::const_iterator it = tbl.begin(), end = tbl.end();
                                 it != end; ++it) {
-                            tempBones[(*it).first].push_back(aiVertexWeight(outIdx, (*it).second));
+                            tempBones[(*it).first].emplace_back(outIdx, (*it).second);
                         }
                     }
 
