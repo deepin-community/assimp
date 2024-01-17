@@ -2,6 +2,6 @@
 version=4
 opts=\
  uversionmangle=s%(rc|a|b|c)%~$1%,\
- repacksuffix=~ds0,\
+ repacksuffix=+ds,\
  dversionmangle=auto \
   https://github.com/assimp/assimp/tags .*/v?@ANY_VERSION@@ARCHIVE_EXT@

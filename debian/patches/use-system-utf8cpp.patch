@@ -41,19 +41,18 @@ Last-Update: 2019-10-17
  
 --- assimp.orig/code/AssetLib/SIB/SIBImporter.cpp
 +++ assimp/code/AssetLib/SIB/SIBImporter.cpp
-@@ -59,7 +59,8 @@
+@@ -59,7 +59,7 @@
  #ifdef ASSIMP_USE_HUNTER
  #include <utf8.h>
  #else
 -#include "../contrib/utf8cpp/source/utf8.h"
-+//#  include "../contrib/ConvertUTF/ConvertUTF.h"
 +#include <utf8.h>
  #endif
  #include <assimp/importerdesc.h>
  #include <assimp/scene.h>
 --- assimp.orig/code/Common/BaseImporter.cpp
 +++ assimp/code/Common/BaseImporter.cpp
-@@ -334,7 +334,7 @@
+@@ -360,7 +360,7 @@
  #ifdef ASSIMP_USE_HUNTER
  #include <utf8.h>
  #else

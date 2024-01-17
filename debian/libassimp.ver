@@ -22,7 +22,9 @@
                  Assimp::StandardShapes*;
                  Assimp::Subdivider*;
                  Assimp::ai*;
+                 Assimp::*AiAssertHandler*;
                  ai*;
+                 DeadlyErrorBase::*
 		};
                 /* g++ version mangling prefixes for 'typeinfo' */
 		_ZTI*; _ZTF*; _ZTS*;

@@ -1,0 +1,60 @@
+Description: use libpugixml-dev provided by the system
+Author: IOhannes m zmölnig
+Origin: Debian
+Forwarded: no
+Last-Update: 2023-10-1
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- assimp.orig/code/CMakeLists.txt
++++ assimp/code/CMakeLists.txt
+@@ -906,17 +906,17 @@
+ SOURCE_GROUP( Extra FILES ${Extra_SRCS})
+ 
+ # pugixml
+-IF(ASSIMP_HUNTER_ENABLED)
+-  hunter_add_package(pugixml)
+-  find_package(pugixml CONFIG REQUIRED)
+-ELSE()
+-  SET( Pugixml_SRCS
+-    ../contrib/pugixml/src/pugiconfig.hpp
+-    ../contrib/pugixml/src/pugixml.hpp
+-  )
+-  INCLUDE_DIRECTORIES("../contrib/pugixml/src")
+-  SOURCE_GROUP( Contrib\\Pugixml FILES ${Pugixml_SRCS})
+-ENDIF()
++#IF(ASSIMP_HUNTER_ENABLED)
++#  hunter_add_package(pugixml)
++#  find_package(pugixml CONFIG REQUIRED)
++#ELSE()
++#  SET( Pugixml_SRCS
++#    ../contrib/pugixml/src/pugiconfig.hpp
++#    ../contrib/pugixml/src/pugixml.hpp
++#  )
++#  INCLUDE_DIRECTORIES("../contrib/pugixml/src")
++#  SOURCE_GROUP( Contrib\\Pugixml FILES ${Pugixml_SRCS})
++#ENDIF()
+ 
+ # utf8
+ IF(ASSIMP_HUNTER_ENABLED)
+@@ -1264,6 +1264,10 @@
+   $<INSTALL_INTERFACE:${ASSIMP_INCLUDE_INSTALL_DIR}>
+ )
+ 
++find_package(pugixml CONFIG REQUIRED)
++## the public header 'assimp/XmlParser.h' includes 'pugixml.hpp', so:
++TARGET_LINK_LIBRARIES(assimp PUBLIC pugixml)
++
+ IF(ASSIMP_HUNTER_ENABLED)
+   TARGET_LINK_LIBRARIES(assimp
+       PUBLIC
+--- assimp.orig/test/CMakeLists.txt
++++ assimp/test/CMakeLists.txt
+@@ -47,7 +47,7 @@
+   INCLUDE_DIRECTORIES(
+     ${Assimp_SOURCE_DIR}/contrib/googletest/googletest/include
+     ${Assimp_SOURCE_DIR}/contrib/googletest/googletest/
+-    ${Assimp_SOURCE_DIR}/contrib/pugixml/src
++    #${Assimp_SOURCE_DIR}/contrib/pugixml/src
+   )
+ endif()
+ 

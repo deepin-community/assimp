@@ -1,0 +1,89 @@
+Description: use rapidjson-dev provided by the system
+Author: IOhannes m zmölnig
+Origin: Debian
+Forwarded: no
+Last-Update: 2023-10-20
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- assimp.orig/code/CMakeLists.txt
++++ assimp/code/CMakeLists.txt
+@@ -1075,17 +1075,17 @@
+ ENDIF ()
+ 
+ # RapidJSON
+-IF(ASSIMP_HUNTER_ENABLED)
+-  hunter_add_package(RapidJSON)
+-  find_package(RapidJSON CONFIG REQUIRED)
+-ELSE()
+-  INCLUDE_DIRECTORIES("../contrib/rapidjson/include")
+-  ADD_DEFINITIONS( -DRAPIDJSON_HAS_STDSTRING=1)
+-  option( ASSIMP_RAPIDJSON_NO_MEMBER_ITERATOR "Suppress rapidjson warning on MSVC (NOTE: breaks android build)" ON )
+-  if(ASSIMP_RAPIDJSON_NO_MEMBER_ITERATOR)
+-    ADD_DEFINITIONS( -DRAPIDJSON_NOMEMBERITERATORCLASS )
+-  endif()
+-ENDIF()
++#IF(ASSIMP_HUNTER_ENABLED)
++#  hunter_add_package(RapidJSON)
++#  find_package(RapidJSON CONFIG REQUIRED)
++#ELSE()
++#  INCLUDE_DIRECTORIES("../contrib/rapidjson/include")
++#  ADD_DEFINITIONS( -DRAPIDJSON_HAS_STDSTRING=1)
++#  option( ASSIMP_RAPIDJSON_NO_MEMBER_ITERATOR "Suppress rapidjson warning on MSVC (NOTE: breaks android build)" ON )
++#  if(ASSIMP_RAPIDJSON_NO_MEMBER_ITERATOR)
++#    ADD_DEFINITIONS( -DRAPIDJSON_NOMEMBERITERATORCLASS )
++#  endif()
++#ENDIF()
+ 
+ # stb
+ #IF(ASSIMP_HUNTER_ENABLED)
+@@ -1268,6 +1268,9 @@
+ ## the public header 'assimp/XmlParser.h' includes 'pugixml.hpp', so:
+ TARGET_LINK_LIBRARIES(assimp PUBLIC pugixml)
+ 
++FIND_PACKAGE(RapidJSON CONFIG REQUIRED)
++TARGET_COMPILE_DEFINITIONS(assimp PRIVATE RAPIDJSON_HAS_STDSTRING=1)
++
+ IF(ASSIMP_HUNTER_ENABLED)
+   TARGET_LINK_LIBRARIES(assimp
+       PUBLIC
+--- assimp.orig/test/CMakeLists.txt
++++ assimp/test/CMakeLists.txt
+@@ -112,7 +112,7 @@
+   unit/utLWOImportExport.cpp
+   unit/utSMDImportExport.cpp
+   unit/utglTFImportExport.cpp
+-  unit/utglTF2ImportExport.cpp
++  #unit/utglTF2ImportExport.cpp
+   unit/utHMPImportExport.cpp
+   unit/utIFCImportExport.cpp
+   unit/utFBXImporterExporter.cpp
+@@ -234,17 +234,18 @@
+ endif()
+ 
+ # RapidJSON
+-IF(ASSIMP_HUNTER_ENABLED)
+-  hunter_add_package(RapidJSON)
+-  find_package(RapidJSON CONFIG REQUIRED)
+-ELSE()
+-  INCLUDE_DIRECTORIES("../contrib/rapidjson/include")
+-  ADD_DEFINITIONS( -DRAPIDJSON_HAS_STDSTRING=1)
+-  option( ASSIMP_RAPIDJSON_NO_MEMBER_ITERATOR "Suppress rapidjson warning on MSVC (NOTE: breaks android build)" ON )
+-  if(ASSIMP_RAPIDJSON_NO_MEMBER_ITERATOR)
+-    ADD_DEFINITIONS( -DRAPIDJSON_NOMEMBERITERATORCLASS )
+-  endif()
+-ENDIF()
++#IF(ASSIMP_HUNTER_ENABLED)
++#  hunter_add_package(RapidJSON)
++#  find_package(RapidJSON CONFIG REQUIRED)
++#ELSE()
++#  INCLUDE_DIRECTORIES("../contrib/rapidjson/include")
++#  ADD_DEFINITIONS( -DRAPIDJSON_HAS_STDSTRING=1)
++#  option( ASSIMP_RAPIDJSON_NO_MEMBER_ITERATOR "Suppress rapidjson warning on MSVC (NOTE: breaks android build)" ON )
++#  if(ASSIMP_RAPIDJSON_NO_MEMBER_ITERATOR)
++#    ADD_DEFINITIONS( -DRAPIDJSON_NOMEMBERITERATORCLASS )
++#  endif()
++#ENDIF()
++FIND_PACKAGE(RapidJSON CONFIG REQUIRED)
+ 
+ IF (ASSIMP_BUILD_DRACO)
+   ADD_DEFINITIONS( -DASSIMP_ENABLE_DRACO )

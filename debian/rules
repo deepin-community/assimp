@@ -30,7 +30,21 @@ export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
 # enable draco (but don't build it)
 export DEB_CPPFLAGS_MAINT_APPEND  = -DASSIMP_ENABLE_DRACO=1
 # package maintainers to append LDFLAGS
-export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+ifeq (,$(findstring nodoc,$(DEB_BUILD_OPTIONS)))
+       BUILD_DOCS = ON
+else
+       BUILD_DOCS = OFF
+endif
+ifeq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
+       BUILD_TESTS = ON
+else
+       BUILD_TESTS = OFF
+endif
+# disable all tests for now
+# the tests use private symbols, and since we strip these out
+# with the libassim.ver script, the tests fail to link
+BUILD_TESTS = OFF
 
 export PYBUILD_NAME=pyassimp
 
@@ -40,10 +54,10 @@ export PYBUILD_NAME=pyassimp
 override_dh_auto_configure:
 	dh_auto_configure -- \
 		-DASSIMP_BUILD_ARCHITECTURE=$(DEB_HOST_ARCH) \
-		-DASSIMP_BUILD_DOCS=ON \
+		-DASSIMP_BUILD_DOCS=$(BUILD_DOCS) \
 		-DASSIMP_BUILD_ASSIMP_TOOLS=ON \
 		-DASSIMP_BUILD_SAMPLES=OFF \
-		-DASSIMP_BUILD_TESTS=OFF \
+		-DASSIMP_BUILD_TESTS=$(BUILD_TESTS) \
 		-DASSIMP_BUILD_ZLIB=OFF \
 		-DASSIMP_LIB_INSTALL_DIR=lib/$(DEB_HOST_MULTIARCH) \
 		-DASSIMP_WARNINGS_AS_ERRORS=OFF \
@@ -52,21 +66,29 @@ override_dh_auto_configure:
 		-DCMAKE_BUILD_RPATH_USE_ORIGIN=ON \
 	        -DCMAKE_DEBUG_POSTFIX=''
 
+ifeq ($(BUILD_DOCS),ON)
 execute_after_dh_auto_build-arch:
 	cd doc && doxygen Doxyfile_Cmd
+endif
 override_dh_auto_build-indep:
 	dh_auto_build --indep --buildsystem=pybuild -- \
 		-d port/PyAssimp/
+ifeq ($(BUILD_DOCS),ON)
 	make -C obj-$(DEB_HOST_GNU_TYPE)/doc
+endif
 
+ifeq ($(BUILD_TESTS),OFF)
 override_dh_auto_test:
 	# tests have been disabled, until we figure out how to make them not stall
 	@echo "skipping tests"
+endif
 
 override_dh_auto_install-indep:
 	dh_auto_install --indep --buildsystem=pybuild -- \
 		-d port/PyAssimp/
+ifeq ($(BUILD_DOCS),ON)
 	make -C obj-$(DEB_HOST_GNU_TYPE)/doc install DESTDIR=$(CURDIR)/debian/tmp
+endif
 
 execute_after_dh_auto_clean-arch:
 	rm -rf doc/tmp/
@@ -74,9 +96,14 @@ execute_after_dh_auto_clean-indep:
 	-dh_auto_clean --indep --buildsystem=pybuild -- \
 		-d port/PyAssimp/
 
+DEB_COPYRIGHT_CHECK_IGNORE_REGEX = \
+        debian/.*|tools/assimp_view/(base\.PNG|HUD\.png)|tools/shared/(default_icon\.xcf|assimp_tools_icon\.(png|ico))|tools/assimp_view/(.*\.bmp|.*\.png|text1\.bin|test\.xcf)|tools/assimp_qt_viewer/doc/.*\.odt|port/PyAssimp/3d_viewer_screenshot\.png|port/Assimp\.NET/CSharpViewerScreenShot\.PNG|doc/AssimpDoc_Html/AnimationOverview\.png|doc/architecture/.*\.png|samples/SimpleAssimpViewX/MyDocument\.xcdatamodel/(elements|layout)|test/models/.*|.*/dragonsplash\.png
+# licensecheck v1
+.PHONY: licensecheck
 licensecheck:
-	licensecheck --deb-machine -r * \
-	| perl -00ne 'print unless /^(Files:)? *((Documentation|CommandLine)\.chm|tools\/assimp_view\/(base\.PNG|HUD\.png)|tools\/shared\/(default_icon\.xcf|assimp_tools_icon\.(png|ico))|tools\/assimp_view\/(.*\.bmp|.*\.png|text1\.bin|test\.xcf)|tools\/assimp_qt_viewer\/doc\/.*\.odt|port\/PyAssimp\/3d_viewer_screenshot\.png|port\/Assimp\.NET\/CSharpViewerScreenShot\.PNG|doc\/AssimpCmdDoc_Html\/(dragonsplash\.png|AssimpCmdDoc\.chm)|doc\/AssimpDoc_Html\/(dragonsplash\.png|AnimationOverview\.png)|doc\/architecture\/.*\.png|samples\/SimpleAssimpViewX\/MyDocument\.xcdatamodel\/(elements|layout)|packaging\/windows-innosetup\/LICENSE\.rtf|doc\/tmp\/.*|test\/models\/3DS\/testFormatDetection|test\/models\/X\/OV_GetNextToken|debian\/(changelog|copyright(|_hints|_newhints)))/' \
-	> debian/copyright_newhints
+	LANG=C.UTF-8 licensecheck \
+		-i "^($(DEB_COPYRIGHT_CHECK_IGNORE_REGEX))$$" \
+		--check '.*' --recursive --deb-machine --lines 0 * \
+		> debian/copyright_newhints
 	cmp debian/copyright_hints debian/copyright_newhints \
-	&& rm debian/copyright_newhints
+		&& rm debian/copyright_newhints

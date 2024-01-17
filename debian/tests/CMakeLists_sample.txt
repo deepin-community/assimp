@@ -1,5 +1,5 @@
-PROJECT(assimp_simpleogl)
 cmake_minimum_required(VERSION 3.13)
+PROJECT(assimp_simpleogl)
 SET(SAMPLE_PROJECT_NAME assimp_simpleogl)
 
 FIND_PACKAGE(assimp)
