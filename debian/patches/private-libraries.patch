@@ -1,0 +1,45 @@
+Description: Mark private libraries as PRIVATE
+Author: IOhannes m zmölnig
+Origin: Debian
+Forwarded: no
+Last-Update: 2023-10-20
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- assimp.orig/code/CMakeLists.txt
++++ assimp/code/CMakeLists.txt
+@@ -1099,6 +1099,8 @@
+ #  SOURCE_GROUP( Contrib\\stb FILES ${stb_SRCS})
+ #ENDIF()
+ 
++INCLUDE_DIRECTORIES("../contrib")
++
+ # VC2010 fixes
+ if(MSVC10)
+   option( VC10_STDINT_FIX "Fix for VC10 Compiler regarding pstdint.h redefinition errors" OFF )
+@@ -1292,7 +1294,7 @@
+     target_link_libraries(assimp PRIVATE ${draco_LIBRARIES})
+   endif()
+ ELSE()
+-  TARGET_LINK_LIBRARIES(assimp ${ZLIB_LIBRARIES} ${OPENDDL_PARSER_LIBRARIES})
++  TARGET_LINK_LIBRARIES(assimp PRIVATE ${ZLIB_LIBRARIES} ${OPENDDL_PARSER_LIBRARIES})
+   if (ASSIMP_BUILD_DRACO)
+     target_link_libraries(assimp PRIVATE ${draco_LIBRARIES})
+   endif()
+@@ -1393,7 +1395,7 @@
+ IF(NOT ASSIMP_HUNTER_ENABLED)
+   if (UNZIP_FOUND)
+     INCLUDE_DIRECTORIES(${UNZIP_INCLUDE_DIRS})
+-    TARGET_LINK_LIBRARIES(assimp ${UNZIP_LIBRARIES})
++    TARGET_LINK_LIBRARIES(assimp PRIVATE ${UNZIP_LIBRARIES})
+   else ()
+     INCLUDE_DIRECTORIES("../")
+   endif ()
+@@ -1401,7 +1403,7 @@
+ 
+ # Add RT-extension library for glTF importer with Open3DGC-compression.
+ IF (RT_FOUND AND ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC)
+-  TARGET_LINK_LIBRARIES(assimp rt)
++	TARGET_LINK_LIBRARIES(assimp PRIVATE rt)
+ ENDIF ()
+ 
+ 

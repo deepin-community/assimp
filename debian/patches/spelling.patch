@@ -1,0 +1,18 @@
+Description: Fix spelling errors
+Author: IOhannes m zmölnig
+Origin: Debian
+Bug: https://github.com/assimp/assimp/issues/5290
+Last-Update: 2023-10-20
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- assimp.orig/code/AssetLib/IFC/IFCOpenings.cpp
++++ assimp/code/AssetLib/IFC/IFCOpenings.cpp
+@@ -1372,7 +1372,7 @@
+     const std::vector<IfcVector3>& va = mesh->mVerts;
+     if(va.size() <= 2) {
+         std::stringstream msg;
+-        msg << "Skipping: Only " << va.size() << " verticies in opening mesh.";
++        msg << "Skipping: Only " << va.size() << " vertices in opening mesh.";
+         IFCImporter::LogDebug(msg.str().c_str());
+         ok = false;
+         return contour;

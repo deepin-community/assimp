@@ -1,5 +1,0 @@
-## the license.txt file mentions the json-evil license verbatim, however
-# the files affected by this license have been stripped out (by upstream)
-license-problem-json-evil [contrib/rapidjson/license.txt]
-# old-style override (for ftp-master)
-assimp source: license-problem-json-evil contrib/rapidjson/license.txt

@@ -16,4 +16,3 @@ Depends:
  freeglut3-dev,
  libassimp-dev,
  libgl1-mesa-dev | libgl-dev,
- zlib1g-dev | libz-dev,

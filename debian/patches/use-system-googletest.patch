@@ -1,0 +1,43 @@
+Description: Use googletest provided by system
+Author: IOhannes m zmölnig
+Origin: Debian
+Forwarded: no
+Last-Update: 2023-10-20
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- assimp.orig/test/CMakeLists.txt
++++ assimp/test/CMakeLists.txt
+@@ -45,8 +45,8 @@
+ 
+ if(NOT ASSIMP_HUNTER_ENABLED)
+   INCLUDE_DIRECTORIES(
+-    ${Assimp_SOURCE_DIR}/contrib/googletest/googletest/include
+-    ${Assimp_SOURCE_DIR}/contrib/googletest/googletest/
++    #${Assimp_SOURCE_DIR}/contrib/googletest/googletest/include
++    #${Assimp_SOURCE_DIR}/contrib/googletest/googletest/
+     #${Assimp_SOURCE_DIR}/contrib/pugixml/src
+   )
+ endif()
+@@ -225,13 +225,15 @@
+   ${POST_PROCESSES}
+ )
+ 
+-if(ASSIMP_HUNTER_ENABLED)
+-    hunter_add_package(GTest)
+-    find_package(GTest CONFIG REQUIRED)
+-    target_link_libraries(unit GTest::gtest_main GTest::gmock)
+-else()
+-    target_sources(unit PUBLIC ${Assimp_SOURCE_DIR}/contrib/googletest/googletest/src/gtest-all.cc)
+-endif()
++#if(ASSIMP_HUNTER_ENABLED)
++#    hunter_add_package(GTest)
++#    find_package(GTest CONFIG REQUIRED)
++#    target_link_libraries(unit GTest::gtest_main GTest::gmock)
++#else()
++#    target_sources(unit PUBLIC ${Assimp_SOURCE_DIR}/contrib/googletest/googletest/src/gtest-all.cc)
++#endif()
++FIND_PACKAGE(GTest CONFIG REQUIRED)
++TARGET_LINK_LIBRARIES(unit GTest::gtest_main GTest::gmock)
+ 
+ # RapidJSON
+ #IF(ASSIMP_HUNTER_ENABLED)

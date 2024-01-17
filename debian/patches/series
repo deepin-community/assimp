@@ -1,7 +1,12 @@
 use-system-utf8cpp.patch
 use-system-stb_image.patch
 use-system-libdraco.patch
+use-system-pugixml.patch
+use-system-rapidjson.patch
+use-system-googletest.patch
+private-libraries.patch
 pyassimp.patch
 pyassimp_faces.patch
 doxygen.patch
 #index_overflow.patch
+spelling.patch

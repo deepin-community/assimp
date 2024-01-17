@@ -6,11 +6,16 @@ Files-Excluded:
  *.rc
  *.chm
  */resource.h
- test/models-nonbsd/*
- contrib/unzip/*
- contrib/zlib/*
- contrib/utf8cpp/*
+ contrib/draco/*
+ contrib/googletest/*
+ contrib/pugixml/*
+ contrib/rapidjson/*
  contrib/stb/*
+ contrib/unzip/*
+ contrib/utf8cpp/*
+ contrib/zlib/*
+ packaging/windows-*
+ test/models-nonbsd/*
 
 Files: *
 Copyright: 2006-2022, ASSIMP Development Team
@@ -64,10 +69,6 @@ Files: cmake-modules/Coveralls*
 Copyright: 2014, Joakim Söderberg <joakim.soderberg@gmail.com>
 License: Expat
 
-Files: contrib/gtest/*
-Copyright: 2003-2015, Google Inc.
-License: BSD-3-clause
-
 Files: contrib/android-cmake/*
 Copyright: 2014, Pavel Rojtberg
 License: BSD-3-clause
@@ -78,17 +79,8 @@ Copyright: 2010-2011, Ethan Rublee
 License: BSD-3-clause
 
 Files: contrib/clipper/*
-Copyright: 2010-2011, Angus Johnson
+Copyright: 2010-2017, Angus Johnson
 License: BSL-1
-
-Files: contrib/draco/*
-Copyright: 2016-2020, The Draco Authors.
-License: Apache-2.0
-
-Files: contrib/draco/src/draco/tools/fuzz/*
- contrib/gtest/scripts/upload.py
-Copyright: 2007, 2020, Google Inc.
-License: Apache-2.0
 
 Files: contrib/poly2tri/*
 Copyright: 2009-2010, Poly2Tri Contributors
@@ -105,16 +97,6 @@ License: Expat
 Files: contrib/Open3DGC/o3dgcArithmeticCodec.*
 Copyright:  2004, Amir Said (said@ieee.org) & William A. Pearlman (pearlw@ecse.rpi.edu)
 License: BSD-2-clause
-
-Files: contrib/pugixml/*
-Copyright: 2006-2022, Arseny Kapoulkine (arseny.kapoulkine@gmail.com)
-License: Expat
-
-Files: contrib/rapidjson/*
-Copyright: 2002, JSON.org
-  2006-2013, Alexander Chemeris
-  2015, THL A29 Limited, a Tencent company, and Milo Yip.
-License: BSD-3-clause and Expat
 
 Files: contrib/zip/*
 Copyright: n/a
@@ -210,22 +192,6 @@ Comment:
  .
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-License: Apache-2.0
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
- .
- .     http://www.apache.org/licenses/LICENSE-2.0
- .
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
-Comment:
- On Debian systems, the complete text of the Apache-2.0 license
- can be found in the file '/usr/share/common-licenses/Apache-2.0'.
 
 License: BSL-1
  The Clipper code library, the "Software" (that includes Delphi, C++ & C#

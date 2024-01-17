@@ -15,7 +15,7 @@ Last-Update: 2019-12-09
 
 --- assimp.orig/port/PyAssimp/pyassimp/core.py
 +++ assimp/port/PyAssimp/pyassimp/core.py
-@@ -442,7 +442,7 @@
+@@ -460,7 +460,7 @@
  
      # prepare faces
      if numpy:

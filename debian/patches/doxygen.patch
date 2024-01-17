@@ -50,6 +50,15 @@ Last-Updated: 2015-07-25
  
  # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create 4096 sub-
  # directories (in 2 levels) under the output directory of each output format and
+@@ -1075,7 +1075,7 @@
+ # The default directory is: html.
+ # This tag requires that the tag GENERATE_HTML is set to YES.
+ 
+-HTML_OUTPUT            = AssimpCmdDoc_Html
++HTML_OUTPUT            = assimp
+ 
+ # The HTML_FILE_EXTENSION tag can be used to specify the file extension for each
+ # generated HTML page (for example: .htm, .php, .asp).
 @@ -1281,7 +1281,6 @@
  # The file has to be specified with full path.
  # This tag requires that the tag GENERATE_HTMLHELP is set to YES.
@@ -58,3 +67,18 @@ Last-Updated: 2015-07-25
  
  # The GENERATE_CHI flag controls if a separate .chi index file is generated (
  # YES) or that it should be included in the master .chm file ( NO).
+--- assimp.orig/doc/CMakeLists.txt
++++ assimp/doc/CMakeLists.txt
+@@ -33,9 +33,9 @@
+         DESTINATION ${CMAKE_INSTALL_DOCDIR}
+     )
+     install(FILES
+-        ${CMAKE_CURRENT_SOURCE_DIR}/AssimpDoc_Html/AnimationOverview.png
+-        ${CMAKE_CURRENT_SOURCE_DIR}/AssimpDoc_Html/AnimationOverview.svg
+-        ${CMAKE_CURRENT_SOURCE_DIR}/AssimpDoc_Html/dragonsplash.png
++        ${CMAKE_CURRENT_SOURCE_DIR}/architecture/AnimationOverview.png
++        ${CMAKE_CURRENT_SOURCE_DIR}/architecture/AnimationOverview.svg
++        ${CMAKE_CURRENT_SOURCE_DIR}/images/dragonsplash.png
+         DESTINATION ${CMAKE_INSTALL_DOCDIR}/${HTML_OUTPUT}
+     )
+ endif()

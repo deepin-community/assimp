@@ -3,20 +3,25 @@ Section: graphics
 Priority: optional
 Maintainer: IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>
 Homepage: https://assimp.org
-Standards-Version: 4.6.1
+Standards-Version: 4.6.2
 Build-Depends:
  cmake,
  debhelper-compat (= 13),
  dh-buildinfo,
- doxygen,
+ doxygen <!nodoc>,
  libboost-dev,
  libdraco-dev,
+# libgmock-dev <!nocheck>,
+# libgtest-dev <!nocheck>,
  libminizip-dev,
+ libpugixml-dev,
  libstb-dev,
  libutfcpp-dev,
  pkg-config,
+ rapidjson-dev,
  zlib1g-dev | libz-dev,
 Build-Depends-Indep:
+ dh-sequence-doxygen <!nodoc>,
  dh-sequence-python3,
  python3-all,
 Rules-Requires-Root: no
@@ -56,8 +61,7 @@ Section: libdevel
 Depends:
  libassimp5 (<< ${source:Upstream-Version}+1~),
  libassimp5 (>= ${source:Version}),
- libdraco-dev,
- libminizip-dev,
+ libpugixml-dev,
  ${misc:Depends},
 Description: 3D model import library (development)
  Assimp is a library to import various well-known 3D model formats ("assets") in
@@ -71,6 +75,7 @@ Description: 3D model import library (development)
 
 Package: libassimp-doc
 Architecture: all
+Build-Profiles: <!nodoc>
 Multi-Arch: foreign
 Section: doc
 Depends:

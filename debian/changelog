@@ -1,3 +1,49 @@
+assimp (5.3.1+ds-1) unstable; urgency=medium
+
+  * New upstream version 5.3.1+ds
+    + Refresh patches
+  * Exclude many more contrib packages in favour of B-Ds
+    + Add patch to use Debian's pugixml
+    + Ensure more system libraries
+  * Use private linking when possible
+    + Drop dependencies on private libraries for libassimp-dev
+  * Export some more symbols
+  * documentation updates
+   + Support the 'nodoc' build-profile
+   + Install docs from new upstream location
+   + Only enable '--with doxygen' on arch:all
+  * testsuite updates
+    + Suport the 'nocheck' build-profile
+    + Prepare for building/running tests (but don't enable it)
+    + Drop unnneeded dependencies for autopkgtests
+  * Fix spelling mistake
+  * Drop unused lintian-overrides
+  * Use '+ds' as repack-suffix
+  * Update copyright information
+    + Update d/copyright
+    + Modernize 'licensecheck' target
+    + Drop more unused files from 'licensecheck'
+    + Re-generate d/copyright_hints
+  * Bump standards version to 4.6.2
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sun, 22 Oct 2023 18:23:12 +0200
+
+assimp (5.2.5~ds0-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Repository-Browse.
+  * Avoid explicitly specifying -Wl,--as-needed linker flag.
+
+  [ Gianfranco Costamagna ]
+  * assimp: Fix autopkgtest regression due to new CMake warning (Closes: #1036838)
+
+  [ Timo Röhling ]
+  * Do not rely on deprecated DRACO_LIBRARIES variable (Closes: #1017746)
+
+ -- Timo Röhling <roehling@debian.org>  Wed, 21 Jun 2023 21:40:33 +0200
+
 assimp (5.2.5~ds0-1) unstable; urgency=medium
 
   * New upstream version 5.2.5~ds0

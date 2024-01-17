@@ -1,0 +1,50 @@
+Description: use libopen3dgc-dev provided by the system
+Author: IOhannes m zmölnig
+Origin: Debian
+Forwarded: no
+Last-Update: 2023-10-20
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- assimp.orig/code/CMakeLists.txt
++++ assimp/code/CMakeLists.txt
+@@ -1073,6 +1073,8 @@
+   MESSAGE (INFO " Hunter enabled or RT-extension not found. glTF import/export will be built without Open3DGC-compression.")
+   #!TODO: off course is better to remove statistics timers from o3dgc codec. Or propose to choose what to use.
+ ENDIF ()
++# on Debian, use lib3dgc
++SET (open3dgc_SRCS "")
+ 
+ # RapidJSON
+ #IF(ASSIMP_HUNTER_ENABLED)
+@@ -1271,6 +1273,9 @@
+ FIND_PACKAGE(RapidJSON CONFIG REQUIRED)
+ TARGET_LINK_LIBRARIES(assimp PRIVATE RapidJSON)
+ 
++TARGET_LINK_LIBRARIES(assimp PRIVATE -lo3dgc_dec_lib  -lo3dgc_enc_lib -lo3dgc_common_lib)
++TARGET_INCLUDE_DIRECTORIES(assimp PRIVATE /usr/include/o3dgc )
++
+ IF(ASSIMP_HUNTER_ENABLED)
+   TARGET_LINK_LIBRARIES(assimp
+       PUBLIC
+--- assimp.orig/code/AssetLib/glTF/glTFAsset.inl
++++ assimp/code/AssetLib/glTF/glTFAsset.inl
+@@ -49,7 +49,7 @@
+ 
+ #ifdef ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC
+ // Header files, Open3DGC.
+-#include <Open3DGC/o3dgcSC3DMCDecoder.h>
++#include <o3dgcSC3DMCDecoder.h>
+ #endif
+ 
+ using namespace Assimp;
+--- assimp.orig/code/AssetLib/glTF/glTFExporter.cpp
++++ assimp/code/AssetLib/glTF/glTFExporter.cpp
+@@ -64,7 +64,7 @@
+ 
+ #ifdef ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC
+ 	// Header files, Open3DGC.
+-#	include <Open3DGC/o3dgcSC3DMCEncoder.h>
++#	include <o3dgcSC3DMCEncoder.h>
+ #endif
+ 
+ using namespace rapidjson;
