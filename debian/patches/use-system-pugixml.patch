@@ -1,13 +1,23 @@
-Description: use libpugixml-dev provided by the system
-Author: IOhannes m zmölnig
+From: =?utf-8?q?=22IOhannes_m_zm=C3=B6lnig_=28Debian/GNU=29=22?=
+ <umlaeute@debian.org>
+Date: Tue, 19 Mar 2024 12:19:19 +0100
+Subject: use libpugixml-dev provided by the system
+
 Origin: Debian
 Forwarded: no
 Last-Update: 2023-10-1
+
+Last-Update: 2023-10-1
 ---
-This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
---- assimp.orig/code/CMakeLists.txt
-+++ assimp/code/CMakeLists.txt
-@@ -906,17 +906,17 @@
+ code/CMakeLists.txt | 26 +++++++++++++++-----------
+ test/CMakeLists.txt |  2 +-
+ 2 files changed, 16 insertions(+), 12 deletions(-)
+
+diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
+index eba6e6e..a995b37 100644
+--- a/code/CMakeLists.txt
++++ b/code/CMakeLists.txt
+@@ -906,17 +906,17 @@ SET( Extra_SRCS
  SOURCE_GROUP( Extra FILES ${Extra_SRCS})
  
  # pugixml
@@ -36,7 +46,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
  # utf8
  IF(ASSIMP_HUNTER_ENABLED)
-@@ -1264,6 +1264,10 @@
+@@ -1264,6 +1264,10 @@ TARGET_INCLUDE_DIRECTORIES ( assimp PUBLIC
    $<INSTALL_INTERFACE:${ASSIMP_INCLUDE_INSTALL_DIR}>
  )
  
@@ -47,9 +57,11 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  IF(ASSIMP_HUNTER_ENABLED)
    TARGET_LINK_LIBRARIES(assimp
        PUBLIC
---- assimp.orig/test/CMakeLists.txt
-+++ assimp/test/CMakeLists.txt
-@@ -47,7 +47,7 @@
+diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
+index afe4874..ba01b8f 100644
+--- a/test/CMakeLists.txt
++++ b/test/CMakeLists.txt
+@@ -47,7 +47,7 @@ if(NOT ASSIMP_HUNTER_ENABLED)
    INCLUDE_DIRECTORIES(
      ${Assimp_SOURCE_DIR}/contrib/googletest/googletest/include
      ${Assimp_SOURCE_DIR}/contrib/googletest/googletest/

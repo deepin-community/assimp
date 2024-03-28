@@ -1,13 +1,22 @@
-Description: use libdraco-dev provided by the system
-Author: IOhannes m zmölnig
+From: =?utf-8?q?=22IOhannes_m_zm=C3=B6lnig_=28Debian/GNU=29=22?=
+ <umlaeute@debian.org>
+Date: Tue, 19 Mar 2024 12:19:19 +0100
+Subject: use libdraco-dev provided by the system
+
 Origin: Debian
 Forwarded: no
 Last-Update: 2021-11-23
+
+Last-Update: 2021-11-23
 ---
-This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
---- assimp.orig/code/CMakeLists.txt
-+++ assimp/code/CMakeLists.txt
-@@ -1282,15 +1282,21 @@
+ code/CMakeLists.txt | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
+index f6e6914..eba6e6e 100644
+--- a/code/CMakeLists.txt
++++ b/code/CMakeLists.txt
+@@ -1282,15 +1282,21 @@ IF(ASSIMP_HUNTER_ENABLED)
    endif()
  
    if (ASSIMP_BUILD_DRACO)

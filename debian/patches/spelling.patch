@@ -1,13 +1,22 @@
-Description: Fix spelling errors
-Author: IOhannes m zmölnig
+From: =?utf-8?q?=22IOhannes_m_zm=C3=B6lnig_=28Debian/GNU=29=22?=
+ <umlaeute@debian.org>
+Date: Tue, 19 Mar 2024 12:19:19 +0100
+Subject: Fix spelling errors
+
 Origin: Debian
 Bug: https://github.com/assimp/assimp/issues/5290
 Last-Update: 2023-10-20
+
+Last-Update: 2023-10-20
 ---
-This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
---- assimp.orig/code/AssetLib/IFC/IFCOpenings.cpp
-+++ assimp/code/AssetLib/IFC/IFCOpenings.cpp
-@@ -1372,7 +1372,7 @@
+ code/AssetLib/IFC/IFCOpenings.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/code/AssetLib/IFC/IFCOpenings.cpp b/code/AssetLib/IFC/IFCOpenings.cpp
+index 48b843a..c47446d 100644
+--- a/code/AssetLib/IFC/IFCOpenings.cpp
++++ b/code/AssetLib/IFC/IFCOpenings.cpp
+@@ -1372,7 +1372,7 @@ std::vector<IfcVector2> GetContourInPlane2D(const std::shared_ptr<TempMesh>& mes
      const std::vector<IfcVector3>& va = mesh->mVerts;
      if(va.size() <= 2) {
          std::stringstream msg;
