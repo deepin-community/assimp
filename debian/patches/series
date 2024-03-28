@@ -10,3 +10,4 @@ pyassimp_faces.patch
 doxygen.patch
 #index_overflow.patch
 spelling.patch
+CVE-2022-45748.patch

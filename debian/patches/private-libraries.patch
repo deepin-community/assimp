@@ -1,13 +1,22 @@
-Description: Mark private libraries as PRIVATE
-Author: IOhannes m zmölnig
+From: =?utf-8?q?=22IOhannes_m_zm=C3=B6lnig_=28Debian/GNU=29=22?=
+ <umlaeute@debian.org>
+Date: Tue, 19 Mar 2024 12:19:19 +0100
+Subject: Mark private libraries as PRIVATE
+
 Origin: Debian
 Forwarded: no
 Last-Update: 2023-10-20
+
+Last-Update: 2023-10-20
 ---
-This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
---- assimp.orig/code/CMakeLists.txt
-+++ assimp/code/CMakeLists.txt
-@@ -1099,6 +1099,8 @@
+ code/CMakeLists.txt | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
+index 9fe0410..e7410ed 100644
+--- a/code/CMakeLists.txt
++++ b/code/CMakeLists.txt
+@@ -1099,6 +1099,8 @@ ENDIF ()
  #  SOURCE_GROUP( Contrib\\stb FILES ${stb_SRCS})
  #ENDIF()
  
@@ -16,7 +25,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  # VC2010 fixes
  if(MSVC10)
    option( VC10_STDINT_FIX "Fix for VC10 Compiler regarding pstdint.h redefinition errors" OFF )
-@@ -1292,7 +1294,7 @@
+@@ -1292,7 +1294,7 @@ IF(ASSIMP_HUNTER_ENABLED)
      target_link_libraries(assimp PRIVATE ${draco_LIBRARIES})
    endif()
  ELSE()
@@ -25,7 +34,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
    if (ASSIMP_BUILD_DRACO)
      target_link_libraries(assimp PRIVATE ${draco_LIBRARIES})
    endif()
-@@ -1393,7 +1395,7 @@
+@@ -1393,7 +1395,7 @@ ENDIF()
  IF(NOT ASSIMP_HUNTER_ENABLED)
    if (UNZIP_FOUND)
      INCLUDE_DIRECTORIES(${UNZIP_INCLUDE_DIRS})
@@ -34,7 +43,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
    else ()
      INCLUDE_DIRECTORIES("../")
    endif ()
-@@ -1401,7 +1403,7 @@
+@@ -1401,7 +1403,7 @@ ENDIF()
  
  # Add RT-extension library for glTF importer with Open3DGC-compression.
  IF (RT_FOUND AND ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC)

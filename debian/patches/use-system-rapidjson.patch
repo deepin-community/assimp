@@ -1,13 +1,23 @@
-Description: use rapidjson-dev provided by the system
-Author: IOhannes m zmölnig
+From: =?utf-8?q?=22IOhannes_m_zm=C3=B6lnig_=28Debian/GNU=29=22?=
+ <umlaeute@debian.org>
+Date: Tue, 19 Mar 2024 12:19:19 +0100
+Subject: use rapidjson-dev provided by the system
+
 Origin: Debian
 Forwarded: no
 Last-Update: 2023-10-20
+
+Last-Update: 2023-10-20
 ---
-This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
---- assimp.orig/code/CMakeLists.txt
-+++ assimp/code/CMakeLists.txt
-@@ -1075,17 +1075,17 @@
+ code/CMakeLists.txt | 25 ++++++++++++++-----------
+ test/CMakeLists.txt | 25 +++++++++++++------------
+ 2 files changed, 27 insertions(+), 23 deletions(-)
+
+diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
+index a995b37..9fe0410 100644
+--- a/code/CMakeLists.txt
++++ b/code/CMakeLists.txt
+@@ -1075,17 +1075,17 @@ ELSE ()
  ENDIF ()
  
  # RapidJSON
@@ -36,7 +46,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
  # stb
  #IF(ASSIMP_HUNTER_ENABLED)
-@@ -1268,6 +1268,9 @@
+@@ -1268,6 +1268,9 @@ find_package(pugixml CONFIG REQUIRED)
  ## the public header 'assimp/XmlParser.h' includes 'pugixml.hpp', so:
  TARGET_LINK_LIBRARIES(assimp PUBLIC pugixml)
  
@@ -46,9 +56,11 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  IF(ASSIMP_HUNTER_ENABLED)
    TARGET_LINK_LIBRARIES(assimp
        PUBLIC
---- assimp.orig/test/CMakeLists.txt
-+++ assimp/test/CMakeLists.txt
-@@ -112,7 +112,7 @@
+diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
+index ba01b8f..72949f9 100644
+--- a/test/CMakeLists.txt
++++ b/test/CMakeLists.txt
+@@ -112,7 +112,7 @@ SET( IMPORTERS
    unit/utLWOImportExport.cpp
    unit/utSMDImportExport.cpp
    unit/utglTFImportExport.cpp
@@ -57,7 +69,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
    unit/utHMPImportExport.cpp
    unit/utIFCImportExport.cpp
    unit/utFBXImporterExporter.cpp
-@@ -234,17 +234,18 @@
+@@ -234,17 +234,18 @@ else()
  endif()
  
  # RapidJSON

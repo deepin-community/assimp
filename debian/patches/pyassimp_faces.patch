@@ -13,9 +13,11 @@ Last-Update: 2019-12-09
  port/PyAssimp/pyassimp/core.py | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- assimp.orig/port/PyAssimp/pyassimp/core.py
-+++ assimp/port/PyAssimp/pyassimp/core.py
-@@ -460,7 +460,7 @@
+diff --git a/port/PyAssimp/pyassimp/core.py b/port/PyAssimp/pyassimp/core.py
+index 95159c4..38a06f9 100644
+--- a/port/PyAssimp/pyassimp/core.py
++++ b/port/PyAssimp/pyassimp/core.py
+@@ -460,7 +460,7 @@ def _finalize_mesh(mesh, target):
  
      # prepare faces
      if numpy:

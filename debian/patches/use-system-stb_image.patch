@@ -9,23 +9,15 @@ Last-Update: 2019-10-17
 
 Last-Update: 2019-10-17
 ---
- samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ code/CMakeLists.txt                                  | 20 ++++++++++----------
+ .../SimpleTexturedOpenGL/src/model_loading.cpp       |  2 +-
+ 2 files changed, 11 insertions(+), 11 deletions(-)
 
---- assimp.orig/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp
-+++ assimp/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp
-@@ -23,7 +23,7 @@
- #endif // _MSC_VER
- 
- #define STB_IMAGE_IMPLEMENTATION
--#include "contrib/stb/stb_image.h"
-+#include "stb/stb_image.h"
- 
- #ifdef _MSC_VER
- #pragma warning(default: 4100) // Enable warning 'unreferenced formal parameter'
---- assimp.orig/code/CMakeLists.txt
-+++ assimp/code/CMakeLists.txt
-@@ -1088,16 +1088,16 @@
+diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
+index 0fe2291..f6e6914 100644
+--- a/code/CMakeLists.txt
++++ b/code/CMakeLists.txt
+@@ -1088,16 +1088,16 @@ ELSE()
  ENDIF()
  
  # stb
@@ -52,3 +44,16 @@ Last-Update: 2019-10-17
  
  # VC2010 fixes
  if(MSVC10)
+diff --git a/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp b/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp
+index 7d730a6..b9d54e9 100644
+--- a/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp
++++ b/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp
+@@ -23,7 +23,7 @@
+ #endif // _MSC_VER
+ 
+ #define STB_IMAGE_IMPLEMENTATION
+-#include "contrib/stb/stb_image.h"
++#include "stb/stb_image.h"
+ 
+ #ifdef _MSC_VER
+ #pragma warning(default: 4100) // Enable warning 'unreferenced formal parameter'

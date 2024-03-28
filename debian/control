@@ -113,7 +113,6 @@ Section: python
 Depends:
  libassimp5 (>= ${source:Version}),
  libassimp5(<< ${source:Upstream-Version}+1~),
- python3-distutils,
  ${misc:Depends},
  ${python3:Depends},
 Description: 3D model import library (Python3 bindings)
