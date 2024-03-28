@@ -10,27 +10,17 @@ Last-Update: 2019-10-17
 using libutfcpp-dev, rather than the included version
 Last-Update: 2019-10-17
 ---
+ code/AssetLib/MMD/MMDPmxParser.cpp            | 2 +-
+ code/AssetLib/SIB/SIBImporter.cpp             | 2 +-
+ code/AssetLib/STEPParser/STEPFileEncoding.cpp | 2 +-
  code/Common/BaseImporter.cpp                  | 2 +-
- code/Importer/STEPParser/STEPFileEncoding.cpp | 2 +-
- code/MMD/MMDPmxParser.cpp                     | 2 +-
- code/SIB/SIBImporter.cpp                      | 2 +-
- code/X3D/FIReader.cpp                         | 2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
---- assimp.orig/code/AssetLib/STEPParser/STEPFileEncoding.cpp
-+++ assimp/code/AssetLib/STEPParser/STEPFileEncoding.cpp
-@@ -48,7 +48,7 @@
- #ifdef ASSIMP_USE_HUNTER
- #  include <utf8.h>
- #else
--#  include <contrib/utf8cpp/source/utf8.h>
-+#  include <utf8.h>
- #endif
- 
- #include <memory>
---- assimp.orig/code/AssetLib/MMD/MMDPmxParser.cpp
-+++ assimp/code/AssetLib/MMD/MMDPmxParser.cpp
-@@ -45,7 +45,7 @@
+diff --git a/code/AssetLib/MMD/MMDPmxParser.cpp b/code/AssetLib/MMD/MMDPmxParser.cpp
+index ca37ba1..2ce7bdd 100644
+--- a/code/AssetLib/MMD/MMDPmxParser.cpp
++++ b/code/AssetLib/MMD/MMDPmxParser.cpp
+@@ -45,7 +45,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  #ifdef ASSIMP_USE_HUNTER
  #  include <utf8.h>
  #else
@@ -39,9 +29,11 @@ Last-Update: 2019-10-17
  #endif
  #include <assimp/Exceptional.h>
  
---- assimp.orig/code/AssetLib/SIB/SIBImporter.cpp
-+++ assimp/code/AssetLib/SIB/SIBImporter.cpp
-@@ -59,7 +59,7 @@
+diff --git a/code/AssetLib/SIB/SIBImporter.cpp b/code/AssetLib/SIB/SIBImporter.cpp
+index 9f29918..8f997a1 100644
+--- a/code/AssetLib/SIB/SIBImporter.cpp
++++ b/code/AssetLib/SIB/SIBImporter.cpp
+@@ -59,7 +59,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  #ifdef ASSIMP_USE_HUNTER
  #include <utf8.h>
  #else
@@ -50,9 +42,24 @@ Last-Update: 2019-10-17
  #endif
  #include <assimp/importerdesc.h>
  #include <assimp/scene.h>
---- assimp.orig/code/Common/BaseImporter.cpp
-+++ assimp/code/Common/BaseImporter.cpp
-@@ -360,7 +360,7 @@
+diff --git a/code/AssetLib/STEPParser/STEPFileEncoding.cpp b/code/AssetLib/STEPParser/STEPFileEncoding.cpp
+index d4456e6..812f29b 100644
+--- a/code/AssetLib/STEPParser/STEPFileEncoding.cpp
++++ b/code/AssetLib/STEPParser/STEPFileEncoding.cpp
+@@ -48,7 +48,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ #ifdef ASSIMP_USE_HUNTER
+ #  include <utf8.h>
+ #else
+-#  include <contrib/utf8cpp/source/utf8.h>
++#  include <utf8.h>
+ #endif
+ 
+ #include <memory>
+diff --git a/code/Common/BaseImporter.cpp b/code/Common/BaseImporter.cpp
+index a169c8a..a5966e7 100644
+--- a/code/Common/BaseImporter.cpp
++++ b/code/Common/BaseImporter.cpp
+@@ -360,7 +360,7 @@ std::string BaseImporter::GetExtension(const std::string &pFile) {
  #ifdef ASSIMP_USE_HUNTER
  #include <utf8.h>
  #else

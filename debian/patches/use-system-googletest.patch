@@ -1,13 +1,22 @@
-Description: Use googletest provided by system
-Author: IOhannes m zmölnig
+From: =?utf-8?q?=22IOhannes_m_zm=C3=B6lnig_=28Debian/GNU=29=22?=
+ <umlaeute@debian.org>
+Date: Tue, 19 Mar 2024 12:19:19 +0100
+Subject: Use googletest provided by system
+
 Origin: Debian
 Forwarded: no
 Last-Update: 2023-10-20
+
+Last-Update: 2023-10-20
 ---
-This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
---- assimp.orig/test/CMakeLists.txt
-+++ assimp/test/CMakeLists.txt
-@@ -45,8 +45,8 @@
+ test/CMakeLists.txt | 20 +++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
+
+diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
+index 72949f9..f2b7691 100644
+--- a/test/CMakeLists.txt
++++ b/test/CMakeLists.txt
+@@ -45,8 +45,8 @@ INCLUDE_DIRECTORIES(
  
  if(NOT ASSIMP_HUNTER_ENABLED)
    INCLUDE_DIRECTORIES(
@@ -18,7 +27,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
      #${Assimp_SOURCE_DIR}/contrib/pugixml/src
    )
  endif()
-@@ -225,13 +225,15 @@
+@@ -225,13 +225,15 @@ add_executable( unit
    ${POST_PROCESSES}
  )
  

@@ -10,13 +10,15 @@ work on platforms such as w32
 Forwarded: no
 Last-Updated: 2015-08-10
 ---
- port/PyAssimp/pyassimp/helper.py | 136 +++++----------------------------------
- port/PyAssimp/setup.py           |   2 -
- 2 files changed, 17 insertions(+), 121 deletions(-)
+ port/PyAssimp/pyassimp/helper.py | 139 +++++----------------------------------
+ port/PyAssimp/setup.py           |   4 +-
+ 2 files changed, 18 insertions(+), 125 deletions(-)
 
---- assimp.orig/port/PyAssimp/pyassimp/helper.py
-+++ assimp/port/PyAssimp/pyassimp/helper.py
-@@ -6,9 +6,7 @@
+diff --git a/port/PyAssimp/pyassimp/helper.py b/port/PyAssimp/pyassimp/helper.py
+index 7c14f60..37ffa84 100644
+--- a/port/PyAssimp/pyassimp/helper.py
++++ b/port/PyAssimp/pyassimp/helper.py
+@@ -6,9 +6,7 @@ Some fancy helper functions.
  
  import os
  import ctypes
@@ -26,7 +28,7 @@ Last-Updated: 2015-08-10
  import re
  import sys
  
-@@ -21,39 +19,6 @@
+@@ -21,39 +19,6 @@ from .errors import AssimpError
  
  additional_dirs, ext_whitelist = [],[]
  
@@ -66,7 +68,7 @@ Last-Updated: 2015-08-10
  def vec2tuple(x):
      """ Converts a VECTOR3D to a Tuple """
      return (x.x, x.y, x.z)
-@@ -159,46 +124,6 @@
+@@ -159,46 +124,6 @@ def get_bounding_box_for_node(node, bb_min, bb_max, transformation):
  
      return bb_min, bb_max
  
@@ -113,7 +115,7 @@ Last-Updated: 2015-08-10
  def search_library():
      '''
      Loads the assimp library.
-@@ -211,8 +136,6 @@
+@@ -211,8 +136,6 @@ def search_library():
                       release function,
                       dll)
      '''
@@ -122,7 +124,7 @@ Last-Updated: 2015-08-10
  
      # silence 'DLL not found' message boxes on win
      try:
-@@ -220,52 +143,24 @@
+@@ -220,52 +143,24 @@ def search_library():
      except AttributeError:
          pass
  
@@ -192,9 +194,11 @@ Last-Updated: 2015-08-10
  
  def hasattr_silent(object, name):
      """
---- assimp.orig/port/PyAssimp/setup.py
-+++ assimp/port/PyAssimp/setup.py
-@@ -8,7 +8,7 @@
+diff --git a/port/PyAssimp/setup.py b/port/PyAssimp/setup.py
+index f1bf6ab..223cb8b 100644
+--- a/port/PyAssimp/setup.py
++++ b/port/PyAssimp/setup.py
+@@ -8,7 +8,7 @@ def readme():
          return f.read()
  
  setup(name='pyassimp',
@@ -203,7 +207,7 @@ Last-Updated: 2015-08-10
        license='ISC',
        description='Python bindings for the Open Asset Import Library (ASSIMP)',
        long_description=readme(),
-@@ -19,8 +19,6 @@
+@@ -19,8 +19,6 @@ setup(name='pyassimp',
        maintainer_email='severin@guakamole.org',
        packages=['pyassimp'],
        data_files=[

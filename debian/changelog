@@ -1,3 +1,11 @@
+assimp (5.3.1+ds-2) unstable; urgency=medium
+
+  * Drop Dependency on python3-distutils (Closes: #1065829)
+  * Backport fix for CVE-2022-45748 (Closes: #1029833)
+  * Refresh patches with 'gbp pq'
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 19 Mar 2024 13:18:36 +0100
+
 assimp (5.3.1+ds-1) unstable; urgency=medium
 
   * New upstream version 5.3.1+ds
