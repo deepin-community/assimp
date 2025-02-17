@@ -242,6 +242,15 @@ Files: CMakeLists.txt
  code/AssetLib/Step/StepExporter.h
  code/AssetLib/Terragen/TerragenLoader.cpp
  code/AssetLib/Terragen/TerragenLoader.h
+ code/AssetLib/USD/USDLoader.cpp
+ code/AssetLib/USD/USDLoader.h
+ code/AssetLib/USD/USDLoaderImplTinyusdz.cpp
+ code/AssetLib/USD/USDLoaderImplTinyusdz.h
+ code/AssetLib/USD/USDLoaderImplTinyusdzHelper.cpp
+ code/AssetLib/USD/USDLoaderImplTinyusdzHelper.h
+ code/AssetLib/USD/USDLoaderUtil.cpp
+ code/AssetLib/USD/USDLoaderUtil.h
+ code/AssetLib/USD/USDPreprocessor.h
  code/AssetLib/Unreal/UnrealLoader.cpp
  code/AssetLib/Unreal/UnrealLoader.h
  code/AssetLib/X/XFileExporter.cpp
@@ -556,6 +565,7 @@ Files: CMakeLists.txt
  test/unit/ImportExport/MDL/utMDLImporter_HL1_ImportSettings.cpp
  test/unit/ImportExport/MDL/utMDLImporter_HL1_Materials.cpp
  test/unit/ImportExport/MDL/utMDLImporter_HL1_Nodes.cpp
+ test/unit/ImportExport/Pbrt/utPbrtImportExport.cpp
  test/unit/ImportExport/RAW/utRAWImportExport.cpp
  test/unit/ImportExport/Terragen/utTerragenImportExport.cpp
  test/unit/ImportExport/utAssjsonImportExport.cpp
@@ -654,6 +664,7 @@ Files: CMakeLists.txt
  test/unit/utTextureTransform.cpp
  test/unit/utTriangulate.cpp
  test/unit/utTypes.cpp
+ test/unit/utUSDImport.cpp
  test/unit/utValidateDataStructure.cpp
  test/unit/utVector3.cpp
  test/unit/utVersion.cpp
@@ -702,8 +713,7 @@ Files: CMakeLists.txt
 Copyright: 2006-2019, assimp team
   2006-2020, assimp team
   2006-2021, assimp team
-  2006-2022, assimp team
-  2006-2023, assimp team
+  2006-2024, assimp team
 License: BSD-3-clause
  FIXME
 
@@ -745,16 +755,26 @@ Files: BUILDBINARIES_EXAMPLE.bat
  contrib/openddlparser/CREDITS
  contrib/openddlparser/README.md
  contrib/poly2tri/AUTHORS
- contrib/poly2tri/README
- contrib/zip/.travis.sh
- contrib/zip/.travis.yml
+ contrib/poly2tri/README.md
+ contrib/tinyusdz/README.md
+ contrib/tinyusdz/assimp_tinyusdz_logging.inc
+ contrib/tinyusdz/patches/README.md
+ contrib/tinyusdz/patches/tinyusdz.patch
  contrib/zip/CMakeLists.txt
+ contrib/zip/CONTRIBUTING.md
+ contrib/zip/Doxyfile.in
+ contrib/zip/cmake/Config.cmake.in
  contrib/zip/cmake/cmake_uninstall.cmake.in
  contrib/zip/src/zip.c
  contrib/zip/src/zip.h
  contrib/zip/test/CMakeLists.txt
- contrib/zip/test/test.c
- contrib/zip/test/test_miniz.c
+ contrib/zip/test/test_append.c
+ contrib/zip/test/test_entry.c
+ contrib/zip/test/test_extract.c
+ contrib/zip/test/test_open.c
+ contrib/zip/test/test_permissions.c
+ contrib/zip/test/test_read.c
+ contrib/zip/test/test_write.c
  contrib/zip/zip.png
  doc/CMakeLists.txt
  doc/Doxyfile.in
@@ -772,6 +792,8 @@ Files: BUILDBINARIES_EXAMPLE.bat
  include/assimp/.editorconfig
  include/assimp/Compiler/poppack1.h
  include/assimp/Compiler/pushpack1.h
+ include/assimp/module.modulemap
+ include/assimp/revision.h.in
  port/AndroidJNI/CMakeLists.txt
  port/AndroidJNI/README.md
  port/AssimpDelphi/Readme.txt
@@ -859,7 +881,6 @@ Files: BUILDBINARIES_EXAMPLE.bat
  port/jassimp/jassimp-native/src/jassimp.h
  port/jassimp/jassimp/src/jassimp/AiConfig.java
  port/jassimp/jassimp/src/jassimp/AiConfigOptions.java
- revision.h.in
  samples/README
  samples/SimpleAssimpViewX/English.lproj/Credits.rtf
  samples/SimpleAssimpViewX/English.lproj/InfoPlist.strings
@@ -912,8 +933,6 @@ Files: BUILDBINARIES_EXAMPLE.bat
  tools/assimp_view/help.rtf
  tools/assimp_view/stdafx.cpp
  tools/assimp_view/stdafx.h
- tools/make/build_env_win32.bat
- tools/make/make_all_win32_x64.bat
  tools/shared/assimp_tools_icon.svg
 Copyright: NONE
 License: UNKNOWN
@@ -1018,6 +1037,7 @@ License: Expat
  FIXME
 
 Files: contrib/poly2tri/LICENSE
+ contrib/poly2tri/poly2tri/common/dll_symbol.h
  contrib/poly2tri/poly2tri/common/shapes.cc
  contrib/poly2tri/poly2tri/common/shapes.h
  contrib/poly2tri/poly2tri/common/utils.h
@@ -1030,7 +1050,9 @@ Files: contrib/poly2tri/LICENSE
  contrib/poly2tri/poly2tri/sweep/sweep.h
  contrib/poly2tri/poly2tri/sweep/sweep_context.cc
  contrib/poly2tri/poly2tri/sweep/sweep_context.h
-Copyright: 2009-2010, Poly2Tri Contributors
+Copyright: 2009-2018, Poly2Tri Contributors
+  2009-2021, Poly2Tri Contributors
+  2009-2022, Poly2Tri Contributors
 License: BSD-3-clause
  FIXME
 
@@ -1041,7 +1063,7 @@ Files: code/AssetLib/M3D/M3DExporter.cpp
  code/AssetLib/M3D/M3DMaterials.h
  code/AssetLib/M3D/M3DWrapper.cpp
  code/AssetLib/M3D/M3DWrapper.h
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2024, assimp team
   2019, bzt
 License: BSD-3-clause
  FIXME
@@ -1084,21 +1106,21 @@ License: BSD-3-clause
 
 Files: code/AssetLib/glTF/glTFExporter.cpp
  code/AssetLib/glTF2/glTF2Exporter.cpp
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2024, assimp team
   aiString copyright_str;
 License: BSD-3-clause
  FIXME
 
 Files: code/AssetLib/glTF/glTFAssetWriter.inl
  code/AssetLib/glTF2/glTF2AssetWriter.inl
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2024, assimp team
   mAl).Move(), mAl);
 License: BSD-3-clause
  FIXME
 
 Files: code/AssetLib/glTF/glTFAsset.h
  code/AssetLib/glTF2/glTF2Asset.h
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2024, assimp team
   message suitable for display to credit the content creator.
 License: BSD-3-clause
  FIXME
@@ -1133,12 +1155,6 @@ Copyright: THEN
 License: UNKNOWN
  FIXME
 
-Files: contrib/zip/UNLICENSE
- contrib/zip/src/miniz.h
-Copyright: NONE
-License: Unlicense
- FIXME
-
 Files: cmake-modules/HunterGate.cmake
 Copyright: 2013-2019, Ruslan Baratov
 License: BSD-2-clause
@@ -1151,7 +1167,7 @@ License: BSD-3-clause
 
 Files: test/unit/utColladaImportExport.cpp
 Copyright: 2006
-  2006-2022, assimp team
+  2006-2024, assimp team
 License: BSD-3-clause
  FIXME
 
@@ -1182,7 +1198,7 @@ License: BSD-3-clause
 
 Files: include/assimp/Hash.h
 Copyright: 2004-2008, Paul Hsieh. It is used here in the belief that
-  2006-2022, assimp team
+  2006-2024, assimp team
 License: BSD-3-clause
  FIXME
 
@@ -1198,7 +1214,7 @@ License: BSD-3-clause
  FIXME
 
 Files: code/Common/CreateAnimMesh.cpp
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2024, assimp team
   2016, The Qt Company Ltd.
 License: BSD-3-clause
  FIXME
@@ -1209,7 +1225,7 @@ License: BSD-3-clause
  FIXME
 
 Files: test/unit/utColladaExport.cpp
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2024, assimp team
   changed";
 License: BSD-3-clause
  FIXME
@@ -1220,6 +1236,11 @@ Copyright: 2006-2020, assimp team
   m_diffuse;
   m_specular;
 License: BSD-3-clause
+ FIXME
+
+Files: contrib/zip/test/minunit.h
+Copyright: 2012, David Siñuela Pastor, siu.4coders@gmail.com
+License: CC-BY-3.0 and/or Expat
  FIXME
 
 Files: contrib/zip/README.md
@@ -1238,6 +1259,18 @@ Copyright: 2019, bzt (bztsrc@gitlab)
 License: Expat
  FIXME
 
+Files: contrib/zip/src/miniz.h
+Copyright: 2010-2014, Rich Geldreich and Tenacious Software LLC
+  2013-2014, RAD Game Tools and Valve Software
+  2016, Martin Raiber
+License: Expat and/or Unlicense
+ FIXME
+
+Files: port/PyAssimp/LICENSE
+Copyright: 2024, pyassimp contributors
+License: ISC
+ FIXME
+
 Files: cmake-modules/DebSourcePPA.cmake
 Copyright: 2010, Daniel Pfeifer <daniel@pfeifer-mail.de>
   set(DEBIAN_COPYRIGHT ${DEBIAN_SOURCE_DIR}/debian/copyright)
@@ -1247,5 +1280,10 @@ License: UNKNOWN
 Files: include/assimp/fast_atof.h
 Copyright: 2002-2007, Nikolaus Gebhardt
 License: UNKNOWN
+ FIXME
+
+Files: contrib/zip/UNLICENSE
+Copyright: NONE
+License: Unlicense
  FIXME
 
