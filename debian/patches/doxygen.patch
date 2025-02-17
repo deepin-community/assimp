@@ -11,11 +11,9 @@ Last-Updated: 2015-07-25
  doc/Doxyfile_Cmd   | 5 ++---
  3 files changed, 8 insertions(+), 9 deletions(-)
 
-diff --git a/doc/CMakeLists.txt b/doc/CMakeLists.txt
-index b510d8c..aef23ea 100644
---- a/doc/CMakeLists.txt
-+++ b/doc/CMakeLists.txt
-@@ -33,9 +33,9 @@ if( DEFINED CMAKE_INSTALL_DOCDIR )
+--- assimp.orig/doc/CMakeLists.txt
++++ assimp/doc/CMakeLists.txt
+@@ -33,9 +33,9 @@
          DESTINATION ${CMAKE_INSTALL_DOCDIR}
      )
      install(FILES
@@ -28,11 +26,9 @@ index b510d8c..aef23ea 100644
          DESTINATION ${CMAKE_INSTALL_DOCDIR}/${HTML_OUTPUT}
      )
  endif()
-diff --git a/doc/Doxyfile.in b/doc/Doxyfile.in
-index 0133050..32131fd 100644
---- a/doc/Doxyfile.in
-+++ b/doc/Doxyfile.in
-@@ -717,7 +717,8 @@ EXCLUDE_SYMLINKS       = NO
+--- assimp.orig/doc/Doxyfile.in
++++ assimp/doc/Doxyfile.in
+@@ -717,7 +717,8 @@
  # against the file with absolute path, so to exclude all test directories 
  # for example use the pattern */test/*
  
@@ -42,7 +38,7 @@ index 0133050..32131fd 100644
  
  # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names 
  # (namespaces, classes, functions, etc.) that should be excluded from the 
-@@ -878,7 +879,7 @@ IGNORE_PREFIX          =
+@@ -878,7 +879,7 @@
  # If the GENERATE_HTML tag is set to YES (the default) Doxygen will 
  # generate HTML output.
  
@@ -51,7 +47,7 @@ index 0133050..32131fd 100644
  
  # The HTML_OUTPUT tag is used to specify where the HTML docs will be put. 
  # If a relative path is entered the value of OUTPUT_DIRECTORY will be 
-@@ -1043,7 +1044,6 @@ CHM_FILE               = AssimpDoc.chm
+@@ -1043,7 +1044,6 @@
  # the HTML help compiler (hhc.exe). If non-empty doxygen will try to run 
  # the HTML help compiler on the generated index.hhp.
  
@@ -59,11 +55,9 @@ index 0133050..32131fd 100644
  
  # If the GENERATE_HTMLHELP tag is set to YES, the GENERATE_CHI flag 
  # controls if a separate .chi index file is generated (YES) or that 
-diff --git a/doc/Doxyfile_Cmd b/doc/Doxyfile_Cmd
-index f0a56e7..98ac9a9 100644
---- a/doc/Doxyfile_Cmd
-+++ b/doc/Doxyfile_Cmd
-@@ -58,7 +58,7 @@ PROJECT_LOGO           =
+--- assimp.orig/doc/Doxyfile_Cmd
++++ assimp/doc/Doxyfile_Cmd
+@@ -58,7 +58,7 @@
  # entered, it will be relative to the location where doxygen was started. If
  # left blank the current directory will be used.
  
@@ -72,7 +66,7 @@ index f0a56e7..98ac9a9 100644
  
  # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create 4096 sub-
  # directories (in 2 levels) under the output directory of each output format and
-@@ -1075,7 +1075,7 @@ GENERATE_HTML          = YES
+@@ -1075,7 +1075,7 @@
  # The default directory is: html.
  # This tag requires that the tag GENERATE_HTML is set to YES.
  
@@ -81,7 +75,7 @@ index f0a56e7..98ac9a9 100644
  
  # The HTML_FILE_EXTENSION tag can be used to specify the file extension for each
  # generated HTML page (for example: .htm, .php, .asp).
-@@ -1281,7 +1281,6 @@ CHM_FILE               = AssimpCmdDoc.chm
+@@ -1281,7 +1281,6 @@
  # The file has to be specified with full path.
  # This tag requires that the tag GENERATE_HTMLHELP is set to YES.
  

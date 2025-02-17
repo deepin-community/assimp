@@ -113,75 +113,75 @@ def recur_node(node, level=0):
 def load(filename=None):
     log.warning("trying: " + filename)
 
-    scene = pyassimp.load(
-        filename, processing=pyassimp.postprocess.aiProcess_Triangulate
-    )
+    with pyassimp.load(
+            filename, processing=pyassimp.postprocess.aiProcess_Triangulate
+    ) as scene:
 
-    # the model we load
-    log.info("MODEL: " + filename)
+        # the model we load
+        log.info("MODEL: " + filename)
 
-    # write some statistics
-    log.info("SCENE:")
-    log.info("  meshes:" + str(len(scene.meshes)))
-    log.info("  materials:" + str(len(scene.materials)))
-    log.info("  textures:" + str(len(scene.textures)))
+        # write some statistics
+        log.info("SCENE:")
+        log.info("  meshes:" + str(len(scene.meshes)))
+        log.info("  materials:" + str(len(scene.materials)))
+        log.info("  textures:" + str(len(scene.textures)))
 
-    log.info("NODES:")
-    recur_node(scene.rootnode)
+        log.info("NODES:")
+        recur_node(scene.rootnode)
 
-    log.info("MESHES:")
-    for index, mesh in enumerate(scene.meshes):
-        log.info("  MESH" + str(index + 1))
-        log.info("    material id:" + str(mesh.materialindex + 1))
-        log.info("    vertices:" + str(len(mesh.vertices)))
-        log.info("    first 3 verts:\n" + str(mesh.vertices[:3]))
-        if mesh.normals.any():
-            log.info("    first 3 normals:\n" + str(mesh.normals[:3]))
-        else:
-            log.info("    no normals")
-        log.info("    colors:" + str(len(mesh.colors)))
-        tcs = mesh.texturecoords
-        if tcs.any():
-            for index, tc in enumerate(tcs):
-                log.info(
-                    "    texture-coords "
-                    + str(index)
-                    + ":"
-                    + str(len(tcs[index]))
-                    + "first3:"
-                    + str(tcs[index][:3])
-                )
+        log.info("MESHES:")
+        for index, mesh in enumerate(scene.meshes):
+            log.info("  MESH" + str(index + 1))
+            log.info("    material id:" + str(mesh.materialindex + 1))
+            log.info("    vertices:" + str(len(mesh.vertices)))
+            log.info("    first 3 verts:\n" + str(mesh.vertices[:3]))
+            if mesh.normals.any():
+                log.info("    first 3 normals:\n" + str(mesh.normals[:3]))
+            else:
+                log.info("    no normals")
+            log.info("    colors:" + str(len(mesh.colors)))
+            tcs = mesh.texturecoords
+            if tcs.any():
+                for index, tc in enumerate(tcs):
+                    log.info(
+                        "    texture-coords "
+                        + str(index)
+                        + ":"
+                        + str(len(tcs[index]))
+                        + "first3:"
+                        + str(tcs[index][:3])
+                    )
 
-        else:
-            log.info("    no texture coordinates")
-        log.info("    uv-component-count:" + str(len(mesh.numuvcomponents)))
-        log.info(
-            "    faces:" + str(len(mesh.faces)) + " -> first:\n" + str(mesh.faces[:3])
-        )
-        log.info(
-            "    bones:"
-            + str(len(mesh.bones))
-            + " -> first:"
-            + str([str(b) for b in mesh.bones[:3]])
-        )
+            else:
+                log.info("    no texture coordinates")
+            log.info("    uv-component-count:" + str(len(mesh.numuvcomponents)))
+            log.info(
+                "    faces:" + str(len(mesh.faces)) + " -> first:\n" + str(mesh.faces[:3])
+            )
+            log.info(
+                "    bones:"
+                + str(len(mesh.bones))
+                + " -> first:"
+                + str([str(b) for b in mesh.bones[:3]])
+            )
 
-    log.info("MATERIALS:")
-    for index, material in enumerate(scene.materials):
-        log.info("  MATERIAL (id:" + str(index + 1) + ")")
-        for key, value in material.properties.items():
-            log.info("    %s: %s" % (key, value))
+        log.info("MATERIALS:")
+        for index, material in enumerate(scene.materials):
+            log.info("  MATERIAL (id:" + str(index + 1) + ")")
+            for key, value in material.properties.items():
+                log.info("    %s: %s" % (key, value))
 
-    log.info("TEXTURES:")
-    for index, texture in enumerate(scene.textures):
-        log.info("  TEXTURE" + str(index + 1))
-        log.info("    width:" + str(texture.width))
-        log.info("    height:" + str(texture.height))
-        log.info("    hint:" + str(texture.achformathint))
-        log.info("    data (size):" + str(len(texture.data)))
+        log.info("TEXTURES:")
+        for index, texture in enumerate(scene.textures):
+            log.info("  TEXTURE" + str(index + 1))
+            log.info("    width:" + str(texture.width))
+            log.info("    height:" + str(texture.height))
+            log.info("    hint:" + str(texture.achformathint))
+            log.info("    data (size):" + str(len(texture.data)))
 
-    # Finally release the model
-    pyassimp.release(scene)
-    log.info("====================================")
+        # Finally release the model
+        #pyassimp.release(scene)
+        log.info("====================================")
 
 
 def run_tests(basepaths, excluded=[]):

@@ -1,8 +1,51 @@
-assimp (5.3.1+ds-2deepin0) unstable; urgency=medium
+assimp (5.4.3+ds-2) unstable; urgency=medium
 
-  * No source change upload against GCC 12.
+  * Upload to unstable.
 
- -- Tianyu Chen <sweetyfish@deepin.org>  Thu, 19 Sep 2024 22:42:16 +0800
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sun, 08 Sep 2024 22:05:32 +0200
+
+assimp (5.4.3+ds-1) unstable; urgency=medium
+
+  * New upstream version 5.4.3+ds
+    + Refresh patches
+  * Add explicit B-D on python3-setuptools (Closes: #1080543)
+  * Update copyright information
+    + Bump copyright dates
+    + Re-generate d/copyright_hints
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sun, 08 Sep 2024 21:45:13 +0200
+
+assimp (5.4.2+ds-1) unstable; urgency=medium
+
+  * New upstream version 5.4.2+ds
+    + Refresh patches
+  * Use context-manager in autopkgtest "quicktest"
+  * Update copyright information
+    + Update license information
+    + Re-generate d/copyright_hints
+  * Fix spelling errors in older entries of d/changelog
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 17 Jul 2024 15:02:24 +0200
+
+assimp (5.4.1+ds-1) unstable; urgency=medium
+
+  * New upstream version 5.4.1+ds
+    + Refresh patches
+  * Bump standards version to 4.7.0
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Fri, 24 May 2024 12:34:07 +0200
+
+assimp (5.4.0+ds-1) unstable; urgency=medium
+
+  * New upstream version 5.4.0+ds
+    + Refresh patches
+    + Drop patches applied upstream
+  * Update copyright information
+    + Bump copyright dates
+    + Add new copyrights
+    + Re-generate d/copyright_hints
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 08 Apr 2024 12:35:37 +0200
 
 assimp (5.3.1+ds-2) unstable; urgency=medium
 
@@ -27,7 +70,7 @@ assimp (5.3.1+ds-1) unstable; urgency=medium
    + Install docs from new upstream location
    + Only enable '--with doxygen' on arch:all
   * testsuite updates
-    + Suport the 'nocheck' build-profile
+    + Support the 'nocheck' build-profile
     + Prepare for building/running tests (but don't enable it)
     + Drop unnneeded dependencies for autopkgtests
   * Fix spelling mistake
@@ -523,7 +566,7 @@ assimp (3.2~dfsg-3) unstable; urgency=medium
 assimp (3.2~dfsg-2) unstable; urgency=medium
 
   * Install CMake config files (Closes: #806317)
-  * Removed copyright-notice for non-existant files
+  * Removed copyright-notice for non-existent files
 
  -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 26 Nov 2015 21:06:53 +0100
 

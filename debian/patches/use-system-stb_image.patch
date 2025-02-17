@@ -13,11 +13,9 @@ Last-Update: 2019-10-17
  .../SimpleTexturedOpenGL/src/model_loading.cpp       |  2 +-
  2 files changed, 11 insertions(+), 11 deletions(-)
 
-diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
-index 0fe2291..f6e6914 100644
---- a/code/CMakeLists.txt
-+++ b/code/CMakeLists.txt
-@@ -1088,16 +1088,16 @@ ELSE()
+--- assimp.orig/code/CMakeLists.txt
++++ assimp/code/CMakeLists.txt
+@@ -1232,16 +1232,16 @@
  ENDIF()
  
  # stb
@@ -44,11 +42,9 @@ index 0fe2291..f6e6914 100644
  
  # VC2010 fixes
  if(MSVC10)
-diff --git a/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp b/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp
-index 7d730a6..b9d54e9 100644
---- a/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp
-+++ b/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp
-@@ -23,7 +23,7 @@
+--- assimp.orig/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp
++++ assimp/samples/SimpleTexturedOpenGL/SimpleTexturedOpenGL/src/model_loading.cpp
+@@ -24,7 +24,7 @@
  #endif // _MSC_VER
  
  #define STB_IMAGE_IMPLEMENTATION
