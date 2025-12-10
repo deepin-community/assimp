@@ -13,12 +13,10 @@ Last-Update: 2023-10-1
  test/CMakeLists.txt |  2 +-
  2 files changed, 16 insertions(+), 12 deletions(-)
 
-diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
-index eba6e6e..a995b37 100644
---- a/code/CMakeLists.txt
-+++ b/code/CMakeLists.txt
-@@ -906,17 +906,17 @@ SET( Extra_SRCS
- SOURCE_GROUP( Extra FILES ${Extra_SRCS})
+--- assimp.orig/code/CMakeLists.txt
++++ assimp/code/CMakeLists.txt
+@@ -1050,17 +1050,17 @@
+ ENDIF() # IF (ASSIMP_BUILD_USD_IMPORTER)
  
  # pugixml
 -IF(ASSIMP_HUNTER_ENABLED)
@@ -46,7 +44,7 @@ index eba6e6e..a995b37 100644
  
  # utf8
  IF(ASSIMP_HUNTER_ENABLED)
-@@ -1264,6 +1264,10 @@ TARGET_INCLUDE_DIRECTORIES ( assimp PUBLIC
+@@ -1414,6 +1414,10 @@
    $<INSTALL_INTERFACE:${ASSIMP_INCLUDE_INSTALL_DIR}>
  )
  
@@ -57,11 +55,9 @@ index eba6e6e..a995b37 100644
  IF(ASSIMP_HUNTER_ENABLED)
    TARGET_LINK_LIBRARIES(assimp
        PUBLIC
-diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
-index afe4874..ba01b8f 100644
---- a/test/CMakeLists.txt
-+++ b/test/CMakeLists.txt
-@@ -47,7 +47,7 @@ if(NOT ASSIMP_HUNTER_ENABLED)
+--- assimp.orig/test/CMakeLists.txt
++++ assimp/test/CMakeLists.txt
+@@ -47,7 +47,7 @@
    INCLUDE_DIRECTORIES(
      ${Assimp_SOURCE_DIR}/contrib/googletest/googletest/include
      ${Assimp_SOURCE_DIR}/contrib/googletest/googletest/

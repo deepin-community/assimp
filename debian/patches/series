@@ -1,4 +1,3 @@
-use-system-utf8cpp.patch
 use-system-stb_image.patch
 use-system-libdraco.patch
 use-system-pugixml.patch
@@ -9,5 +8,3 @@ pyassimp.patch
 pyassimp_faces.patch
 doxygen.patch
 #index_overflow.patch
-spelling.patch
-CVE-2022-45748.patch
