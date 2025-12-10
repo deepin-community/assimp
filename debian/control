@@ -3,7 +3,7 @@ Section: graphics
 Priority: optional
 Maintainer: IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>
 Homepage: https://assimp.org
-Standards-Version: 4.6.2
+Standards-Version: 4.7.0
 Build-Depends:
  cmake,
  debhelper-compat (= 13),
@@ -24,6 +24,7 @@ Build-Depends-Indep:
  dh-sequence-doxygen <!nodoc>,
  dh-sequence-python3,
  python3-all,
+ python3-setuptools,
 Rules-Requires-Root: no
 Vcs-Git: https://salsa.debian.org/debian/assimp.git
 Vcs-Browser: https://salsa.debian.org/debian/assimp

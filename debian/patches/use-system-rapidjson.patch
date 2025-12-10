@@ -13,11 +13,9 @@ Last-Update: 2023-10-20
  test/CMakeLists.txt | 25 +++++++++++++------------
  2 files changed, 27 insertions(+), 23 deletions(-)
 
-diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
-index a995b37..9fe0410 100644
---- a/code/CMakeLists.txt
-+++ b/code/CMakeLists.txt
-@@ -1075,17 +1075,17 @@ ELSE ()
+--- assimp.orig/code/CMakeLists.txt
++++ assimp/code/CMakeLists.txt
+@@ -1219,17 +1219,17 @@
  ENDIF ()
  
  # RapidJSON
@@ -46,7 +44,7 @@ index a995b37..9fe0410 100644
  
  # stb
  #IF(ASSIMP_HUNTER_ENABLED)
-@@ -1268,6 +1268,9 @@ find_package(pugixml CONFIG REQUIRED)
+@@ -1418,6 +1418,9 @@
  ## the public header 'assimp/XmlParser.h' includes 'pugixml.hpp', so:
  TARGET_LINK_LIBRARIES(assimp PUBLIC pugixml)
  
@@ -56,11 +54,9 @@ index a995b37..9fe0410 100644
  IF(ASSIMP_HUNTER_ENABLED)
    TARGET_LINK_LIBRARIES(assimp
        PUBLIC
-diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
-index ba01b8f..72949f9 100644
---- a/test/CMakeLists.txt
-+++ b/test/CMakeLists.txt
-@@ -112,7 +112,7 @@ SET( IMPORTERS
+--- assimp.orig/test/CMakeLists.txt
++++ assimp/test/CMakeLists.txt
+@@ -112,7 +112,7 @@
    unit/utLWOImportExport.cpp
    unit/utSMDImportExport.cpp
    unit/utglTFImportExport.cpp
@@ -69,7 +65,7 @@ index ba01b8f..72949f9 100644
    unit/utHMPImportExport.cpp
    unit/utIFCImportExport.cpp
    unit/utFBXImporterExporter.cpp
-@@ -234,17 +234,18 @@ else()
+@@ -236,17 +236,18 @@
  endif()
  
  # RapidJSON
