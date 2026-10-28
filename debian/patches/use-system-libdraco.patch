@@ -9,34 +9,35 @@ Last-Update: 2021-11-23
 
 Last-Update: 2021-11-23
 ---
- code/CMakeLists.txt | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ code/CMakeLists.txt | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
 diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
-index f6e6914..eba6e6e 100644
+index 140fd76..521f161 100644
 --- a/code/CMakeLists.txt
 +++ b/code/CMakeLists.txt
-@@ -1282,15 +1282,21 @@ IF(ASSIMP_HUNTER_ENABLED)
-   endif()
+@@ -1386,9 +1386,13 @@ IF (ASSIMP_BUILD_NONFREE_C4D_IMPORTER)
+ ENDIF ()
  
-   if (ASSIMP_BUILD_DRACO)
--    target_link_libraries(assimp PUBLIC ${draco_LIBRARIES})
-+    target_link_libraries(assimp PRIVATE ${draco_LIBRARIES})
-   endif()
+ IF (ASSIMP_BUILD_DRACO)
+-  INCLUDE_DIRECTORIES(${draco_INCLUDE_DIRS})
+-  ADD_DEFINITIONS( -DASSIMP_ENABLE_DRACO )
++  #INCLUDE_DIRECTORIES(${draco_INCLUDE_DIRS})
++  #ADD_DEFINITIONS( -DASSIMP_ENABLE_DRACO )
+ ENDIF()
++find_package(draco CONFIG REQUIRED)
++set(draco_LIBRARIES "draco::draco")
++set(ASSIMP_BUILD_DRACO 1)
++
+ 
+ ADD_LIBRARY( assimp ${assimp_src} )
+ ADD_LIBRARY(assimp::assimp ALIAS assimp)
+@@ -1499,7 +1503,7 @@ IF(ASSIMP_HUNTER_ENABLED)
  ELSE()
    TARGET_LINK_LIBRARIES(assimp ${ZLIB_LIBRARIES} ${OPENDDL_PARSER_LIBRARIES})
    if (ASSIMP_BUILD_DRACO)
 -    target_link_libraries(assimp ${draco_LIBRARIES})
 +    target_link_libraries(assimp PRIVATE ${draco_LIBRARIES})
    endif()
- ENDIF()
- 
-+find_package(draco CONFIG REQUIRED)
-+if(NOT DRACO_LIBRARIES)
-+    set(DRACO_LIBRARIES "draco::draco")
-+endif()
-+target_link_libraries(assimp PRIVATE ${DRACO_LIBRARIES})
-+
- if(ASSIMP_ANDROID_JNIIOSYSTEM)
-   set(ASSIMP_ANDROID_JNIIOSYSTEM_PATH port/AndroidJNI)
-   add_subdirectory(../${ASSIMP_ANDROID_JNIIOSYSTEM_PATH}/ ../${ASSIMP_ANDROID_JNIIOSYSTEM_PATH}/)
+   if(TARGET pugixml::pugixml)
+     target_link_libraries(assimp pugixml::pugixml)

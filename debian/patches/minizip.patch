@@ -1,0 +1,59 @@
+From: fundawang <https://github.com/fundawang>
+Date: Wed, 22 Apr 2026 17:36:06 +0200
+Subject: Fix compilation with minzip
+
+Bug: https://github.com/assimp/assimp/issues/6576
+---
+ CMakeLists.txt                     | 6 ++++++
+ code/AssetLib/IFC/IFCLoader.cpp    | 2 +-
+ code/Common/ZipArchiveIOSystem.cpp | 2 +-
+ 3 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b603b2e..2285d12 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -599,11 +599,17 @@ ENDIF()
+ IF( NOT IOS )
+   IF( NOT ASSIMP_BUILD_MINIZIP )
+     use_pkgconfig(UNZIP minizip)
++    IF(${UNZIP_VERSION} VERSION_GREATER_EQUAL "1.3.1.2")
++      add_definitions(-DMINIZIP1_3_1_2)
++    ENDIF()
+   ENDIF()
+ ELSE ()
+   IF( NOT BUILD_SHARED_LIBS )
+     IF( NOT ASSIMP_BUILD_MINIZIP )
+       USE_PKGCONFIG(UNZIP minizip)
++      IF(${UNZIP_VERSION} VERSION_GREATER_EQUAL "1.3.1.2")
++        add_definitions(-DMINIZIP1_3_1_2)
++      ENDIF()
+     ENDIF()
+   ENDIF ()
+ ENDIF ()
+diff --git a/code/AssetLib/IFC/IFCLoader.cpp b/code/AssetLib/IFC/IFCLoader.cpp
+index 8c1e658..621e94c 100644
+--- a/code/AssetLib/IFC/IFCLoader.cpp
++++ b/code/AssetLib/IFC/IFCLoader.cpp
+@@ -50,7 +50,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ #include <tuple>
+ 
+ #ifndef ASSIMP_BUILD_NO_COMPRESSED_IFC
+-#ifdef ASSIMP_USE_HUNTER
++#if defined(ASSIMP_USE_HUNTER) || defined(MINIZIP1_3_1_2)
+ #include <minizip/unzip.h>
+ #else
+ #include <unzip.h>
+diff --git a/code/Common/ZipArchiveIOSystem.cpp b/code/Common/ZipArchiveIOSystem.cpp
+index 11cd362..914d4fa 100644
+--- a/code/Common/ZipArchiveIOSystem.cpp
++++ b/code/Common/ZipArchiveIOSystem.cpp
+@@ -51,7 +51,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ #include <map>
+ #include <memory>
+ 
+-#ifdef ASSIMP_USE_HUNTER
++#if defined(ASSIMP_USE_HUNTER) || defined(MINIZIP1_3_1_2)
+ #    include <minizip/unzip.h>
+ #else
+ #    include <unzip.h>

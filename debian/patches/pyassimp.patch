@@ -10,25 +10,15 @@ work on platforms such as w32
 Forwarded: no
 Last-Updated: 2015-08-10
 ---
- port/PyAssimp/pyassimp/helper.py | 139 +++++----------------------------------
+ port/PyAssimp/pyassimp/helper.py | 141 +++++----------------------------------
  port/PyAssimp/setup.py           |   4 +-
- 2 files changed, 18 insertions(+), 125 deletions(-)
+ 2 files changed, 18 insertions(+), 127 deletions(-)
 
 diff --git a/port/PyAssimp/pyassimp/helper.py b/port/PyAssimp/pyassimp/helper.py
-index 7c14f60..37ffa84 100644
+index 0ae7cbd..10b1319 100644
 --- a/port/PyAssimp/pyassimp/helper.py
 +++ b/port/PyAssimp/pyassimp/helper.py
-@@ -6,9 +6,7 @@ Some fancy helper functions.
- 
- import os
- import ctypes
--import operator
- 
--from distutils.sysconfig import get_python_lib
- import re
- import sys
- 
-@@ -21,39 +19,6 @@ from .errors import AssimpError
+@@ -25,43 +25,6 @@ from .errors import AssimpError
  
  additional_dirs, ext_whitelist = [],[]
  
@@ -43,10 +33,14 @@ index 7c14f60..37ffa84 100644
 -
 -    if 'LD_LIBRARY_PATH' in os.environ:
 -        additional_dirs.extend([item for item in os.environ['LD_LIBRARY_PATH'].split(':') if item])
+-    
+-    if platform.system() == 'Darwin':
+-        if 'DYLD_LIBRARY_PATH' in os.environ:
+-            additional_dirs.extend([item for item in os.environ['DYLD_LIBRARY_PATH'].split(':') if item])
 -
 -    # check if running from anaconda.
 -    anaconda_keywords = ("conda", "continuum")
--    if any(k in sys.version.lower() for k in anaconda_keywords):
+-    if have_distutils and any(k in sys.version.lower() for k in anaconda_keywords):
 -      cur_path = get_python_lib()
 -      pattern = re.compile('.*\/lib\/')
 -      conda_lib = pattern.match(cur_path).group()
@@ -68,7 +62,7 @@ index 7c14f60..37ffa84 100644
  def vec2tuple(x):
      """ Converts a VECTOR3D to a Tuple """
      return (x.x, x.y, x.z)
-@@ -159,46 +124,6 @@ def get_bounding_box_for_node(node, bb_min, bb_max, transformation):
+@@ -167,46 +130,6 @@ def get_bounding_box_for_node(node, bb_min, bb_max, transformation):
  
      return bb_min, bb_max
  
@@ -115,7 +109,7 @@ index 7c14f60..37ffa84 100644
  def search_library():
      '''
      Loads the assimp library.
-@@ -211,8 +136,6 @@ def search_library():
+@@ -219,8 +142,6 @@ def search_library():
                       release function,
                       dll)
      '''
@@ -124,7 +118,7 @@ index 7c14f60..37ffa84 100644
  
      # silence 'DLL not found' message boxes on win
      try:
-@@ -220,52 +143,24 @@ def search_library():
+@@ -228,52 +149,24 @@ def search_library():
      except AttributeError:
          pass
  
@@ -162,7 +156,7 @@ index 7c14f60..37ffa84 100644
 -    if not candidates:
 -        # no library found
 -        raise AssimpError("assimp library not found")
-+    libassimp = 'libassimp.so.5'
++    libassimp = 'libassimp.so.6'
 +    LIBASSIMP = ctypes.CDLL(libassimp)
 +    try:
 +        load = LIBASSIMP.aiImportFile
@@ -195,7 +189,7 @@ index 7c14f60..37ffa84 100644
  def hasattr_silent(object, name):
      """
 diff --git a/port/PyAssimp/setup.py b/port/PyAssimp/setup.py
-index f1bf6ab..223cb8b 100644
+index f1bf6ab..405c350 100644
 --- a/port/PyAssimp/setup.py
 +++ b/port/PyAssimp/setup.py
 @@ -8,7 +8,7 @@ def readme():
@@ -203,7 +197,7 @@ index f1bf6ab..223cb8b 100644
  
  setup(name='pyassimp',
 -      version='5.2.5',
-+      version='5.3.1',
++      version='6.0.2',
        license='ISC',
        description='Python bindings for the Open Asset Import Library (ASSIMP)',
        long_description=readme(),

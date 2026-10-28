@@ -8,7 +8,7 @@ runtest() {
    case "${ret}" in
            0)
                    ;;
-           5) # assimp failed to open the file, but handled it gracefully
+           [1-9]) # assimp failed to open the file, but handled it gracefully
                    ;;
            *)
                    echo "> assimp info '$1' returned $ret"

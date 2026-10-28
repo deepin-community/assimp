@@ -1,0 +1,17 @@
+Package: python3-pyassimp
+Source: assimp
+Version: 6.0.5+ds-1
+Architecture: all
+Maintainer: IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>
+Installed-Size: 222
+Depends: libassimp6 (>= 6.0.5+ds-1), libassimp6 (<< 6.0.5+ds+1~), python3-numpy, python3:any
+Section: python
+Homepage: https://assimp.org
+Description: 3D model import library (Python3 bindings)
+ Assimp is a library to import various well-known 3D model formats ("assets") in
+ a uniform manner.
+ Assimp aims at providing a full asset conversion pipeline for use in game
+ engines / realtime rendering systems of any kind but is not limited to this
+ audience.
+ .
+ This package provides Python3 bindings to the Assimp library.

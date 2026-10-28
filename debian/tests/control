@@ -3,8 +3,14 @@ Depends:
  assimp-testmodels,
  assimp-utils,
 
+Test-Command: find /usr/share/assimp/models/ -type f -exec ./debian/tests/assimp-dump -M debian/tests/memorylimits.txt {} +
+Depends:
+ assimp-testmodels,
+ assimp-utils,
+
 Test-Command: ./debian/tests/quicktest.py -M debian/tests/memorylimits.txt -m $(./debian/tests/getAvailableMemory) /usr/share/assimp/models/
-Restrictions: allow-stderr,
+Restrictions:
+ allow-stderr,
 Depends:
  assimp-testmodels,
  python3-pyassimp,
@@ -15,4 +21,4 @@ Depends:
  cmake,
  freeglut3-dev,
  libassimp-dev,
- libgl1-mesa-dev | libgl-dev,
+ libgl-dev,
