@@ -1,0 +1,14 @@
+9f21243be1e4e78c2bdecaf7ffdb3531  usr/lib/python3/dist-packages/pyassimp-6.0.2.egg-info/PKG-INFO
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/pyassimp-6.0.2.egg-info/dependency_links.txt
+d41d8cd98f00b204e9800998ecf8427e  usr/lib/python3/dist-packages/pyassimp-6.0.2.egg-info/requires.txt
+04359906fef56be6d7e121b038095802  usr/lib/python3/dist-packages/pyassimp-6.0.2.egg-info/top_level.txt
+29a6a1e050bd42fe24cd17b138d4b08d  usr/lib/python3/dist-packages/pyassimp/__init__.py
+8851f2ecdd8b0b510fe487a8ebbdb902  usr/lib/python3/dist-packages/pyassimp/core.py
+54964a16e78b36249306c76e75cec516  usr/lib/python3/dist-packages/pyassimp/errors.py
+2336231f9eb0449475015cea1deaad45  usr/lib/python3/dist-packages/pyassimp/helper.py
+546f2fef2a6b038f8bd3b4fdea6a141d  usr/lib/python3/dist-packages/pyassimp/material.py
+e587c800190fe0a548bd60a95f3e88e7  usr/lib/python3/dist-packages/pyassimp/postprocess.py
+d60ce69112fa2478168d17cbf7e729e3  usr/lib/python3/dist-packages/pyassimp/structs.py
+f11af55ed0e780d0779589fe2e088321  usr/share/doc/python3-pyassimp/changelog.Debian.gz
+4ced17f4726c38c10770ad34c0e7adc0  usr/share/doc/python3-pyassimp/changelog.gz
+f8577b9d375abb84d20a3b1e1653f37b  usr/share/doc/python3-pyassimp/copyright

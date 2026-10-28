@@ -6,16 +6,29 @@ Subject: removed calls to HHC (only available on w32)
 and install into tmp-directories (make 'clean' target easier)
 Last-Updated: 2015-07-25
 ---
- doc/CMakeLists.txt | 6 +++---
- doc/Doxyfile.in    | 6 +++---
- doc/Doxyfile_Cmd   | 5 ++---
- 3 files changed, 8 insertions(+), 9 deletions(-)
+ doc/CMakeLists.txt | 10 +++++-----
+ doc/Doxyfile.in    |  6 +++---
+ doc/Doxyfile_Cmd   |  5 ++---
+ 3 files changed, 10 insertions(+), 11 deletions(-)
 
 diff --git a/doc/CMakeLists.txt b/doc/CMakeLists.txt
-index b510d8c..aef23ea 100644
+index b510d8c..7a4d3e9 100644
 --- a/doc/CMakeLists.txt
 +++ b/doc/CMakeLists.txt
-@@ -33,9 +33,9 @@ if( DEFINED CMAKE_INSTALL_DOCDIR )
+@@ -1,6 +1,6 @@
+ find_package( Doxygen REQUIRED )
+ 
+-set( HTML_OUTPUT "AssimpDoc_Html" CACHE STRING "Output directory for generated HTML documentation. Defaults to AssimpDoc_Html." )
++set( HTML_OUTPUT "assimp" CACHE STRING "Output directory for generated HTML documentation. Defaults to AssimpDoc_Html." )
+ 
+ # Enable Microsoft CHM help style only on Windows
+ set( MICROSOFT_HELP_WORKSHOP "NO")
+@@ -29,13 +29,13 @@ add_custom_command(
+ 
+ if( DEFINED CMAKE_INSTALL_DOCDIR )
+     install(
+-        DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${HTML_OUTPUT}
++        DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/out/${HTML_OUTPUT}
          DESTINATION ${CMAKE_INSTALL_DOCDIR}
      )
      install(FILES
@@ -29,36 +42,36 @@ index b510d8c..aef23ea 100644
      )
  endif()
 diff --git a/doc/Doxyfile.in b/doc/Doxyfile.in
-index 0133050..32131fd 100644
+index 2c36d13..48ce6ba 100644
 --- a/doc/Doxyfile.in
 +++ b/doc/Doxyfile.in
-@@ -717,7 +717,8 @@ EXCLUDE_SYMLINKS       = NO
- # against the file with absolute path, so to exclude all test directories 
- # for example use the pattern */test/*
+@@ -170,7 +170,7 @@ FULL_PATH_NAMES        = YES
+ # will be relative from the directory where doxygen is started.
+ # This tag requires that the tag FULL_PATH_NAMES is set to YES.
  
--EXCLUDE_PATTERNS       = */.git/* 
-+EXCLUDE_PATTERNS       = */.git/* \
-+                         */*.o.d
+-STRIP_FROM_PATH        =
++STRIP_FROM_PATH        = @CMAKE_CURRENT_SOURCE_DIR@
  
- # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names 
- # (namespaces, classes, functions, etc.) that should be excluded from the 
-@@ -878,7 +879,7 @@ IGNORE_PREFIX          =
- # If the GENERATE_HTML tag is set to YES (the default) Doxygen will 
- # generate HTML output.
+ # The STRIP_FROM_INC_PATH tag can be used to strip a user-defined part of the
+ # path mentioned in the documentation of a class, which tells the reader which
+@@ -864,7 +864,7 @@ WARN_LOGFILE           =
+ # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
+ # Note: If this tag is empty the current directory is searched.
  
--GENERATE_HTML          = NO
-+GENERATE_HTML          = YES
+-INPUT                  =
++INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@
  
- # The HTML_OUTPUT tag is used to specify where the HTML docs will be put. 
- # If a relative path is entered the value of OUTPUT_DIRECTORY will be 
-@@ -1043,7 +1044,6 @@ CHM_FILE               = AssimpDoc.chm
- # the HTML help compiler (hhc.exe). If non-empty doxygen will try to run 
- # the HTML help compiler on the generated index.hhp.
+ # This tag can be used to specify the character encoding of the source files
+ # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
+@@ -1221,7 +1221,7 @@ GENERATE_HTML          = YES
+ # The default directory is: html.
+ # This tag requires that the tag GENERATE_HTML is set to YES.
  
--HHC_LOCATION           = "C:\Program Files (x86)\HTML Help Workshop/hhc.exe"
+-HTML_OUTPUT            = html
++HTML_OUTPUT            = assimp
  
- # If the GENERATE_HTMLHELP tag is set to YES, the GENERATE_CHI flag 
- # controls if a separate .chi index file is generated (YES) or that 
+ # The HTML_FILE_EXTENSION tag can be used to specify the file extension for each
+ # generated HTML page (for example: .htm, .php, .asp).
 diff --git a/doc/Doxyfile_Cmd b/doc/Doxyfile_Cmd
 index f0a56e7..98ac9a9 100644
 --- a/doc/Doxyfile_Cmd

@@ -2,24 +2,6 @@ Assimp - Open Asset Import Library
 ==================================
 
 
-DEVELOPING THIS PACKAGE FOR DEBIAN
-----------------------------------
-
-this package uses CDBS as the build system and git for maintainance.
-for a quick start, see
-        http://wiki.debian.org/CDBS+git-buildpackage
-
-
-EDITING debian/control
-----------------------
-please note that you should NOT modify debian/control directly, as this file
-will be generated from debian/control.in using CDBS.
-therefore you ought to change debian/control.in and trigger a re-creation of
-debian/control using
-$ DEB_MAINTAINER_MODE=1 dpkg-buildpackage -rfakeroot
-
-
-
 IMPORTING/REPACKAGING UPSTREAM
 ------------------------------
 

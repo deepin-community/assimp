@@ -1,13 +1,11 @@
 Source: assimp
 Section: graphics
-Priority: optional
 Maintainer: IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>
 Homepage: https://assimp.org
-Standards-Version: 4.6.2
+Standards-Version: 4.7.4
 Build-Depends:
- cmake,
  debhelper-compat (= 13),
- dh-buildinfo,
+ cmake,
  doxygen <!nodoc>,
  libboost-dev,
  libdraco-dev,
@@ -17,18 +15,18 @@ Build-Depends:
  libpugixml-dev,
  libstb-dev,
  libutfcpp-dev,
- pkg-config,
+ pkgconf,
  rapidjson-dev,
  zlib1g-dev | libz-dev,
 Build-Depends-Indep:
  dh-sequence-doxygen <!nodoc>,
  dh-sequence-python3,
  python3-all,
-Rules-Requires-Root: no
+ python3-setuptools,
 Vcs-Git: https://salsa.debian.org/debian/assimp.git
 Vcs-Browser: https://salsa.debian.org/debian/assimp
 
-Package: libassimp5
+Package: libassimp6
 Architecture: any
 Multi-Arch: same
 Section: libs
@@ -59,8 +57,8 @@ Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends:
- libassimp5 (<< ${source:Upstream-Version}+1~),
- libassimp5 (>= ${source:Version}),
+ libassimp6 (<< ${source:Upstream-Version}+1~),
+ libassimp6 (>= ${source:Version}),
  libpugixml-dev,
  ${misc:Depends},
 Description: 3D model import library (development)
@@ -111,8 +109,8 @@ Package: python3-pyassimp
 Architecture: all
 Section: python
 Depends:
- libassimp5 (>= ${source:Version}),
- libassimp5(<< ${source:Upstream-Version}+1~),
+ libassimp6 (>= ${source:Version}),
+ libassimp6(<< ${source:Upstream-Version}+1~),
  ${misc:Depends},
  ${python3:Depends},
 Description: 3D model import library (Python3 bindings)

@@ -1,8 +1,154 @@
-assimp (5.3.1+ds-2deepin0) unstable; urgency=medium
+assimp (6.0.5+ds-1deepin0) unstable; urgency=medium
 
-  * No source change upload against GCC 12.
+  * New upstream version 6.0.5+ds.
+  * Required by qt6-quick3d 6.12 (libassimp-dev >= 6.0.0~).
 
- -- Tianyu Chen <sweetyfish@deepin.org>  Thu, 19 Sep 2024 22:42:16 +0800
+ -- pengfeixx <63588879+pengfeixx@users.noreply.github.com>  Wed, 28 Oct 2026 12:38:29 +0800
+
+assimp (6.0.5+ds-1) unstable; urgency=medium
+
+  * New upstream version 6.0.5+ds
+    (Closes: CVE-2025-2750, CVE-2025-2751,
+     CVE-2025-2757, CVE-2025-3158, CVE-2025-3196)
+  * Re-generate d/copyright_hints
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 04 May 2026 13:03:54 +0200
+
+assimp (6.0.4+ds-3) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 22 Apr 2026 22:25:43 +0200
+
+assimp (6.0.4+ds-2) unstable; urgency=medium
+
+  * Refresh patches with 'gbp pq'
+  * Backport patch to fix compilation with new minizip.
+    Thanks to fundawang (Closes: #1133850)
+  * autopkgtests: Drop obsolete Depends on libgl1-mesa-dev
+  * Update copyright information
+    + Add License paragraph for "Public Domain"
+  * Bump standards version to 4.7.4
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 22 Apr 2026 19:26:26 +0200
+
+assimp (6.0.4+ds-1) unstable; urgency=medium
+
+  * New upstream version 6.0.4+ds
+  * Update copyright information
+    + Bump copyright dates
+    + Re-generate d/copyright_hints
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sun, 25 Jan 2026 21:52:01 +0100
+
+assimp (6.0.3+ds-1) unstable; urgency=medium
+
+  * New upstream version 6.0.3+ds
+    + Closes: #1103444 (CVE-2025-3549)
+    + Closes: #1106591 (CVE-2025-5165)
+    + Closes: #1106592 (CVE-2025-5166)
+    + Closes: #1107477
+    + Closes: #1117693 (CVE-2025-11277)
+  * Update patches
+    + Drop patches applied upstream
+    + Refresh patches
+  * Fix doxygen patch
+    + Fix artifacts directory
+    + Fix out-of-tree building of documentation
+  * Drop obsolete Rules-Requires-Root stanza.
+  * Update copyright information
+    + Add license for new file
+    + Bump copyright dates
+    + Re-generate d/copyright_hints
+  * Update d/watch to version 5
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 21 Jan 2026 17:20:54 +0100
+
+assimp (6.0.2+ds-1) unstable; urgency=medium
+
+  * New upstream version 6.0.2+ds
+    + Refresh patches
+  * libassimp5 -> libassimp6
+    + Adjust pyassimp for libassimp6
+  * Add patch to fix PyAssimp
+  * autopkgtests:
+    + Add more acceptable errors
+    + new 'assimp dump' test
+    + Disabled known broken tests for now
+  * Fix documentation patch
+  * Update copyright information
+    + Update copyright holders
+    + Bump copyright dates
+    + Re-generate d/copyright_hints
+  * Apply 'wrap-and-sort -ast'
+  * Update changelog entry for 5.4.3+ds-3 to mention
+    standards version bump and properly credit Alexandre
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 28 Aug 2025 12:28:58 +0200
+
+assimp (5.4.3+ds-3) unstable; urgency=medium
+
+  * Team Upload
+
+  [ Alexandre Detiste ]
+  * Remove more CDBS leftovers from d/README.source
+  * Remove obsolete dh-buildinfo build dependency
+  * Replace obsolete pkg-config with pkgconf
+  * Bump standards version to 4.7.0
+
+  [ IOhannes m zmölnig (Debian/GNU) ]
+  * Update git repository layout to follow DEP-14
+
+ -- Alexandre Detiste <tchet@debian.org>  Sun, 17 Aug 2025 21:02:50 +0200
+
+assimp (5.4.3+ds-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sun, 08 Sep 2024 22:05:32 +0200
+
+assimp (5.4.3+ds-1) unstable; urgency=medium
+
+  * New upstream version 5.4.3+ds
+    + Refresh patches
+  * Add explicit B-D on python3-setuptools (Closes: #1080543)
+  * Update copyright information
+    + Bump copyright dates
+    + Re-generate d/copyright_hints
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sun, 08 Sep 2024 21:45:13 +0200
+
+assimp (5.4.2+ds-1) unstable; urgency=medium
+
+  * New upstream version 5.4.2+ds
+    + Refresh patches
+  * Use context-manager in autopkgtest "quicktest"
+  * Update copyright information
+    + Update license information
+    + Re-generate d/copyright_hints
+  * Fix spelling errors in older entries of d/changelog
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 17 Jul 2024 15:02:24 +0200
+
+assimp (5.4.1+ds-1) unstable; urgency=medium
+
+  * New upstream version 5.4.1+ds
+    + Refresh patches
+  * Bump standards version to 4.7.0
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Fri, 24 May 2024 12:34:07 +0200
+
+assimp (5.4.0+ds-1) unstable; urgency=medium
+
+  * New upstream version 5.4.0+ds
+    + Refresh patches
+    + Drop patches applied upstream
+  * Update copyright information
+    + Bump copyright dates
+    + Add new copyrights
+    + Re-generate d/copyright_hints
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 08 Apr 2024 12:35:37 +0200
 
 assimp (5.3.1+ds-2) unstable; urgency=medium
 
@@ -27,7 +173,7 @@ assimp (5.3.1+ds-1) unstable; urgency=medium
    + Install docs from new upstream location
    + Only enable '--with doxygen' on arch:all
   * testsuite updates
-    + Suport the 'nocheck' build-profile
+    + Support the 'nocheck' build-profile
     + Prepare for building/running tests (but don't enable it)
     + Drop unnneeded dependencies for autopkgtests
   * Fix spelling mistake
@@ -523,7 +669,7 @@ assimp (3.2~dfsg-3) unstable; urgency=medium
 assimp (3.2~dfsg-2) unstable; urgency=medium
 
   * Install CMake config files (Closes: #806317)
-  * Removed copyright-notice for non-existant files
+  * Removed copyright-notice for non-existent files
 
  -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 26 Nov 2015 21:06:53 +0100
 

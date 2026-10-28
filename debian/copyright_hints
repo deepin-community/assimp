@@ -155,6 +155,7 @@ Files: CMakeLists.txt
  code/AssetLib/MDC/MDCFileData.h
  code/AssetLib/MDC/MDCLoader.cpp
  code/AssetLib/MDC/MDCLoader.h
+ code/AssetLib/MDL/HalfLife/HL1DataBuffer.h
  code/AssetLib/MDL/HalfLife/HL1FileData.h
  code/AssetLib/MDL/HalfLife/HL1ImportDefinitions.h
  code/AssetLib/MDL/HalfLife/HL1ImportSettings.h
@@ -242,8 +243,19 @@ Files: CMakeLists.txt
  code/AssetLib/Step/StepExporter.h
  code/AssetLib/Terragen/TerragenLoader.cpp
  code/AssetLib/Terragen/TerragenLoader.h
+ code/AssetLib/USD/USDLoader.cpp
+ code/AssetLib/USD/USDLoader.h
+ code/AssetLib/USD/USDLoaderImplTinyusdz.cpp
+ code/AssetLib/USD/USDLoaderImplTinyusdz.h
+ code/AssetLib/USD/USDLoaderImplTinyusdzHelper.cpp
+ code/AssetLib/USD/USDLoaderImplTinyusdzHelper.h
+ code/AssetLib/USD/USDLoaderUtil.cpp
+ code/AssetLib/USD/USDLoaderUtil.h
+ code/AssetLib/USD/USDPreprocessor.h
  code/AssetLib/Unreal/UnrealLoader.cpp
  code/AssetLib/Unreal/UnrealLoader.h
+ code/AssetLib/VRML/VrmlConverter.cpp
+ code/AssetLib/VRML/VrmlConverter.hpp
  code/AssetLib/X/XFileExporter.cpp
  code/AssetLib/X/XFileExporter.h
  code/AssetLib/X/XFileHelper.h
@@ -269,8 +281,6 @@ Files: CMakeLists.txt
  code/AssetLib/XGL/XGLLoader.h
  code/AssetLib/glTF/glTFAsset.inl
  code/AssetLib/glTF/glTFAssetWriter.h
- code/AssetLib/glTF/glTFCommon.cpp
- code/AssetLib/glTF/glTFCommon.h
  code/AssetLib/glTF/glTFExporter.h
  code/AssetLib/glTF/glTFImporter.cpp
  code/AssetLib/glTF/glTFImporter.h
@@ -279,6 +289,8 @@ Files: CMakeLists.txt
  code/AssetLib/glTF2/glTF2Exporter.h
  code/AssetLib/glTF2/glTF2Importer.cpp
  code/AssetLib/glTF2/glTF2Importer.h
+ code/AssetLib/glTFCommon/glTFCommon.cpp
+ code/AssetLib/glTFCommon/glTFCommon.h
  code/CApi/AssimpCExport.cpp
  code/CApi/CInterfaceIOWrapper.cpp
  code/CApi/CInterfaceIOWrapper.h
@@ -402,6 +414,13 @@ Files: CMakeLists.txt
  code/PostProcessing/ValidateDataStructure.h
  doc/Preamble.txt
  fuzz/assimp_fuzzer.cc
+ fuzz/assimp_fuzzer_collada.cc
+ fuzz/assimp_fuzzer_fbx.cc
+ fuzz/assimp_fuzzer_glb.cc
+ fuzz/assimp_fuzzer_gltf.cc
+ fuzz/assimp_fuzzer_obj.cc
+ fuzz/assimp_fuzzer_stl.cc
+ fuzz/fuzzer_common.h
  include/assimp/AssertHandler.h
  include/assimp/Base64.hpp
  include/assimp/BaseImporter.h
@@ -544,8 +563,10 @@ Files: CMakeLists.txt
  test/unit/Common/utBaseProcess.cpp
  test/unit/Common/utHash.cpp
  test/unit/Common/utLineSplitter.cpp
+ test/unit/Common/utLogger.cpp
  test/unit/Common/utMaybe.cpp
  test/unit/Common/utMesh.cpp
+ test/unit/Common/utParsingUtils.cpp
  test/unit/Common/utSpatialSort.cpp
  test/unit/Common/utStandardShapes.cpp
  test/unit/Common/utXmlParser.cpp
@@ -556,6 +577,7 @@ Files: CMakeLists.txt
  test/unit/ImportExport/MDL/utMDLImporter_HL1_ImportSettings.cpp
  test/unit/ImportExport/MDL/utMDLImporter_HL1_Materials.cpp
  test/unit/ImportExport/MDL/utMDLImporter_HL1_Nodes.cpp
+ test/unit/ImportExport/Pbrt/utPbrtImportExport.cpp
  test/unit/ImportExport/RAW/utRAWImportExport.cpp
  test/unit/ImportExport/Terragen/utTerragenImportExport.cpp
  test/unit/ImportExport/utAssjsonImportExport.cpp
@@ -654,6 +676,7 @@ Files: CMakeLists.txt
  test/unit/utTextureTransform.cpp
  test/unit/utTriangulate.cpp
  test/unit/utTypes.cpp
+ test/unit/utUSDImport.cpp
  test/unit/utValidateDataStructure.cpp
  test/unit/utVector3.cpp
  test/unit/utVersion.cpp
@@ -698,18 +721,18 @@ Files: CMakeLists.txt
  tools/assimp_view/Shaders.h
  tools/assimp_view/assimp_view.cpp
  tools/assimp_view/assimp_view.h
- tools/coverity/assimp_modeling.cpp
 Copyright: 2006-2019, assimp team
   2006-2020, assimp team
   2006-2021, assimp team
-  2006-2022, assimp team
-  2006-2023, assimp team
+  2006-2024, assimp team
+  2006-2026, assimp team
 License: BSD-3-clause
  FIXME
 
-Files: BUILDBINARIES_EXAMPLE.bat
+Files: AGENTS.md
+ BUILDBINARIES_EXAMPLE.bat
  Build.md
- CHANGES
+ CMakePresets.json
  CODE_OF_CONDUCT.md
  CONTRIBUTING.md
  CREDITS
@@ -719,7 +742,6 @@ Files: BUILDBINARIES_EXAMPLE.bat
  Readme.md
  SECURITY.md
  assimp.pc.in
- cmake-modules/FindDevIL.cmake
  cmake-modules/FindRT.cmake
  cmake-modules/Findassimp.cmake
  cmake-modules/MinGW_x86_64.cmake
@@ -727,11 +749,11 @@ Files: BUILDBINARIES_EXAMPLE.bat
  cmake-modules/assimp-hunter-config.cmake.in
  cmake-modules/assimp-plain-config.cmake.in
  cmake-modules/cmake_uninstall.cmake.in
- code/.editorconfig
  code/AssetLib/Blender/BlenderCustomData.cpp
  code/AssetLib/Blender/BlenderCustomData.h
  code/AssetLib/IQM/iqm.h
  code/AssetLib/Irr/IRRShared.h
+ code/AssetLib/VRML/README.md
  code/AssetLib/X3D/X3DExporter.cpp
  code/AssetLib/X3D/X3DExporter.hpp
  code/AssetLib/X3D/X3DGeoHelper.cpp
@@ -741,20 +763,34 @@ Files: BUILDBINARIES_EXAMPLE.bat
  code/Common/IFF.h
  code/Common/assbin_chunks.h
  contrib/android-cmake/ndk_links.md
+ contrib/earcut-hpp/earcut.hpp
+ contrib/meshlab/README.md
+ contrib/meshlab/patches/README.md
+ contrib/meshlab/patches/meshlab.patch
  contrib/openddlparser/CMakeLists.txt
  contrib/openddlparser/CREDITS
  contrib/openddlparser/README.md
  contrib/poly2tri/AUTHORS
- contrib/poly2tri/README
- contrib/zip/.travis.sh
- contrib/zip/.travis.yml
+ contrib/poly2tri/README.md
+ contrib/tinyusdz/README.md
+ contrib/tinyusdz/assimp_tinyusdz_logging.inc
+ contrib/tinyusdz/patches/README.md
+ contrib/tinyusdz/patches/tinyusdz.patch
  contrib/zip/CMakeLists.txt
+ contrib/zip/CONTRIBUTING.md
+ contrib/zip/Doxyfile.in
+ contrib/zip/cmake/Config.cmake.in
  contrib/zip/cmake/cmake_uninstall.cmake.in
  contrib/zip/src/zip.c
  contrib/zip/src/zip.h
  contrib/zip/test/CMakeLists.txt
- contrib/zip/test/test.c
- contrib/zip/test/test_miniz.c
+ contrib/zip/test/test_append.c
+ contrib/zip/test/test_entry.c
+ contrib/zip/test/test_extract.c
+ contrib/zip/test/test_open.c
+ contrib/zip/test/test_permissions.c
+ contrib/zip/test/test_read.c
+ contrib/zip/test/test_write.c
  contrib/zip/zip.png
  doc/CMakeLists.txt
  doc/Doxyfile.in
@@ -769,9 +805,14 @@ Files: BUILDBINARIES_EXAMPLE.bat
  doc/datastructure.xml
  doc/dox.h
  doc/dox_cmd.h
+ fuzz/assimp_fuzzer.dict
+ fuzz/ossfuzz/build.sh
+ fuzz/ossfuzz/project.yaml
  include/assimp/.editorconfig
  include/assimp/Compiler/poppack1.h
  include/assimp/Compiler/pushpack1.h
+ include/assimp/module.modulemap
+ include/assimp/revision.h.in
  port/AndroidJNI/CMakeLists.txt
  port/AndroidJNI/README.md
  port/AssimpDelphi/Readme.txt
@@ -798,6 +839,7 @@ Files: BUILDBINARIES_EXAMPLE.bat
  port/PyAssimp/pyassimp/material.py
  port/PyAssimp/pyassimp/postprocess.py
  port/PyAssimp/pyassimp/structs.py
+ port/PyAssimp/pyproject.toml
  port/PyAssimp/scripts/3d_viewer.py
  port/PyAssimp/scripts/3d_viewer_py3.py
  port/PyAssimp/scripts/README.md
@@ -805,43 +847,10 @@ Files: BUILDBINARIES_EXAMPLE.bat
  port/PyAssimp/scripts/quicktest.py
  port/PyAssimp/scripts/sample.py
  port/PyAssimp/setup.py
- port/assimp_rs/Cargo.lock
  port/assimp_rs/Cargo.toml
- port/assimp_rs/src/camera/mod.rs
+ port/assimp_rs/build.rs
+ port/assimp_rs/src/assimp_wrapper.h
  port/assimp_rs/src/lib.rs
- port/assimp_rs/src/structs/anim/anim.rs
- port/assimp_rs/src/structs/anim/mod.rs
- port/assimp_rs/src/structs/blob/mod.rs
- port/assimp_rs/src/structs/bone/mod.rs
- port/assimp_rs/src/structs/camera/mod.rs
- port/assimp_rs/src/structs/color/color.rs
- port/assimp_rs/src/structs/color/mod.rs
- port/assimp_rs/src/structs/face/mod.rs
- port/assimp_rs/src/structs/key/mod.rs
- port/assimp_rs/src/structs/light/mod.rs
- port/assimp_rs/src/structs/material/mod.rs
- port/assimp_rs/src/structs/matrix/matrix.rs
- port/assimp_rs/src/structs/matrix/mod.rs
- port/assimp_rs/src/structs/memory/memory.rs
- port/assimp_rs/src/structs/memory/mod.rs
- port/assimp_rs/src/structs/mesh/mod.rs
- port/assimp_rs/src/structs/meta/mod.rs
- port/assimp_rs/src/structs/mod.rs
- port/assimp_rs/src/structs/node/mod.rs
- port/assimp_rs/src/structs/plane/mod.rs
- port/assimp_rs/src/structs/plane/plane.rs
- port/assimp_rs/src/structs/quaternion/mod.rs
- port/assimp_rs/src/structs/quaternion/quaternion.rs
- port/assimp_rs/src/structs/ray/mod.rs
- port/assimp_rs/src/structs/scene/mod.rs
- port/assimp_rs/src/structs/string/mod.rs
- port/assimp_rs/src/structs/string/string.rs
- port/assimp_rs/src/structs/texture/mod.rs
- port/assimp_rs/src/structs/texture/texture.rs
- port/assimp_rs/src/structs/transform/mod.rs
- port/assimp_rs/src/structs/vec/mod.rs
- port/assimp_rs/src/structs/vec/vec.rs
- port/assimp_rs/src/structs/vertex/mod.rs
  port/dAssimp/README
  port/iOS/IPHONEOS_ARM64E_TOOLCHAIN.cmake
  port/iOS/IPHONEOS_ARM64_TOOLCHAIN.cmake
@@ -849,7 +858,8 @@ Files: BUILDBINARIES_EXAMPLE.bat
  port/iOS/IPHONEOS_ARMV7S_TOOLCHAIN.cmake
  port/iOS/IPHONEOS_ARMV7_TOOLCHAIN.cmake
  port/iOS/IPHONEOS_I386_TOOLCHAIN.cmake
- port/iOS/IPHONEOS_X86_64_TOOLCHAIN.cmake
+ port/iOS/IPHONESIMULATOR_ARM64_TOOLCHAIN.cmake
+ port/iOS/IPHONESIMULATOR_X86_64_TOOLCHAIN.cmake
  port/iOS/README.md
  port/iOS/build.sh
  port/jassimp/README
@@ -859,7 +869,6 @@ Files: BUILDBINARIES_EXAMPLE.bat
  port/jassimp/jassimp-native/src/jassimp.h
  port/jassimp/jassimp/src/jassimp/AiConfig.java
  port/jassimp/jassimp/src/jassimp/AiConfigOptions.java
- revision.h.in
  samples/README
  samples/SimpleAssimpViewX/English.lproj/Credits.rtf
  samples/SimpleAssimpViewX/English.lproj/InfoPlist.strings
@@ -900,20 +909,15 @@ Files: BUILDBINARIES_EXAMPLE.bat
  test/.editorconfig
  test/headercheck/CMakeLists.txt
  test/headercheck/headercheck.cpp.in
- test/other/streamload.py
- test/regression/.project
- test/regression/.pydevproject
- test/regression/README.txt
- test/regression/whitelist.csv
  test/test.3mf
  test/unit/CCompilerTest.c
  test/unit/Main.cpp
+ test/unit/Tools/TestTools.h
  tools/assimp_view/NOTE@help.rtf.txt
  tools/assimp_view/help.rtf
  tools/assimp_view/stdafx.cpp
  tools/assimp_view/stdafx.h
- tools/make/build_env_win32.bat
- tools/make/make_all_win32_x64.bat
+ tools/shared/assimp_tools_icon.bmp
  tools/shared/assimp_tools_icon.svg
 Copyright: NONE
 License: UNKNOWN
@@ -955,13 +959,8 @@ Files: code/AssetLib/Blender/BlenderScene.cpp
  scripts/StepImporter/StepReaderGen.cpp.template
  scripts/StepImporter/StepReaderGen.h.template
  scripts/StepImporter/extract_step_token.py
- test/regression/ai_regression_ui.py
- test/regression/gen_db.py
- test/regression/result_checker.py
- test/regression/run.py
- test/regression/settings.py
- test/regression/utils.py
 Copyright: 2006-2020, ASSIMP Development Team
+  2006-2026, ASSIMP Development Team
 License: BSD-3-clause
  FIXME
 
@@ -1014,10 +1013,12 @@ Files: contrib/openddlparser/LICENSE
 Copyright: 2014, Kim Kulling
   2014-2019, Kim Kulling
   2014-2020, Kim Kulling
+  2014-2025, Kim Kulling
 License: Expat
  FIXME
 
 Files: contrib/poly2tri/LICENSE
+ contrib/poly2tri/poly2tri/common/dll_symbol.h
  contrib/poly2tri/poly2tri/common/shapes.cc
  contrib/poly2tri/poly2tri/common/shapes.h
  contrib/poly2tri/poly2tri/common/utils.h
@@ -1030,7 +1031,9 @@ Files: contrib/poly2tri/LICENSE
  contrib/poly2tri/poly2tri/sweep/sweep.h
  contrib/poly2tri/poly2tri/sweep/sweep_context.cc
  contrib/poly2tri/poly2tri/sweep/sweep_context.h
-Copyright: 2009-2010, Poly2Tri Contributors
+Copyright: 2009-2018, Poly2Tri Contributors
+  2009-2021, Poly2Tri Contributors
+  2009-2022, Poly2Tri Contributors
 License: BSD-3-clause
  FIXME
 
@@ -1041,7 +1044,7 @@ Files: code/AssetLib/M3D/M3DExporter.cpp
  code/AssetLib/M3D/M3DMaterials.h
  code/AssetLib/M3D/M3DWrapper.cpp
  code/AssetLib/M3D/M3DWrapper.h
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2026, assimp team
   2019, bzt
 License: BSD-3-clause
  FIXME
@@ -1084,21 +1087,21 @@ License: BSD-3-clause
 
 Files: code/AssetLib/glTF/glTFExporter.cpp
  code/AssetLib/glTF2/glTF2Exporter.cpp
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2026, assimp team
   aiString copyright_str;
 License: BSD-3-clause
  FIXME
 
 Files: code/AssetLib/glTF/glTFAssetWriter.inl
  code/AssetLib/glTF2/glTF2AssetWriter.inl
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2026, assimp team
   mAl).Move(), mAl);
 License: BSD-3-clause
  FIXME
 
 Files: code/AssetLib/glTF/glTFAsset.h
  code/AssetLib/glTF2/glTF2Asset.h
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2026, assimp team
   message suitable for display to credit the content creator.
 License: BSD-3-clause
  FIXME
@@ -1133,10 +1136,9 @@ Copyright: THEN
 License: UNKNOWN
  FIXME
 
-Files: contrib/zip/UNLICENSE
- contrib/zip/src/miniz.h
-Copyright: NONE
-License: Unlicense
+Files: fuzz/ossfuzz/Dockerfile
+Copyright: 2021, Google LLC
+License: Apache-2.0
  FIXME
 
 Files: cmake-modules/HunterGate.cmake
@@ -1151,7 +1153,7 @@ License: BSD-3-clause
 
 Files: test/unit/utColladaImportExport.cpp
 Copyright: 2006
-  2006-2022, assimp team
+  2006-2026, assimp team
 License: BSD-3-clause
  FIXME
 
@@ -1182,12 +1184,12 @@ License: BSD-3-clause
 
 Files: include/assimp/Hash.h
 Copyright: 2004-2008, Paul Hsieh. It is used here in the belief that
-  2006-2022, assimp team
+  2006-2026, assimp team
 License: BSD-3-clause
  FIXME
 
 Files: LICENSE
-Copyright: 2006-2021, assimp team
+Copyright: 2006-2026, assimp team
   2009-2010, Poly2Tri Contributors
 License: BSD-3-clause
  FIXME
@@ -1198,7 +1200,7 @@ License: BSD-3-clause
  FIXME
 
 Files: code/Common/CreateAnimMesh.cpp
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2026, assimp team
   2016, The Qt Company Ltd.
 License: BSD-3-clause
  FIXME
@@ -1209,7 +1211,7 @@ License: BSD-3-clause
  FIXME
 
 Files: test/unit/utColladaExport.cpp
-Copyright: 2006-2022, assimp team
+Copyright: 2006-2026, assimp team
   changed";
 License: BSD-3-clause
  FIXME
@@ -1220,6 +1222,18 @@ Copyright: 2006-2020, assimp team
   m_diffuse;
   m_specular;
 License: BSD-3-clause
+ FIXME
+
+Files: contrib/zip/test/minunit.h
+Copyright: 2012, David Siñuela Pastor, siu.4coders@gmail.com
+License: CC-BY-3.0 and/or Expat
+ FIXME
+
+Files: AIToolPolicy.md
+Copyright: and
+  policy:
+  that have
+License: CC-BY-4.0
  FIXME
 
 Files: contrib/zip/README.md
@@ -1238,6 +1252,23 @@ Copyright: 2019, bzt (bztsrc@gitlab)
 License: Expat
  FIXME
 
+Files: contrib/zip/src/miniz.h
+Copyright: 2010-2014, Rich Geldreich and Tenacious Software LLC
+  2013-2014, RAD Game Tools and Valve Software
+  2016, Martin Raiber
+License: Expat and/or Unlicense
+ FIXME
+
+Files: contrib/earcut-hpp/LICENSE
+Copyright: 2015, Mapbox
+License: ISC
+ FIXME
+
+Files: port/PyAssimp/LICENSE
+Copyright: 2024, pyassimp contributors
+License: ISC
+ FIXME
+
 Files: cmake-modules/DebSourcePPA.cmake
 Copyright: 2010, Daniel Pfeifer <daniel@pfeifer-mail.de>
   set(DEBIAN_COPYRIGHT ${DEBIAN_SOURCE_DIR}/debian/copyright)
@@ -1247,5 +1278,16 @@ License: UNKNOWN
 Files: include/assimp/fast_atof.h
 Copyright: 2002-2007, Nikolaus Gebhardt
 License: UNKNOWN
+ FIXME
+
+Files: CHANGES.md
+Copyright: git commit hash and original filename.
+  headers to ZipArchiveIOSystem
+License: UNKNOWN
+ FIXME
+
+Files: contrib/zip/UNLICENSE
+Copyright: NONE
+License: Unlicense
  FIXME
 

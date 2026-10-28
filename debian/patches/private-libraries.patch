@@ -9,14 +9,14 @@ Last-Update: 2023-10-20
 
 Last-Update: 2023-10-20
 ---
- code/CMakeLists.txt | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ code/CMakeLists.txt | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
 diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
-index 9fe0410..e7410ed 100644
+index 1870a4e..7b3522c 100644
 --- a/code/CMakeLists.txt
 +++ b/code/CMakeLists.txt
-@@ -1099,6 +1099,8 @@ ENDIF ()
+@@ -1307,6 +1307,8 @@ ENDIF ()
  #  SOURCE_GROUP( Contrib\\stb FILES ${stb_SRCS})
  #ENDIF()
  
@@ -25,7 +25,7 @@ index 9fe0410..e7410ed 100644
  # VC2010 fixes
  if(MSVC10)
    option( VC10_STDINT_FIX "Fix for VC10 Compiler regarding pstdint.h redefinition errors" OFF )
-@@ -1292,7 +1294,7 @@ IF(ASSIMP_HUNTER_ENABLED)
+@@ -1508,7 +1510,7 @@ IF(ASSIMP_HUNTER_ENABLED)
      target_link_libraries(assimp PRIVATE ${draco_LIBRARIES})
    endif()
  ELSE()
@@ -34,16 +34,19 @@ index 9fe0410..e7410ed 100644
    if (ASSIMP_BUILD_DRACO)
      target_link_libraries(assimp PRIVATE ${draco_LIBRARIES})
    endif()
-@@ -1393,7 +1395,7 @@ ENDIF()
- IF(NOT ASSIMP_HUNTER_ENABLED)
-   if (UNZIP_FOUND)
+@@ -1605,9 +1607,9 @@ IF(NOT ASSIMP_HUNTER_ENABLED)
      INCLUDE_DIRECTORIES(${UNZIP_INCLUDE_DIRS})
--    TARGET_LINK_LIBRARIES(assimp ${UNZIP_LIBRARIES})
-+    TARGET_LINK_LIBRARIES(assimp PRIVATE ${UNZIP_LIBRARIES})
+     # TODO if cmake required version has been updated to >3.12.0, collapse this to the second case only
+     if(${CMAKE_VERSION} VERSION_LESS "3.12.0")
+-      TARGET_LINK_LIBRARIES(assimp ${UNZIP_LIBRARIES})
++      TARGET_LINK_LIBRARIES(assimp PRIVATE ${UNZIP_LIBRARIES})
+     else()
+-      TARGET_LINK_LIBRARIES(assimp ${UNZIP_LINK_LIBRARIES})
++      TARGET_LINK_LIBRARIES(assimp PRIVATE ${UNZIP_LINK_LIBRARIES})
+     endif()
    else ()
      INCLUDE_DIRECTORIES("../")
-   endif ()
-@@ -1401,7 +1403,7 @@ ENDIF()
+@@ -1616,7 +1618,7 @@ ENDIF()
  
  # Add RT-extension library for glTF importer with Open3DGC-compression.
  IF (RT_FOUND AND ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC)
@@ -51,4 +54,4 @@ index 9fe0410..e7410ed 100644
 +	TARGET_LINK_LIBRARIES(assimp PRIVATE rt)
  ENDIF ()
  
- 
+ IF(ASSIMP_INSTALL)

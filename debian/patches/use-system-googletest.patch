@@ -13,7 +13,7 @@ Last-Update: 2023-10-20
  1 file changed, 11 insertions(+), 9 deletions(-)
 
 diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
-index 72949f9..f2b7691 100644
+index b5b7558..b35a601 100644
 --- a/test/CMakeLists.txt
 +++ b/test/CMakeLists.txt
 @@ -45,8 +45,8 @@ INCLUDE_DIRECTORIES(
@@ -27,8 +27,8 @@ index 72949f9..f2b7691 100644
      #${Assimp_SOURCE_DIR}/contrib/pugixml/src
    )
  endif()
-@@ -225,13 +225,15 @@ add_executable( unit
-   ${POST_PROCESSES}
+@@ -250,13 +250,15 @@ add_executable( unit
+     ${TOOLS}
  )
  
 -if(ASSIMP_HUNTER_ENABLED)

@@ -9,35 +9,39 @@ Last-Update: 2023-10-1
 
 Last-Update: 2023-10-1
 ---
- code/CMakeLists.txt | 26 +++++++++++++++-----------
+ code/CMakeLists.txt | 33 +++++++++++++++++----------------
  test/CMakeLists.txt |  2 +-
- 2 files changed, 16 insertions(+), 12 deletions(-)
+ 2 files changed, 18 insertions(+), 17 deletions(-)
 
 diff --git a/code/CMakeLists.txt b/code/CMakeLists.txt
-index eba6e6e..a995b37 100644
+index 521f161..af07632 100644
 --- a/code/CMakeLists.txt
 +++ b/code/CMakeLists.txt
-@@ -906,17 +906,17 @@ SET( Extra_SRCS
- SOURCE_GROUP( Extra FILES ${Extra_SRCS})
+@@ -1112,19 +1112,19 @@ ELSE() # IF (ASSIMP_BUILD_USD_IMPORTER)
+     MESSAGE(STATUS "tinyusdz disabled")
+ ENDIF() # IF (ASSIMP_BUILD_USD_IMPORTER)
  
- # pugixml
+-# pugixml
 -IF(ASSIMP_HUNTER_ENABLED)
 -  hunter_add_package(pugixml)
 -  find_package(pugixml CONFIG REQUIRED)
--ELSE()
+-ELSEIF(NOT TARGET pugixml::pugixml)
 -  SET( Pugixml_SRCS
 -    ../contrib/pugixml/src/pugiconfig.hpp
+-    ../contrib/pugixml/src/pugixml.cpp
 -    ../contrib/pugixml/src/pugixml.hpp
 -  )
 -  INCLUDE_DIRECTORIES("../contrib/pugixml/src")
 -  SOURCE_GROUP( Contrib\\Pugixml FILES ${Pugixml_SRCS})
 -ENDIF()
++## pugixml
 +#IF(ASSIMP_HUNTER_ENABLED)
 +#  hunter_add_package(pugixml)
 +#  find_package(pugixml CONFIG REQUIRED)
-+#ELSE()
++#ELSEIF(NOT TARGET pugixml::pugixml)
 +#  SET( Pugixml_SRCS
 +#    ../contrib/pugixml/src/pugiconfig.hpp
++#    ../contrib/pugixml/src/pugixml.cpp
 +#    ../contrib/pugixml/src/pugixml.hpp
 +#  )
 +#  INCLUDE_DIRECTORIES("../contrib/pugixml/src")
@@ -46,7 +50,7 @@ index eba6e6e..a995b37 100644
  
  # utf8
  IF(ASSIMP_HUNTER_ENABLED)
-@@ -1264,6 +1264,10 @@ TARGET_INCLUDE_DIRECTORIES ( assimp PUBLIC
+@@ -1482,6 +1482,10 @@ TARGET_INCLUDE_DIRECTORIES ( assimp PUBLIC
    $<INSTALL_INTERFACE:${ASSIMP_INCLUDE_INSTALL_DIR}>
  )
  
@@ -57,8 +61,18 @@ index eba6e6e..a995b37 100644
  IF(ASSIMP_HUNTER_ENABLED)
    TARGET_LINK_LIBRARIES(assimp
        PUBLIC
+@@ -1505,9 +1509,6 @@ ELSE()
+   if (ASSIMP_BUILD_DRACO)
+     target_link_libraries(assimp PRIVATE ${draco_LIBRARIES})
+   endif()
+-  if(TARGET pugixml::pugixml)
+-    target_link_libraries(assimp pugixml::pugixml)
+-  endif()
+ ENDIF()
+ 
+ if(ASSIMP_ANDROID_JNIIOSYSTEM)
 diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
-index afe4874..ba01b8f 100644
+index 362a43b..8cc6548 100644
 --- a/test/CMakeLists.txt
 +++ b/test/CMakeLists.txt
 @@ -47,7 +47,7 @@ if(NOT ASSIMP_HUNTER_ENABLED)
