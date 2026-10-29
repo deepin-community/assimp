@@ -1,9 +1,0 @@
-libdir=/usr/lib/x86_64-linux-gnu
-includedir=/usr/include
-
-Name: Assimp
-Description: Import various well-known 3D model formats in an uniform manner.
-Version: 6.0.5
-Libs: -L${libdir} -lassimp
-Libs.private: -lstdc++ -loptimized;/usr/lib/x86_64-linux-gnu/libz.so;debug;/usr/lib/x86_64-linux-gnu/libz.so
-Cflags: -I${includedir}
